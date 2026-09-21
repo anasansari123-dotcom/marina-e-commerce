@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  --site-nav: 94px;
+}
+
+@media (min-width: 1280px) {
+  html {
+    --site-nav: 102px;
+  }
+}
+
+body {
+  @apply bg-[#FAF7F2] text-navy-900 antialiased;
+}
+
+.btn-gold {
+  @apply inline-flex items-center justify-center rounded-full bg-[#C9A84C] px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#1a1408] transition hover:bg-[#d4b45a];
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-full border border-[#C9A84C] px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E8D5A3] transition hover:bg-[#C9A84C]/10;
+}
+
+.btn-navy {
+  @apply inline-flex items-center justify-center rounded-full bg-navy-900 px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-cream-50 transition hover:bg-navy-800;
+}
+
+.input {
+  @apply w-full rounded-lg border border-[#e6dfd2] bg-white px-4 py-2.5 text-sm text-navy-900 outline-none ring-[#C9A84C]/30 placeholder:text-navy-500/40 focus:ring-2;
+}
+
+.section-title {
+  @apply font-serif text-[2.35rem] text-navy-900 md:text-[2.75rem];
+}
+
+.hex-icon {
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+}
+
+@keyframes collections-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.collections-marquee {
+  animation: collections-marquee 40s linear infinite;
+}
+
+.collections-marquee:hover {
+  animation-play-state: paused;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
