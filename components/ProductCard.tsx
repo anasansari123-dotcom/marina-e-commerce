@@ -43,9 +43,9 @@ export function ProductCard({ product }: { product: Product }) {
           />
         </button>
       </div>
-      <Link href={`/product/${product.slug}`} className="block p-4">
-        <h3 className="font-serif text-lg leading-snug text-navy-900">{product.name}</h3>
-        <div className="mt-1.5 flex items-center gap-1.5">
+      <Link href={`/product/${product.slug}`} className="block p-3 sm:p-4">
+        <h3 className="font-serif text-base leading-snug text-navy-900 sm:text-lg">{product.name}</h3>
+        <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
           <span className="flex items-center gap-0.5 text-[#C9A84C]">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star
@@ -55,7 +55,7 @@ export function ProductCard({ product }: { product: Product }) {
             ))}
           </span>
           <span className="text-xs text-navy-700">{product.rating.toFixed(1)}</span>
-          <span className="text-xs text-navy-500">({product.reviews} reviews)</span>
+          <span className="hidden text-xs text-navy-500 sm:inline">({product.reviews} reviews)</span>
         </div>
         <p className="mt-2 font-serif text-xl text-navy-900">
           {formatPrice(product.price)}{" "}

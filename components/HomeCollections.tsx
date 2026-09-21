@@ -10,7 +10,7 @@ export function HomeCollections() {
   return (
     <section className="px-5 py-16 md:py-20">
       <div className="mx-auto max-w-[1320px]">
-        <h2 className="text-center font-serif text-[2.5rem] text-navy-900 md:text-[2.85rem]">
+        <h2 className="text-center font-serif text-3xl text-navy-900 md:text-[2.85rem]">
           Explore Our Collections
         </h2>
         <div className="mt-10 overflow-hidden">

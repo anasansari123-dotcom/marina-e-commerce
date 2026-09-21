@@ -91,14 +91,15 @@ export function ChatWidget() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-5 right-5 z-40 flex items-center gap-2 rounded-full bg-[#0B1D36] px-4 py-3 text-sm text-white shadow-lg hover:bg-navy-800"
+        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex items-center gap-2 rounded-full bg-[#0B1D36] p-3 text-sm text-white shadow-lg hover:bg-navy-800 sm:bottom-5 sm:right-5 sm:px-4 sm:py-3"
+        aria-label="Ask Marina"
       >
         <MessageCircle className="h-5 w-5 text-[#C9A84C]" />
-        Ask Marina
+        <span className="hidden sm:inline">Ask Marina</span>
       </button>
 
       {open && (
-        <div className="fixed bottom-5 right-5 z-50 flex h-[560px] w-[min(100%-1.5rem,380px)] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+        <div className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-50 flex h-[min(560px,calc(100dvh-var(--site-nav)-2rem))] w-auto max-w-[380px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:inset-x-auto sm:right-5 sm:w-[min(100%-1.5rem,380px)]">
           <div className="flex items-center justify-between bg-[#0B1D36] px-4 py-3 text-white">
             <div>
               <p className="text-sm font-medium">AI Shipping Assistant</p>

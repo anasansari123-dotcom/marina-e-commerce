@@ -2,8 +2,8 @@ import Image from "next/image";
 
 const frames = {
   header:
-    "relative h-11 w-[200px] overflow-hidden sm:h-12 sm:w-[240px] xl:h-[50px] xl:w-[260px]",
-  footer: "relative h-12 w-[240px] overflow-hidden",
+    "relative h-9 w-[148px] overflow-hidden sm:h-11 sm:w-[200px] md:h-12 md:w-[240px] xl:h-[50px] xl:w-[260px]",
+  footer: "relative h-10 w-[200px] overflow-hidden sm:h-12 sm:w-[240px]",
   hero: "relative mx-auto h-32 w-full max-w-3xl overflow-hidden md:h-44",
   admin: "relative h-10 w-full max-w-[190px] overflow-hidden",
 };

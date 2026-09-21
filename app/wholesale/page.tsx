@@ -6,7 +6,7 @@ import { heroImg } from "@/lib/images";
 export default function WholesalePage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[58vh] overflow-hidden bg-navy-950 text-cream-50">
+      <section className="relative min-h-[46vh] overflow-hidden bg-navy-950 text-cream-50 md:min-h-[58vh]">
         <Image
           src={heroImg.compass}
           alt="Antique brass compass on a nautical chart"
@@ -15,10 +15,10 @@ export default function WholesalePage() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/88 via-[#081525]/50 to-[#081525]/15" />
-        <div className="relative mx-auto flex min-h-[58vh] max-w-[1320px] items-center justify-between gap-8 px-5 py-16">
+        <div className="relative mx-auto flex min-h-[46vh] max-w-[1320px] items-center justify-between gap-8 px-5 py-14 md:min-h-[58vh] md:py-16">
           <div className="max-w-xl">
             <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">B2B / Wholesale</p>
-            <h1 className="mt-3 font-serif text-5xl leading-[1.08] md:text-[3.35rem]">
+            <h1 className="mt-3 font-serif text-4xl leading-[1.08] md:text-[3.35rem]">
               Built for Businesses.
               <br />
               Priced for Volume.

@@ -33,9 +33,9 @@ export function SearchModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[80] bg-navy-950/70 p-4 backdrop-blur-sm" onClick={onClose}>
+    <div className="fixed inset-0 z-[80] bg-navy-950/70 p-3 backdrop-blur-sm sm:p-4" onClick={onClose}>
       <div
-        className="mx-auto mt-16 max-w-2xl overflow-hidden rounded-2xl bg-cream-50 shadow-2xl"
+        className="mx-auto mt-[max(0.75rem,calc(var(--site-nav)-2rem))] max-h-[calc(100dvh-2rem)] max-w-2xl overflow-hidden rounded-2xl bg-cream-50 shadow-2xl sm:mt-16"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center gap-3 border-b border-cream-300 px-4 py-3">

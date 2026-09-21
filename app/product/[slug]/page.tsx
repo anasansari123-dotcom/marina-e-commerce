@@ -123,7 +123,7 @@ export default function ProductPage() {
           </div>
 
           <div>
-            <h1 className="font-serif text-[2.4rem] leading-tight text-navy-900">{product.name}</h1>
+            <h1 className="font-serif text-[1.85rem] leading-tight text-navy-900 md:text-[2.4rem]">{product.name}</h1>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
               <span className="flex items-center gap-0.5 text-[#C9A84C]">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -137,7 +137,7 @@ export default function ProductPage() {
               <span className="text-navy-400">|</span>
               <span className="text-navy-500">{product.sku}</span>
             </div>
-            <p className="mt-4 font-serif text-[2.4rem] text-navy-900">{formatPrice(product.price)}</p>
+            <p className="mt-4 font-serif text-[1.85rem] text-navy-900 md:text-[2.4rem]">{formatPrice(product.price)}</p>
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-1.5 text-emerald-700">
                 <Check className="h-4 w-4" /> {stockLabel}
@@ -148,7 +148,7 @@ export default function ProductPage() {
               </span>
             </div>
 
-            <div className="mt-7 grid grid-cols-2 gap-3">
+            <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <button onClick={handleAdd} className="btn-navy">
                 {added ? "Added to Cart" : "Add to Cart"}
               </button>
@@ -157,7 +157,7 @@ export default function ProductPage() {
               </Link>
             </div>
 
-            <div className="mt-3 grid grid-cols-2 gap-3">
+            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
               <button
                 type="button"
                 onClick={() =>

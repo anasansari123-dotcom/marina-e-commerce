@@ -38,7 +38,7 @@ function CircleIcon({ children }: { children: React.ReactNode }) {
 export default function ShippingPage() {
   return (
     <div className="bg-white">
-      <section className="relative isolate min-h-[340px] overflow-hidden bg-[#0B1D36] md:min-h-[400px]">
+      <section className="relative isolate min-h-[280px] overflow-hidden bg-[#0B1D36] md:min-h-[400px]">
         <Image
           src="/shipping-hero.jpg"
           alt="Cargo ship, aircraft and truck at port"
@@ -46,16 +46,17 @@ export default function ShippingPage() {
           priority
           className="object-cover object-[68%_center]"
         />
+        <div className="absolute inset-0 z-[1] bg-[#0B1D36]/82 md:hidden" />
         <div
-          className="absolute inset-y-0 left-0 z-[1] w-full bg-[#0B1D36] md:w-[54%]"
+          className="absolute inset-y-0 left-0 z-[1] hidden w-[54%] bg-[#0B1D36] md:block"
           style={{ clipPath: "polygon(0 0, 86% 0, 72% 100%, 0 100%)" }}
         />
-        <div className="relative z-[2] mx-auto flex min-h-[340px] max-w-[1240px] items-center px-5 py-14 md:min-h-[400px]">
+        <div className="relative z-[2] mx-auto flex min-h-[280px] max-w-[1240px] items-center px-5 py-12 md:min-h-[400px] md:py-14">
           <div className="max-w-[520px] text-white">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.32em] text-white/85">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/85 md:text-[12px] md:tracking-[0.32em]">
               Reliable &nbsp;•&nbsp; Safe &nbsp;•&nbsp; On Time
             </p>
-            <h1 className="mt-3 font-serif text-[4.2rem] italic leading-[0.9] md:text-[5.2rem]">Shipping</h1>
+            <h1 className="mt-3 font-serif text-[3.4rem] italic leading-[0.9] md:text-[5.2rem]">Shipping</h1>
             <div className="mt-3 h-[3px] w-[72px] bg-[#C9A84C]" />
             <p className="mt-5 font-serif text-[1.65rem] leading-snug md:text-[1.85rem]">
               We deliver your orders <span className="text-[#C9A84C]">worldwide</span>
@@ -196,7 +197,7 @@ export default function ShippingPage() {
       </section>
 
       <section className="bg-[#0B1D36] px-5 py-6">
-        <div className="mx-auto flex max-w-[900px] items-center justify-center gap-4 text-center">
+        <div className="mx-auto flex max-w-[900px] flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
           <Handshake className="h-10 w-10 shrink-0 text-[#C9A84C]" strokeWidth={1.5} />
           <p className="font-serif text-[1.35rem] italic leading-snug text-[#C9A84C] md:text-[1.55rem]">
             We request you to give us a chance to prove our capabilities

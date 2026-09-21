@@ -68,18 +68,19 @@ export function LanguageSwitcher() {
     <div ref={rootRef} className="relative">
       <button
         type="button"
+        aria-label={`Language: ${current.name}`}
         aria-haspopup="listbox"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="inline-flex items-center gap-1.5 text-[#d9c9a3] hover:text-[#C9A84C]"
       >
         <Globe className="h-3 w-3 text-[#C9A84C]" />
-        <span className="max-w-[7.5rem] truncate">{current.name}</span>
+        <span className="hidden max-w-[7.5rem] truncate sm:inline">{current.name}</span>
         <ChevronDown className={`h-3 w-3 transition ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open ? (
-        <div className="absolute right-0 top-full z-50 mt-2 w-[min(20.5rem,calc(100vw-2.5rem))] overflow-hidden rounded-xl border border-[#C9A84C]/25 bg-[#0B1D36] shadow-lg">
+        <div className="absolute right-0 top-full z-50 mt-2 w-[min(20.5rem,calc(100vw-1.5rem))] overflow-hidden rounded-xl border border-[#C9A84C]/25 bg-[#0B1D36] shadow-lg">
           <div className="border-b border-white/10 p-2">
             <label className="relative block">
               <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#C9A84C]" />

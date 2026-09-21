@@ -25,7 +25,7 @@ export default function ContactPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/90 via-[#081525]/55 to-[#081525]/20" />
         <div className="relative mx-auto flex min-h-[46vh] max-w-[1320px] flex-col justify-center px-5 py-16">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">Contact us</p>
-          <h1 className="mt-3 max-w-3xl font-serif text-5xl leading-[1.08] md:text-[3.4rem]">
+          <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
             Atelier & trade desk.
           </h1>
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/80">
@@ -37,7 +37,7 @@ export default function ContactPage() {
       <section className="px-5 py-16 md:py-20">
         <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[1fr_1.05fr]">
           <div>
-            <h2 className="font-serif text-4xl">Reach {company.name}</h2>
+            <h2 className="font-serif text-3xl md:text-4xl">Reach {company.name}</h2>
             <p className="mt-4 max-w-md text-navy-600">
               We reply within one business day. For urgent wholesale samples, WhatsApp the trade desk.
             </p>
@@ -118,7 +118,7 @@ export default function ContactPage() {
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.28em] text-[#8C6E28]">Visit us</p>
-              <h2 className="mt-2 font-serif text-4xl">Find the atelier</h2>
+              <h2 className="mt-2 font-serif text-3xl md:text-4xl">Find the atelier</h2>
               <p className="mt-2 max-w-lg text-navy-600">
                 Corporate office &amp; factory — {company.address.join(", ")}. Appointments welcome for
                 wholesale buyers and OEM sampling.
@@ -138,11 +138,11 @@ export default function ContactPage() {
             <iframe
               title={`${company.name} factory map — Roorkee, Uttarakhand, India`}
               src={companyMapSrc}
-              className="h-[380px] w-full md:h-[480px]"
+              className="h-[280px] w-full md:h-[480px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
-            <div className="pointer-events-none absolute bottom-5 left-5 right-5 max-w-xs rounded-2xl bg-white/95 p-4 shadow-soft md:bottom-auto md:left-8 md:right-auto md:top-8">
+            <div className="border-t border-[#eee7db] bg-white p-4 md:pointer-events-none md:absolute md:bottom-auto md:left-8 md:right-auto md:top-8 md:max-w-xs md:rounded-2xl md:border-0 md:bg-white/95 md:p-4 md:shadow-soft">
               <p className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#8C6E28]">
                 <MapPin className="h-3.5 w-3.5" />
                 Factory

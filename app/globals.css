@@ -8,7 +8,13 @@
 
 html {
   scroll-behavior: smooth;
-  --site-nav: 94px;
+  --site-nav: 86px;
+}
+
+@media (min-width: 640px) {
+  html {
+    --site-nav: 94px;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -18,7 +24,7 @@ html {
 }
 
 body {
-  @apply bg-[#FAF7F2] text-navy-900 antialiased;
+  @apply overflow-x-hidden bg-[#FAF7F2] text-navy-900 antialiased;
 }
 
 .btn-gold {

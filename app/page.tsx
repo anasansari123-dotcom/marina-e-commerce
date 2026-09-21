@@ -55,11 +55,11 @@ export default function HomePage() {
             <p className="mt-5 max-w-lg text-cream-100/75">
               Partner with us for premium nautical & brass products. Competitive pricing, reliable supply and global logistics — from 50 pieces to container programmes.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/wholesale/register" className="btn-gold">
+            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+              <Link href="/wholesale/register" className="btn-gold w-full sm:w-auto">
                 Create Wholesale Account
               </Link>
-              <Link href="/login" className="btn-outline">
+              <Link href="/login" className="btn-outline w-full sm:w-auto">
                 Already a member? Login
               </Link>
             </div>

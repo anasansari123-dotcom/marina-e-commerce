@@ -58,7 +58,7 @@ export function HomeHero() {
   }
 
   return (
-    <section className="relative h-[78vh] min-h-[560px] overflow-hidden bg-[#1a140c] text-cream-50">
+    <section className="relative h-[min(72vh,640px)] min-h-[420px] overflow-hidden bg-[#1a140c] text-cream-50 md:min-h-[560px]">
       {slides.map((s, idx) => (
         <Image
           key={s.src}
@@ -76,21 +76,21 @@ export function HomeHero() {
       <button
         aria-label="Previous slide"
         onClick={prev}
-        className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white"
+        className="absolute left-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white sm:flex"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         aria-label="Next slide"
         onClick={next}
-        className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white"
+        className="absolute right-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white sm:flex"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
 
       <div className="relative mx-auto flex h-full max-w-[1320px] items-center px-5 py-16">
         <div className="max-w-xl">
-          <h1 className="font-serif text-[3.2rem] leading-[1.05] tracking-tight text-white md:text-7xl">
+          <h1 className="font-serif text-[2.15rem] leading-[1.08] tracking-tight text-white sm:text-[3.2rem] md:text-7xl">
             {slide.title.split("\n").map((line) => (
               <span key={line} className="block">
                 {line}
@@ -98,11 +98,11 @@ export function HomeHero() {
             ))}
           </h1>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/85">{slide.text}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link href="/shop" className="btn-gold">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
+            <Link href="/shop" className="btn-gold w-full sm:w-auto">
               B2C Retail Collection
             </Link>
-            <Link href="/wholesale" className="btn-outline">
+            <Link href="/wholesale" className="btn-outline w-full sm:w-auto">
               B2B Wholesale Collection
             </Link>
           </div>

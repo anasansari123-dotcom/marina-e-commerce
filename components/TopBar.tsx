@@ -6,7 +6,7 @@ import { TopBarSearch } from "./TopBarSearch";
 export function TopBar() {
   return (
     <div className="relative z-50 bg-[#081525] text-[11px] text-[#d9c9a3]">
-      <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-4 px-5 py-[7px]">
+      <div className="mx-auto flex max-w-[1320px] items-center justify-between gap-2 px-3 py-[7px] sm:gap-4 sm:px-5">
         <div className="hidden items-center gap-4 md:flex">
           <span className="inline-flex items-center gap-1.5">
             <Compass className="h-3 w-3 text-[#C9A84C]" />
@@ -23,8 +23,8 @@ export function TopBar() {
             Custom Manufacturing
           </span>
         </div>
-        <p className="truncate md:hidden">Worldwide Shipping · Premium Quality</p>
-        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
+        <p className="min-w-0 flex-1 truncate pr-2 md:hidden">Worldwide Shipping</p>
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <LanguageSwitcher />
           <span className="text-white/20">|</span>
           <TopBarSearch />

@@ -93,7 +93,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/92 via-[#081525]/60 to-[#081525]/25" />
         <div className="relative mx-auto flex min-h-[52vh] max-w-[1320px] flex-col justify-center px-5 py-16">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">About us</p>
-          <h1 className="mt-3 max-w-3xl font-serif text-5xl leading-[1.08] md:text-[3.4rem]">
+          <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
             Marina Muse International
           </h1>
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/80">

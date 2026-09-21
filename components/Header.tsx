@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, ShoppingBag, User, X, Heart } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrandLogo } from "./Logo";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
@@ -31,9 +31,13 @@ export function Header() {
   const { count: wishCount } = useWishlist();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   return (
-    <header className="bg-[#0B1D36]">
-      <div className="mx-auto flex max-w-[1680px] items-center gap-4 px-4 py-2.5 xl:px-6">
+    <header className="relative bg-[#0B1D36]">
+      <div className="mx-auto flex max-w-[1680px] items-center gap-2 px-3 py-2 sm:gap-4 sm:px-4 sm:py-2.5 xl:px-6">
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
           <BrandLogo size="header" priority />
         </Link>
@@ -83,7 +87,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-[#0B1D36] px-5 py-3 xl:hidden">
+        <div className="absolute inset-x-0 top-full z-50 max-h-[min(70vh,calc(100dvh-var(--site-nav)))] overflow-y-auto border-t border-white/10 bg-[#0B1D36] px-5 py-3 shadow-lg xl:hidden">
           {nav.map((item) => (
             <Link
               key={item.href}

@@ -13,6 +13,7 @@ export default function ShopPage() {
   const [sub, setSub] = useState<string | null>(null);
   const [sort, setSort] = useState("new");
   const [grid, setGrid] = useState(true);
+  const [catsOpen, setCatsOpen] = useState(false);
 
   const list = useMemo(() => {
     let next = [...products];
@@ -48,14 +49,24 @@ export default function ShopPage() {
     setOpen(parentSlug);
     setParent(parentSlug);
     setSub(childSlug);
+    setCatsOpen(false);
   }
 
   return (
     <div className="bg-white">
-      <div className="mx-auto flex max-w-[1400px]">
+      <div className="mx-auto flex max-w-[1400px] flex-col md:flex-row">
         <aside className="w-full shrink-0 border-b border-[#eee] bg-white md:w-[300px] md:border-b-0 md:border-r">
-            <nav className="py-2 md:sticky md:top-[var(--site-nav)] md:max-h-[calc(100vh-var(--site-nav))] md:overflow-y-auto">
-            <p className="px-4 pb-2 pt-3 text-[15px] font-medium text-[#b0893a]">Product categories</p>
+          <button
+            type="button"
+            className="flex w-full items-center justify-between px-4 py-3 text-left text-[14px] font-medium text-[#b0893a] md:hidden"
+            onClick={() => setCatsOpen((v) => !v)}
+            aria-expanded={catsOpen}
+          >
+            <span>Product categories</span>
+            {catsOpen ? <ChevronDown className="h-4 w-4 text-[#bbb]" /> : <ChevronRight className="h-4 w-4 text-[#bbb]" />}
+          </button>
+            <nav className={`${catsOpen ? "block" : "hidden"} max-h-[min(55vh,28rem)] overflow-y-auto py-2 md:block md:sticky md:top-[var(--site-nav)] md:max-h-[calc(100vh-var(--site-nav))]`}>
+            <p className="hidden px-4 pb-2 pt-3 text-[15px] font-medium text-[#b0893a] md:block">Product categories</p>
             <button
               type="button"
               onClick={showAll}

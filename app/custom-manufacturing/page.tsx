@@ -69,7 +69,7 @@ const buyers = [
 export default function CustomManufacturingPage() {
   return (
     <div className="bg-white">
-      <section className="relative min-h-[70vh] overflow-hidden bg-[#0B1D36] text-white">
+      <section className="relative min-h-[52vh] overflow-hidden bg-[#0B1D36] text-white md:min-h-[70vh]">
         <Image
           src="/custom-manufacturing-hero.jpg"
           alt="Custom brass telescope and binoculars on a workshop table"
@@ -78,10 +78,10 @@ export default function CustomManufacturingPage() {
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/88 via-[#081525]/40 to-transparent" />
-        <div className="relative mx-auto flex min-h-[70vh] max-w-[1200px] items-center px-5 py-20">
+        <div className="relative mx-auto flex min-h-[52vh] max-w-[1200px] items-center px-5 py-16 md:min-h-[70vh] md:py-20">
           <div className="max-w-xl">
-            <h1 className="font-serif text-5xl leading-[1.05] md:text-6xl">Custom Manufacturing</h1>
-            <p className="mt-4 font-serif text-2xl text-white/95 md:text-[1.85rem]">
+            <h1 className="font-serif text-4xl leading-[1.05] md:text-6xl">Custom Manufacturing</h1>
+            <p className="mt-4 font-serif text-xl text-white/95 md:text-[1.85rem]">
               Custom Brass Telescopes &amp; Binoculars
               <br />
               Manufactured in Our Own Factory
@@ -120,8 +120,7 @@ export default function CustomManufacturingPage() {
       <section className="bg-[#FAF7F2] px-5 py-16 md:py-20">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="text-center font-serif text-3xl md:text-4xl">What Can Be Customized?</h2>
-          <div className="-mx-5 mt-12 overflow-x-auto px-5">
-            <div className="mx-auto grid min-w-[920px] grid-cols-9 items-start gap-3 xl:min-w-0">
+          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 lg:gap-3">
               {customizable.map((c) => (
                 <div key={c.label} className="min-w-0 text-center">
                   <div className="relative mx-auto aspect-square w-full max-w-[96px] overflow-hidden rounded-full border-[3px] border-[#C9A84C]/70 shadow-soft">
@@ -132,7 +131,6 @@ export default function CustomManufacturingPage() {
                   </p>
                 </div>
               ))}
-            </div>
           </div>
         </div>
       </section>
