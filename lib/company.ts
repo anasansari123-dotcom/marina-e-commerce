@@ -12,8 +12,16 @@ export const company = {
   mapQuery:
     "Rampur Chungi, Doon School Road, Green Park Colony, Lane No. 9, Roorkee 247667, Uttarakhand, India",
   hours: "Mon–Sat · 9:30am – 6:30pm IST",
-  email: "hello@marinamuse.com",
+  email: "Muaasiyainternational@gmail.com",
+  emails: ["Muaasiyainternational@gmail.com", "ibrahiminternational3112026@gmail.com"],
+  phone: "+91 74570 99540",
+  phoneTel: "+917457099540",
+  whatsapp: "917457099540",
 } as const;
+
+export const companyMailto = `mailto:${company.email}`;
+export const companyTel = `tel:${company.phoneTel}`;
+export const companyWhatsApp = `https://wa.me/${company.whatsapp}`;
 
 export const companyAddress = company.address.join(", ");
 export const companyMapSrc = `https://maps.google.com/maps?q=${encodeURIComponent(company.mapQuery)}&hl=en&z=16&output=embed`;

@@ -14,7 +14,7 @@ export default function CartPage() {
         <h1 className="font-serif text-5xl">Your cart is empty</h1>
         <p className="mt-3 text-navy-600">The foundry is full. The bag is not.</p>
         <Link href="/shop" className="btn-gold mt-8">
-          Shop collection
+          Shop Now
         </Link>
       </div>
     );

@@ -140,10 +140,10 @@ export default function AboutPage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/shop" className="btn-gold">
-                Shop collection
+                B2C Retail Collection
               </Link>
               <Link href="/wholesale" className="btn-navy">
-                Wholesale / B2B
+                B2B Wholesale Collection
               </Link>
             </div>
           </div>

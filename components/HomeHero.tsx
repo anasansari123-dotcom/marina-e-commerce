@@ -2,40 +2,45 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { heroImg } from "@/lib/images";
 
 const slides = [
   {
-    src: heroImg.compass,
-    alt: "Antique brass compass and magnifier on a maritime chart",
-    title: "Crafted in Brass.\nDesigned to Last.",
-    text: "Discover premium nautical instruments, handcrafted brass décor and custom-made products from India.",
+    src: "/1.jpeg",
+    alt: "Marina Muse International — brass binoculars and telescope",
+    eyebrow: "Brass optics · Nautical · Exploration",
+    title: "See More.\nExplore Further.",
+    text: "Handcrafted brass telescopes and binoculars — real viewing, premium finish, worldwide shipping.",
   },
   {
-    src: heroImg.telescope,
-    alt: "Vintage brass nautical telescope",
-    title: "Instruments of\nthe Open Sea.",
-    text: "Telescopes, spyglasses and officer pieces finished by hand in our Roorkee factory.",
+    src: "/2.jpeg",
+    alt: "Marina Muse International — armour, helmets and nautical instruments",
+    eyebrow: "Armour · Instruments · Heritage",
+    title: "Forged for\nCollectors.",
+    text: "Armour, helmets, diving pieces and brass instruments from our Roorkee factory.",
   },
   {
-    src: heroImg.goldCompass,
-    alt: "Gold compass on a nautical map",
-    title: "True North,\nin Solid Brass.",
-    text: "Working compasses for collectors, hotels and corporate gifting — engraved on request.",
+    src: "/3.jpeg",
+    alt: "Marina Muse International — brass and copper kitchenware",
+    eyebrow: "Kitchen · Table · Hospitality",
+    title: "Brass & Copper\nfor the Table.",
+    text: "Serveware, cookware and cutlery programmes for homes, hotels and wholesale.",
   },
   {
     src: heroImg.harbor,
-    alt: "Harbour with working vessels",
+    alt: "Harbour with working vessels — built for business, shipped worldwide",
+    eyebrow: "Export · Wholesale · OEM",
     title: "Built for Business.\nShipped Worldwide.",
-    text: "Wholesale lots, OEM logos and export documents from India to 46 countries.",
+    text: "Wholesale lots, custom logos and export documents from India.",
   },
   {
-    src: heroImg.sail,
-    alt: "Classic sailing ship at sea",
-    title: "Nautical Décor\nfor Homes & Hotels.",
-    text: "Ship wheels, lanterns, anchors and diving helmets — statement brass for every interior.",
+    src: "/5.jpeg",
+    alt: "Marina Muse International — nautical brass décor",
+    eyebrow: "Décor · Interiors · Gifting",
+    title: "Nautical Décor\nfor Every Room.",
+    text: "Lanterns, globes, clocks and brass accents for homes and hotels.",
   },
 ];
 
@@ -46,7 +51,7 @@ export function HomeHero() {
   useEffect(() => {
     const id = window.setInterval(() => {
       setI((n) => (n === slides.length - 1 ? 0 : n + 1));
-    }, 5500);
+    }, 6000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -58,70 +63,67 @@ export function HomeHero() {
   }
 
   return (
-    <section className="relative h-[min(72vh,640px)] min-h-[420px] overflow-hidden bg-[#1a140c] text-cream-50 md:min-h-[560px]">
-      {slides.map((s, idx) => (
-        <Image
-          key={s.src}
-          src={s.src}
-          alt={s.alt}
-          fill
-          priority={idx === 0}
-          className={`object-cover object-[68%_center] transition-opacity duration-700 ${
-            idx === i ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-black/10" />
+    <section className="relative isolate h-[min(78vh,760px)] min-h-[480px] overflow-hidden bg-[#081525] text-white md:min-h-[580px]">
+      <div className="absolute inset-0 z-0">
+        {slides.map((s, idx) => (
+          <Image
+            key={s.src}
+            src={s.src}
+            alt={s.alt}
+            fill
+            priority={idx === 0}
+            sizes="100vw"
+            className={`object-cover object-center transition-opacity duration-700 ${
+              idx === i ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
+      </div>
 
-      <button
-        aria-label="Previous slide"
-        onClick={prev}
-        className="absolute left-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white sm:flex"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </button>
-      <button
-        aria-label="Next slide"
-        onClick={next}
-        className="absolute right-2 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/25 text-white sm:flex"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </button>
-
-      <div className="relative mx-auto flex h-full max-w-[1320px] items-center px-5 py-16">
-        <div className="max-w-xl">
-          <h1 className="font-serif text-[2.15rem] leading-[1.08] tracking-tight text-white sm:text-[3.2rem] md:text-7xl">
+      <div className="relative z-20 mx-auto flex h-full max-w-[1320px] items-center px-5 py-12 sm:px-8">
+        <div className="max-w-lg rounded-2xl bg-[#081525]/92 px-6 py-7 shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/15 backdrop-blur-sm sm:px-8 sm:py-8">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">{slide.eyebrow}</p>
+          <h1 className="mt-3 font-serif text-[2rem] leading-[1.08] tracking-tight text-white sm:text-4xl md:text-[2.75rem]">
             {slide.title.split("\n").map((line) => (
               <span key={line} className="block">
                 {line}
               </span>
             ))}
           </h1>
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/85">{slide.text}</p>
-          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
-            <Link href="/shop" className="btn-gold w-full sm:w-auto">
-              B2C Retail Collection
+          <p className="mt-4 text-[15px] leading-relaxed text-white/90">{slide.text}</p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <Link href="/shop" className="btn-gold w-full text-center sm:w-auto">
+              Shop Now
             </Link>
-            <Link href="/wholesale" className="btn-outline w-full sm:w-auto">
+            <Link href="/wholesale" className="btn-outline w-full text-center sm:w-auto">
               B2B Wholesale Collection
             </Link>
           </div>
-          <Link
-            href="/about"
-            className="mt-6 inline-flex items-center gap-2.5 text-sm text-white/90 hover:text-gold-300"
-          >
-            <span className="grid h-8 w-8 place-items-center rounded-full border border-white/50">
-              <Play className="h-3 w-3 fill-current" />
-            </span>
-            Watch Our Story
-          </Link>
         </div>
       </div>
 
-      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+      <button
+        type="button"
+        aria-label="Previous slide"
+        onClick={prev}
+        className="absolute left-3 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#081525]/40 text-white backdrop-blur-sm hover:bg-[#081525]/70 sm:flex"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        type="button"
+        aria-label="Next slide"
+        onClick={next}
+        className="absolute right-3 top-1/2 z-20 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#081525]/40 text-white backdrop-blur-sm hover:bg-[#081525]/70 sm:flex"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-2">
         {slides.map((s, idx) => (
           <button
             key={s.src}
+            type="button"
             aria-label={`Go to slide ${idx + 1}`}
             onClick={() => setI(idx)}
             className={`h-2 rounded-full transition-all ${

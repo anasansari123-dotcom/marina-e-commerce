@@ -1,38 +1,36 @@
 import Image from "next/image";
 
 const frames = {
-  header:
-    "relative h-9 w-[148px] overflow-hidden sm:h-11 sm:w-[200px] md:h-12 md:w-[240px] xl:h-[50px] xl:w-[260px]",
-  footer: "relative h-10 w-[200px] overflow-hidden sm:h-12 sm:w-[240px]",
-  hero: "relative mx-auto h-32 w-full max-w-3xl overflow-hidden md:h-44",
-  admin: "relative h-10 w-full max-w-[190px] overflow-hidden",
+  header: "h-10 sm:h-11 md:h-12 xl:h-[52px]",
+  footer: "h-14 sm:h-16",
+  hero: "mx-auto h-36 md:h-48",
+  admin: "h-14",
 };
 
 export function BrandLogo({
   size = "header",
   priority = false,
+  onDark = true,
 }: {
   size?: keyof typeof frames;
   priority?: boolean;
+  onDark?: boolean;
 }) {
   return (
-    <span className={`block ${frames[size]}`}>
-      <Image
-        src="/logo1.png"
-        alt="Marina Muse International — Exporter, Manufacturer & Supplier"
-        fill
-        priority={priority}
-        sizes={
-          size === "hero"
-            ? "(max-width: 768px) 90vw, 768px"
-            : size === "header"
-              ? "320px"
-              : "280px"
-        }
-        className={
-          size === "hero" ? "object-contain object-center" : "object-contain object-left"
-        }
-      />
+    <span
+      className={`inline-flex items-center justify-center ${onDark ? "rounded-md bg-white px-2.5 py-1.5 shadow-sm" : ""}`}
+    >
+      <span className={`relative block ${frames[size]}`}>
+        <Image
+          src="/newlogo-removebg-preview.png"
+          alt="Marina Muse International — Exporter, Manufacturer & Supplier"
+          width={707}
+          height={353}
+          priority={priority}
+          sizes={size === "hero" ? "(max-width: 768px) 90vw, 768px" : "420px"}
+          className="h-full w-auto object-contain"
+        />
+      </span>
     </span>
   );
 }

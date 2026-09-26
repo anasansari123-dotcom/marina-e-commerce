@@ -37,18 +37,18 @@ export function Header() {
 
   return (
     <header className="relative bg-[#0B1D36]">
-      <div className="mx-auto flex max-w-[1680px] items-center gap-2 px-3 py-2 sm:gap-4 sm:px-4 sm:py-2.5 xl:px-6">
+      <div className="mx-auto flex max-w-[1680px] items-center gap-3 px-3 py-2 sm:px-5 xl:px-6">
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
           <BrandLogo size="header" priority />
         </Link>
 
-        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-5 2xl:gap-x-6 xl:flex mr-12">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-x-3 lg:flex xl:gap-x-5 2xl:gap-x-6">
           {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`whitespace-nowrap py-2 text-[10px] font-medium uppercase tracking-[0.08em] 2xl:text-[13px] ${
-                isActive(pathname, item.href) ? "text-[#C9A84C]" : "text-white/85 hover:text-[#C9A84C]"
+              className={`whitespace-nowrap py-2 text-[10px] font-medium uppercase tracking-[0.08em] transition-colors xl:text-[11px] 2xl:text-[12px] ${
+                isActive(pathname, item.href) ? "text-[#C9A84C]" : "text-white/80 hover:text-[#C9A84C]"
               }`}
             >
               {item.label}
@@ -56,15 +56,15 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-0.5 text-white">
+        <div className="ml-auto flex shrink-0 items-center gap-0.5 text-white lg:ml-0">
           <Link
             href="/login"
-            className="inline-flex items-center gap-1.5 px-2 py-2 text-[10px] font-medium uppercase tracking-[0.14em] hover:text-[#C9A84C]"
+            className="inline-flex items-center gap-1.5 px-2 py-2 text-[10px] font-medium uppercase tracking-[0.14em] text-white/85 hover:text-[#C9A84C]"
           >
-            <User className="h-[16px] w-[16px]" />
+            <User className="h-4 w-4" />
             <span className="hidden sm:inline">Login</span>
           </Link>
-          <Link href="/wishlist" aria-label="My Wishlist" className="relative p-2 hover:text-[#C9A84C]">
+          <Link href="/wishlist" aria-label="My Wishlist" className="relative p-2 text-white/85 hover:text-[#C9A84C]">
             <Heart className="h-[18px] w-[18px]" />
             {wishCount > 0 && (
               <span className="absolute right-0.5 top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#C9A84C] px-1 text-[10px] font-semibold text-navy-950">
@@ -72,7 +72,7 @@ export function Header() {
               </span>
             )}
           </Link>
-          <Link href="/cart" aria-label="Cart" className="relative p-2 hover:text-[#C9A84C]">
+          <Link href="/cart" aria-label="Cart" className="relative p-2 text-white/85 hover:text-[#C9A84C]">
             <ShoppingBag className="h-[18px] w-[18px]" />
             {count > 0 && (
               <span className="absolute right-0.5 top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#C9A84C] px-1 text-[10px] font-semibold text-navy-950">
@@ -80,14 +80,14 @@ export function Header() {
               </span>
             )}
           </Link>
-          <button className="p-2 xl:hidden" aria-label="Menu" onClick={() => setOpen((v) => !v)}>
+          <button className="p-2 lg:hidden" aria-label="Menu" onClick={() => setOpen((v) => !v)}>
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="absolute inset-x-0 top-full z-50 max-h-[min(70vh,calc(100dvh-var(--site-nav)))] overflow-y-auto border-t border-white/10 bg-[#0B1D36] px-5 py-3 shadow-lg xl:hidden">
+        <div className="absolute inset-x-0 top-full z-50 max-h-[min(70vh,calc(100dvh-var(--site-nav)))] overflow-y-auto border-t border-[#C9A84C]/20 bg-[#0B1D36] px-5 py-3 shadow-lg lg:hidden">
           {nav.map((item) => (
             <Link
               key={item.href}

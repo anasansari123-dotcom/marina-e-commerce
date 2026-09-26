@@ -10,6 +10,7 @@ import {
   Youtube,
 } from "lucide-react";
 import { BrandLogo } from "./Logo";
+import { company, companyWhatsApp } from "@/lib/company";
 
 const columns = [
   {
@@ -18,7 +19,6 @@ const columns = [
       ["B2C Retail Collection", "/shop"],
       ["Collections", "/collections"],
       ["My Wishlist", "/wishlist"],
-      ["Corporate Gifts", "/corporate-gifts"],
     ],
   },
   {
@@ -34,11 +34,18 @@ const columns = [
     title: "Company",
     links: [
       ["About Us", "/about"],
-      ["Contact", "/contact"],
+      ["Contact Us", "/contact"],
       ["Blog", "/blog"],
       ["Shipping", "/shipping"],
     ],
   },
+];
+
+const socials = [
+  { href: "https://www.facebook.com/", label: "Facebook", Icon: Facebook },
+  { href: "https://www.instagram.com/", label: "Instagram", Icon: Instagram },
+  { href: "https://www.youtube.com/", label: "YouTube", Icon: Youtube },
+  { href: "https://www.linkedin.com/", label: "LinkedIn", Icon: Linkedin },
 ];
 
 const promises = [
@@ -50,7 +57,7 @@ const promises = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto bg-[#081525] text-cream-100">
+    <footer className="mt-auto overflow-x-hidden bg-[#081525] text-cream-100">
       <div className="border-y border-white/10 bg-[#0B1D36]">
         <div className="mx-auto grid max-w-[1320px] gap-6 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
           {promises.map((p) => (
@@ -65,29 +72,54 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-[1320px] gap-8 px-5 py-10 md:grid-cols-4 md:gap-10 md:py-14">
-        <div className="md:col-span-1">
+      <div className="mx-auto grid max-w-[1320px] gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:py-16">
+        <div>
           <BrandLogo size="footer" />
-          <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-100/65">
-            Premium nautical instruments, handcrafted brass décor and custom manufacturing from India — exporter, manufacturer &amp; supplier.
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-cream-100/70">
+            Premium nautical instruments, handcrafted brass décor and custom manufacturing from India — exporter,
+            manufacturer &amp; supplier.
           </p>
-          <p className="mt-4 max-w-xs text-xs leading-relaxed text-cream-100/50">
-            Corporate Office &amp; Factory
+          <p className="mt-5 text-[11px] uppercase tracking-[0.2em] text-[#C9A84C]">Corporate Office &amp; Factory</p>
+          <p className="mt-2 max-w-xs text-sm leading-relaxed text-cream-100/65">
+            {company.address[0]}
             <br />
-            Rampur Chungi, Doon School Road
+            {company.address[1]}
             <br />
-            Green Park Colony, Lane No. 9
-            <br />
-            Roorkee-247667, Uttarakhand, India
+            {company.address[2]}
           </p>
+          <div className="mt-5 space-y-1.5 text-sm text-cream-100/80">
+            {company.emails.map((mail) => (
+              <a key={mail} href={`mailto:${mail}`} className="block break-all hover:text-[#C9A84C]">
+                {mail}
+              </a>
+            ))}
+            <a href={companyWhatsApp} target="_blank" rel="noreferrer" className="block hover:text-[#C9A84C]">
+              WhatsApp {company.phone}
+            </a>
+          </div>
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {socials.map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={label}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#C9A84C] text-[#081525] hover:bg-[#d4b45a]"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
+
         {columns.map((col) => (
           <div key={col.title}>
-            <p className="text-xs uppercase tracking-[0.28em] text-[#C9A84C]">{col.title}</p>
-            <ul className="mt-4 space-y-2">
+            <p className="text-[11px] uppercase tracking-[0.24em] text-[#C9A84C]">{col.title}</p>
+            <ul className="mt-4 space-y-2.5">
               {col.links.map(([label, href]) => (
                 <li key={`${col.title}-${label}`}>
-                  <Link href={href} className="text-sm text-cream-100/75 hover:text-[#C9A84C]">
+                  <Link href={href} className="text-sm text-cream-100/75 transition hover:text-[#C9A84C]">
                     {label}
                   </Link>
                 </li>
@@ -98,27 +130,8 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-3 px-5 py-5 text-xs text-cream-100/50 sm:flex-row">
-          <p>© 2026 Marina Muse International. Exporter · Manufacturer · Supplier.</p>
-          <p className="flex flex-wrap justify-center gap-4">
-            <span>Premium Nautical Instruments</span>
-            <span>Handcrafted Brass Décor</span>
-            <span>Custom Manufacturing</span>
-          </p>
-          <div className="flex items-center gap-3 text-white/70">
-            <a href="#" aria-label="Facebook" className="hover:text-[#C9A84C]">
-              <Facebook className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="Instagram" className="hover:text-[#C9A84C]">
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="YouTube" className="hover:text-[#C9A84C]">
-              <Youtube className="h-4 w-4" />
-            </a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-[#C9A84C]">
-              <Linkedin className="h-4 w-4" />
-            </a>
-          </div>
+        <div className="mx-auto max-w-[1320px] px-5 py-5 pb-8 text-center text-xs text-cream-100/45">
+          © 2026 {company.name}. Exporter · Manufacturer · Supplier.
         </div>
       </div>
     </footer>

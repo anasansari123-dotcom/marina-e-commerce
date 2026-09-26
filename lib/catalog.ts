@@ -31,6 +31,11 @@ export const shopCategories = [
   { slug: "ship-telegraph", name: "Ship Telegraph" },
   { slug: "walking-stick", name: "Walking Stick & Shoe Horn" },
   { slug: "nautical-decor-gifts", name: "Nautical Decor & Gifts" },
+  { slug: "kitchen-product", name: "Kitchen Product" },
+  { slug: "decor", name: "Décor" },
+  { slug: "jewellery", name: "Jewellery" },
+  { slug: "hardware", name: "Hardware" },
+  { slug: "modern-brass-wall-sconce", name: "Modern Brass Wall Sconce" },
   { slug: "ungrouped", name: "Ungrouped" },
 ];
 
@@ -47,6 +52,7 @@ const collectionMap: Record<string, string> = {
   "corporate-gifts": "nautical-decor-gifts",
   "custom-manufacturing": "ungrouped",
   "new-arrivals": "ungrouped",
+  "modern-brass-wall-sconce": "modern-brass-wall-sconce",
 };
 
 const slugMap: Record<string, string> = {

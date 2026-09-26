@@ -146,9 +146,9 @@ export default function ShopPage() {
             </div>
           </div>
 
-          <div className={grid ? "grid grid-cols-2 gap-4 lg:grid-cols-4" : "grid grid-cols-1 gap-4"}>
+          <div className={grid ? "grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-8" : "grid grid-cols-1 gap-6"}>
             {list.map((p) => (
-              <CatalogCard key={p.slug} product={p} />
+              <CatalogCard key={p.slug} product={p} freeShipping />
             ))}
           </div>
         </div>

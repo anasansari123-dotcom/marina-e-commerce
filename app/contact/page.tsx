@@ -3,12 +3,12 @@ import Link from "next/link";
 import { Clock3, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
 import { heroImg } from "@/lib/images";
-import { company, companyDirections, companyMapSrc } from "@/lib/company";
+import { company, companyDirections, companyMapSrc, companyTel, companyWhatsApp } from "@/lib/company";
 
 const desks = [
-  { title: "Retail & gifting", body: "Orders, tracking and product advice.", mail: "hello@marinamuse.com" },
-  { title: "Wholesale / B2B", body: "Catalogues, MOQs and trade terms.", mail: "trade@marinamuse.com" },
-  { title: "OEM & custom", body: "Drawings, logos and sampling.", mail: "studio@marinamuse.com" },
+  { title: "Retail & gifting", body: "Orders, tracking and product advice." },
+  { title: "Wholesale / B2B", body: "Catalogues, MOQs and trade terms." },
+  { title: "OEM & custom", body: "Drawings, logos and sampling." },
 ];
 
 export default function ContactPage() {
@@ -62,14 +62,18 @@ export default function ContactPage() {
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#C9A84C]" />
-                <a href="mailto:hello@marinamuse.com" className="hover:text-[#8C6E28]">
-                  hello@marinamuse.com
-                </a>
+                <span className="flex flex-col gap-1">
+                  {company.emails.map((mail) => (
+                    <a key={mail} href={`mailto:${mail}`} className="hover:text-[#8C6E28]">
+                      {mail}
+                    </a>
+                  ))}
+                </span>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 h-5 w-5 shrink-0 text-[#C9A84C]" />
-                <a href="tel:+14015550148" className="hover:text-[#8C6E28]">
-                  +1 (401) 555-0148
+                <a href={companyTel} className="hover:text-[#8C6E28]">
+                  {company.phone}
                 </a>
               </li>
               <li className="flex gap-3">
@@ -78,7 +82,7 @@ export default function ContactPage() {
               </li>
             </ul>
             <a
-              href="https://wa.me/14015550148"
+              href={companyWhatsApp}
               target="_blank"
               rel="noreferrer"
               className="btn-gold mt-8 inline-flex gap-2"
@@ -91,9 +95,13 @@ export default function ContactPage() {
                 <div key={d.title} className="rounded-2xl border border-[#eee7db] bg-white p-4">
                   <p className="font-serif text-xl">{d.title}</p>
                   <p className="mt-1 text-sm text-navy-600">{d.body}</p>
-                  <a href={`mailto:${d.mail}`} className="mt-3 inline-block text-xs text-[#8C6E28] underline">
-                    {d.mail}
-                  </a>
+                  <span className="mt-3 flex flex-col gap-1">
+                    {company.emails.map((mail) => (
+                      <a key={mail} href={`mailto:${mail}`} className="text-xs text-[#8C6E28] underline">
+                        {mail}
+                      </a>
+                    ))}
+                  </span>
                 </div>
               ))}
             </div>

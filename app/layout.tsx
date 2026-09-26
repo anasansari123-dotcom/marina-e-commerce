@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   description:
     "Premium nautical instruments, handcrafted brass décor and custom-made products from India. Wholesale, corporate gifts and global shipping.",
   icons: {
-    icon: "/logo1.png",
-    apple: "/logo1.png",
+    icon: "/newlogo.png",
+    apple: "/newlogo.png",
   },
 };
 

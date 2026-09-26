@@ -1,41 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { featuredProducts, reviews, trustStats } from "@/lib/products";
+import { reviews, trustStats } from "@/lib/products";
 import { HomeHero } from "@/components/HomeHero";
 import { HomeCollections } from "@/components/HomeCollections";
-import { ProductCard } from "@/components/ProductCard";
 import { ShieldCheck } from "lucide-react";
 import { heroImg, img } from "@/lib/images";
 
 export default function HomePage() {
-  const featured = featuredProducts();
-
   return (
     <div className="bg-[#FAF7F2]">
       <HomeHero />
       <HomeCollections />
-
-      <section className="bg-[#F4F1EA] px-5 py-20">
-        <div className="mx-auto max-w-[1320px]">
-          <div className="mb-10 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">Atelier selection</p>
-              <h2 className="mt-2 font-serif text-4xl text-navy-900">Featured Pieces</h2>
-            </div>
-            <Link
-              href="/shop"
-              className="hidden text-sm tracking-widest text-navy-700 underline decoration-[#C9A84C] underline-offset-4 md:inline"
-            >
-              View all
-            </Link>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {featured.slice(0, 8).map((p) => (
-              <ProductCard key={p.slug} product={p} />
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="relative overflow-hidden bg-navy-900 py-20 text-cream-50">
         <Image
@@ -115,7 +90,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1320px]">
           <div className="text-center">
             <div className="mx-auto mb-4 h-px w-16 bg-[#C9A84C]" />
-            <h2 className="font-serif text-4xl text-navy-900 md:text-5xl">Captains of taste</h2>
+            <h2 className="font-serif text-4xl text-navy-900 md:text-5xl">What Our Customers Say</h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {reviews.map((r) => (

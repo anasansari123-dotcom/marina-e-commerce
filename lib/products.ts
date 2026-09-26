@@ -1,5 +1,5 @@
 import { catalogProducts } from "./catalog";
-import { img } from "./images";
+import { imageForName, img } from "./images";
 
 export type Collection = {
   slug: string;
@@ -188,7 +188,15 @@ export const collections: Collection[] = [
     description: "Antique brass magnifying glasses with turned handles for desk and gifting.",
     image: img.magnifier,
   },
-];
+  {
+    slug: "modern-brass-wall-sconce",
+    name: "Modern Brass Wall Sconce",
+    tagline: "Wall light in brass",
+    description:
+      "Modern brass wall sconces for hallways, hotels and dining rooms — single-arm, dual-arm, glass shade, outdoor and vintage finishes.",
+    image: img.sconceWall,
+  },
+].map((c) => ({ ...c, image: imageForName(c.name, c.image) }));
 
 const coreProducts: Product[] = [
   {
@@ -767,7 +775,13 @@ const coreProducts: Product[] = [
   },
 ];
 
-export const products: Product[] = [...coreProducts, ...catalogProducts];
+function withNamedImage(p: Product): Product {
+  const image = imageForName(p.name, p.image);
+  const rest = (p.gallery || []).filter((g) => g !== image);
+  return { ...p, image, gallery: [image, ...rest].slice(0, 4) };
+}
+
+export const products: Product[] = [...coreProducts, ...catalogProducts].map(withNamedImage);
 
 export const reviews = [
   {

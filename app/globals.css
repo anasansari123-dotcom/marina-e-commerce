@@ -8,18 +8,18 @@
 
 html {
   scroll-behavior: smooth;
-  --site-nav: 86px;
+  --site-nav: 104px;
 }
 
 @media (min-width: 640px) {
   html {
-    --site-nav: 94px;
+    --site-nav: 112px;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1024px) {
   html {
-    --site-nav: 102px;
+    --site-nav: 118px;
   }
 }
 
@@ -49,23 +49,6 @@ body {
 
 .hex-icon {
   clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
-}
-
-@keyframes collections-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.collections-marquee {
-  animation: collections-marquee 40s linear infinite;
-}
-
-.collections-marquee:hover {
-  animation-play-state: paused;
 }
 
 .no-scrollbar {

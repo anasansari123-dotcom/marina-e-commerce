@@ -91,7 +91,7 @@ export function ChatWidget() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex items-center gap-2 rounded-full bg-[#0B1D36] p-3 text-sm text-white shadow-lg hover:bg-navy-800 sm:bottom-5 sm:right-5 sm:px-4 sm:py-3"
+        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-30 flex items-center gap-2 rounded-full bg-[#0B1D36] p-3 text-sm text-white shadow-lg hover:bg-navy-800 sm:bottom-6 sm:right-6 sm:px-4 sm:py-3"
         aria-label="Ask Marina"
       >
         <MessageCircle className="h-5 w-5 text-[#C9A84C]" />

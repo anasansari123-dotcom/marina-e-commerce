@@ -13,7 +13,7 @@ export default function WishlistPage() {
         <h1 className="font-serif text-5xl">Your wishlist is empty</h1>
         <p className="mt-3 text-navy-600">Tap the heart on any product image to save it here.</p>
         <Link href="/shop" className="btn-gold mt-8">
-          Shop collection
+          Shop Now
         </Link>
       </div>
     );

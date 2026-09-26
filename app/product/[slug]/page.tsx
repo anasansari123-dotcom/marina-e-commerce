@@ -18,6 +18,8 @@ import {
   Truck,
 } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
+import { companyWhatsApp } from "@/lib/company";
+import { FreeShippingTag } from "@/components/FreeShippingTag";
 
 const tabs = ["Specifications", "Dimensions", "What's Included", "Reviews", "FAQs"] as const;
 
@@ -123,7 +125,7 @@ export default function ProductPage() {
           </div>
 
           <div>
-            <h1 className="font-serif text-[1.85rem] leading-tight text-navy-900 md:text-[2.4rem]">{product.name}</h1>
+            <h1 className="text-[1.85rem] font-normal leading-tight text-[#222222] md:text-[2.15rem]">{product.name}</h1>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
               <span className="flex items-center gap-0.5 text-[#C9A84C]">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -137,7 +139,8 @@ export default function ProductPage() {
               <span className="text-navy-400">|</span>
               <span className="text-navy-500">{product.sku}</span>
             </div>
-            <p className="mt-4 font-serif text-[1.85rem] text-navy-900 md:text-[2.4rem]">{formatPrice(product.price)}</p>
+            <p className="mt-4 text-[1.75rem] font-bold text-[#222222] md:text-[2rem]">{formatPrice(product.price)}</p>
+            <FreeShippingTag />
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-1.5 text-emerald-700">
                 <Check className="h-4 w-4" /> {stockLabel}
@@ -171,7 +174,7 @@ export default function ProductPage() {
                 Ask AI About This Product
               </button>
               <a
-                href="https://wa.me/919876543210"
+                href={companyWhatsApp}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] text-white"
               >
                 <MessageCircle className="h-3.5 w-3.5" />
