@@ -36,6 +36,7 @@ const reasons = [
   { icon: BadgeCheck, title: "Custom Tripod & Stand", body: "Brass, wood or steel tripod/stand options." },
   { icon: Boxes, title: "Bulk & Wholesale Orders", body: "For retailers, resellers and business partners." },
   { icon: Tag, title: "Private Label / Business Orders", body: "Your brand, our quality." },
+  { icon: Truck, title: "Global Shipping", body: "Safe and reliable delivery worldwide." },
 ];
 
 const customizable = [
@@ -63,14 +64,14 @@ const buyers = [
   "Retailers",
   "Hotels & Resorts",
   "Interior / Lifestyle Businesses",
-  "Gift & Corporate Orders",
+  "Export Orders",
   "International Buyers",
 ];
 
 export default function CustomManufacturingPage() {
   return (
     <div className="bg-white">
-      <section className="relative min-h-[52vh] overflow-hidden bg-[#0B1D36] text-white md:min-h-[70vh]">
+      <section className="relative min-h-[38vh] overflow-hidden bg-[#0B1D36] text-white md:min-h-[48vh]">
         <Image
           src="/custom-manufacturing-hero.jpg"
           alt="Custom brass telescope and binoculars on a workshop table"
@@ -79,7 +80,7 @@ export default function CustomManufacturingPage() {
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/88 via-[#081525]/40 to-transparent" />
-        <div className="relative mx-auto flex min-h-[52vh] max-w-[1200px] items-center px-5 py-16 md:min-h-[70vh] md:py-20">
+        <div className="relative mx-auto flex min-h-[38vh] max-w-[1200px] items-center px-5 py-10 md:min-h-[48vh] md:py-14">
           <div className="max-w-xl">
             <h1 className="font-serif text-4xl leading-[1.05] md:text-6xl">Custom Manufacturing</h1>
             <p className="mt-4 font-serif text-xl text-white/95 md:text-[1.85rem]">
@@ -99,29 +100,37 @@ export default function CustomManufacturingPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 md:py-20">
-        <div className="mx-auto max-w-[1200px]">
+      <section className="bg-white px-5 py-10 md:py-14">
+        <div className="mx-auto max-w-[1400px]">
           <h2 className="text-center font-serif text-3xl md:text-4xl">
             Why Choose Our Custom Manufacturing?
           </h2>
-          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7">
+          <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-6">
             {reasons.map((r) => (
-              <div key={r.title} className="text-center">
+              <div key={r.title} className="min-w-0 text-center">
                 <div className="mx-auto grid h-[84px] w-[84px] place-items-center rounded-full bg-[#0B1D36] text-[#C9A84C]">
                   <r.icon className="h-8 w-8" strokeWidth={1.5} />
                 </div>
                 <h3 className="mt-4 text-sm font-semibold text-navy-900">{r.title}</h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-navy-600">{r.body}</p>
+                <p
+                  className={
+                    r.title === "Custom Lens & Optical Specifications"
+                      ? "mt-2 max-md:whitespace-normal whitespace-nowrap text-[12px] leading-snug tracking-tight text-navy-600"
+                      : "mt-2 text-[13px] leading-relaxed text-navy-600"
+                  }
+                >
+                  {r.body}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#FAF7F2] px-5 py-16 md:py-20">
+      <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1400px]">
           <h2 className="text-center font-serif text-3xl md:text-4xl">What Can Be Customized?</h2>
-          <div className="mt-12 grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 lg:gap-3">
+          <div className="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 lg:gap-3">
               {customizable.map((c) => (
                 <div key={c.label} className="min-w-0 text-center">
                   <div className="relative mx-auto aspect-square w-full max-w-[96px] overflow-hidden rounded-full border-[3px] border-[#C9A84C]/70 shadow-soft">
@@ -136,12 +145,12 @@ export default function CustomManufacturingPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#0B1D36] px-5 py-16 text-white md:py-20">
+      <section className="relative overflow-hidden bg-[#0B1D36] px-5 py-10 text-white md:py-14">
         <Image src={heroImg.harbor} alt="" fill className="object-cover opacity-35" />
         <div className="absolute inset-0 bg-[#0B1D36]/55" />
         <div className="relative mx-auto max-w-[1200px]">
           <h2 className="text-center font-serif text-3xl md:text-4xl">Our Custom Manufacturing Process</h2>
-          <div className="mt-12 flex flex-wrap items-start justify-center gap-y-8">
+          <div className="mt-8 flex flex-wrap items-start justify-center gap-y-8">
             {process.map((step, i) => (
               <div key={step.title} className="flex items-start">
                 <div className="w-[150px] text-center md:w-[160px]">
@@ -162,7 +171,7 @@ export default function CustomManufacturingPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 md:py-20">
+      <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1200px] items-center gap-10 md:grid-cols-2">
           <div className="relative aspect-[5/4] overflow-hidden rounded-2xl">
             <Image
@@ -198,7 +207,7 @@ export default function CustomManufacturingPage() {
         </div>
       </section>
 
-      <section className="bg-[#FAF7F2] px-5 py-16 md:py-20">
+      <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1200px] items-center gap-10 md:grid-cols-[0.9fr_1.1fr]">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
             <Image src={img.binoculars} alt="Brass binoculars in a presentation case" fill className="object-cover" />
@@ -212,7 +221,7 @@ export default function CustomManufacturingPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#0B1D36] px-5 py-16 text-center text-white md:py-20">
+      <section className="relative overflow-hidden bg-[#0B1D36] px-5 py-10 text-center text-white md:py-14">
         <Image src={heroImg.sail} alt="" fill className="object-cover opacity-40" />
         <div className="absolute inset-0 bg-[#081525]/60" />
         <div className="relative mx-auto max-w-2xl">

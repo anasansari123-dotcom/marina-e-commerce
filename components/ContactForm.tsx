@@ -9,7 +9,7 @@ export function ContactForm() {
 
   if (done) {
     return (
-      <div className="rounded-3xl bg-white p-8 py-16 text-center shadow-soft md:p-10">
+      <div className="rounded-3xl bg-white p-8 py-10 text-center shadow-soft md:p-10">
         <CheckCircle2 className="mx-auto h-12 w-12 text-[#C9A84C]" />
         <h2 className="mt-4 font-serif text-3xl">Message received</h2>
         <p className="mt-2 text-navy-600">We’ll reply within one business day.</p>
@@ -25,7 +25,7 @@ export function ContactForm() {
         setDone(true);
       }}
     >
-      <h2 className="font-serif text-3xl">Send a message</h2>
+      <h2 className="font-serif text-3xl">Send an Enquiry</h2>
       <div className="mt-5 grid grid-cols-2 rounded-full bg-[#F4F1EA] p-1 text-sm">
         <button
           type="button"
@@ -54,7 +54,6 @@ export function ContactForm() {
           <option>Product enquiry</option>
           <option>Wholesale pricing</option>
           <option>Custom manufacturing</option>
-          <option>Corporate gifts</option>
           <option>Order / shipping</option>
         </select>
         <textarea className="input min-h-36" required placeholder="How can we help?" />

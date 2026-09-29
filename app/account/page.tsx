@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function AccountPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16">
+    <div className="mx-auto max-w-3xl px-4 py-10 md:py-12">
       <h1 className="font-serif text-4xl">Your account</h1>
       <p className="mt-2 text-navy-600">Demo customer / wholesale portal.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">

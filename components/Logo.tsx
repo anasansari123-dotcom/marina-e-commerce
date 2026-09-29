@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 const frames = {
-  header: "h-10 sm:h-11 md:h-12 xl:h-[52px]",
-  footer: "h-14 sm:h-16",
+  header: "h-[52px] sm:h-16 md:h-[72px] xl:h-[80px]",
+  footer: "h-16 sm:h-[4.5rem] md:h-20",
   hero: "mx-auto h-36 md:h-48",
   admin: "h-14",
 };
@@ -10,27 +10,21 @@ const frames = {
 export function BrandLogo({
   size = "header",
   priority = false,
-  onDark = true,
 }: {
   size?: keyof typeof frames;
   priority?: boolean;
-  onDark?: boolean;
 }) {
   return (
-    <span
-      className={`inline-flex items-center justify-center ${onDark ? "rounded-md bg-white px-2.5 py-1.5 shadow-sm" : ""}`}
-    >
-      <span className={`relative block ${frames[size]}`}>
-        <Image
-          src="/newlogo-removebg-preview.png"
-          alt="Marina Muse International — Exporter, Manufacturer & Supplier"
-          width={707}
-          height={353}
-          priority={priority}
-          sizes={size === "hero" ? "(max-width: 768px) 90vw, 768px" : "420px"}
-          className="h-full w-auto object-contain"
-        />
-      </span>
+    <span className={`relative inline-block leading-none ${frames[size]}`}>
+      <Image
+        src="/newlogo.png"
+        alt="Marina Muse International — Exporter, Manufacturer & Supplier"
+        width={707}
+        height={353}
+        priority={priority}
+        sizes={size === "hero" ? "(max-width: 768px) 90vw, 768px" : "420px"}
+        className="h-full w-auto object-contain"
+      />
     </span>
   );
 }

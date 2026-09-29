@@ -6,13 +6,19 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { heroImg } from "@/lib/images";
 
+const btnBase =
+  "inline-flex min-w-0 flex-1 items-center justify-center whitespace-nowrap rounded-full px-3 py-2.5 text-center text-[9px] font-semibold uppercase tracking-[0.08em] transition duration-300 sm:px-6 sm:py-3 sm:text-[11px] sm:tracking-[0.16em]";
+
 const slides = [
   {
-    src: "/1.jpeg",
-    alt: "Marina Muse International — brass binoculars and telescope",
+    src: "/hh.jpeg",
+    alt: "Brass telescope and spyglass on a mountain overlook at sunset",
     eyebrow: "Brass optics · Nautical · Exploration",
     title: "See More.\nExplore Further.",
     text: "Handcrafted brass telescopes and binoculars — real viewing, premium finish, worldwide shipping.",
+    accent: "#E8D5A3",
+    primaryCls: "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff1d0]",
+    secondaryCls: "border border-[#C9A84C] text-[#E8D5A3] hover:bg-[#C9A84C]/10",
   },
   {
     src: "/2.jpeg",
@@ -20,6 +26,9 @@ const slides = [
     eyebrow: "Armour · Instruments · Heritage",
     title: "Forged for\nCollectors.",
     text: "Armour, helmets, diving pieces and brass instruments from our Roorkee factory.",
+    accent: "#E08A2C",
+    primaryCls: "bg-[#E08A2C] text-[#1a1208] hover:bg-[#f09a3c]",
+    secondaryCls: "border border-[#E08A2C] text-[#F3D5A0] hover:bg-[#E08A2C]/15",
   },
   {
     src: "/3.jpeg",
@@ -27,6 +36,9 @@ const slides = [
     eyebrow: "Kitchen · Table · Hospitality",
     title: "Brass & Copper\nfor the Table.",
     text: "Serveware, cookware and cutlery programmes for homes, hotels and wholesale.",
+    accent: "#C9A227",
+    primaryCls: "bg-[#C9A227] text-[#1a1408] hover:bg-[#d4b03a]",
+    secondaryCls: "border border-[#B87333] text-[#E8C4A0] hover:bg-[#B87333]/15",
   },
   {
     src: heroImg.harbor,
@@ -34,6 +46,9 @@ const slides = [
     eyebrow: "Export · Wholesale · OEM",
     title: "Built for Business.\nShipped Worldwide.",
     text: "Wholesale lots, custom logos and export documents from India.",
+    accent: "#3A8BB8",
+    primaryCls: "bg-[#2E7AA6] text-white hover:bg-[#3a8bb8]",
+    secondaryCls: "border border-[#6BB3D9] text-[#B8DFF0] hover:bg-[#2E7AA6]/20",
   },
   {
     src: "/5.jpeg",
@@ -41,6 +56,9 @@ const slides = [
     eyebrow: "Décor · Interiors · Gifting",
     title: "Nautical Décor\nfor Every Room.",
     text: "Lanterns, globes, clocks and brass accents for homes and hotels.",
+    accent: "#D4AF37",
+    primaryCls: "bg-[#D4AF37] text-[#1a1408] hover:bg-[#e0c04a]",
+    secondaryCls: "border border-[#D4AF37] text-[#E8D5A3] hover:bg-[#D4AF37]/10",
   },
 ];
 
@@ -81,8 +99,10 @@ export function HomeHero() {
       </div>
 
       <div className="relative z-20 mx-auto flex h-full max-w-[1320px] items-center px-5 py-12 sm:px-8">
-        <div className="max-w-lg rounded-2xl bg-[#081525]/92 px-6 py-7 shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/15 backdrop-blur-sm sm:px-8 sm:py-8">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">{slide.eyebrow}</p>
+        <div className="max-w-xl rounded-2xl bg-[#081525]/92 px-6 py-7 shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-white/15 backdrop-blur-sm sm:px-8 sm:py-8">
+          <p className="text-[11px] uppercase tracking-[0.28em] transition-colors duration-500" style={{ color: slide.accent }}>
+            {slide.eyebrow}
+          </p>
           <h1 className="mt-3 font-serif text-[2rem] leading-[1.08] tracking-tight text-white sm:text-4xl md:text-[2.75rem]">
             {slide.title.split("\n").map((line) => (
               <span key={line} className="block">
@@ -91,11 +111,11 @@ export function HomeHero() {
             ))}
           </h1>
           <p className="mt-4 text-[15px] leading-relaxed text-white/90">{slide.text}</p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Link href="/shop" className="btn-gold w-full text-center sm:w-auto">
-              Shop Now
+          <div className="mt-7 flex flex-nowrap items-center gap-2 sm:gap-3">
+            <Link href="/shop" className={`${btnBase} ${slide.primaryCls}`}>
+              B2C Retail Collection
             </Link>
-            <Link href="/wholesale" className="btn-outline w-full text-center sm:w-auto">
+            <Link href="/wholesale" className={`${btnBase} ${slide.secondaryCls}`}>
               B2B Wholesale Collection
             </Link>
           </div>
@@ -126,9 +146,8 @@ export function HomeHero() {
             type="button"
             aria-label={`Go to slide ${idx + 1}`}
             onClick={() => setI(idx)}
-            className={`h-2 rounded-full transition-all ${
-              idx === i ? "w-7 bg-[#C9A84C]" : "w-2 bg-white/50 hover:bg-white"
-            }`}
+            className={`h-2 rounded-full transition-all ${idx === i ? "w-7" : "w-2 bg-white/50 hover:bg-white"}`}
+            style={idx === i ? { backgroundColor: slide.accent } : undefined}
           />
         ))}
       </div>

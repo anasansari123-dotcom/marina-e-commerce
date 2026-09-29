@@ -1,6 +1,7 @@
 "use client";
 
 import { CatalogCard } from "@/components/CatalogCard";
+import { ShopTabs } from "@/components/ShopTabs";
 import { getProductCategory } from "@/lib/catalog";
 import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
 import { products } from "@/lib/products";
@@ -36,13 +37,15 @@ export default function ShopPage() {
   }
 
   function toggleParent(slug: string) {
-    if (open === slug) {
+    const node = shopNowTree.find((c) => c.slug === slug);
+    setParent(slug);
+    setSub(null);
+    setCatsOpen(false);
+    if (!node?.children.length) {
       setOpen(null);
       return;
     }
-    setOpen(slug);
-    setParent(slug);
-    setSub(null);
+    setOpen(open === slug ? null : slug);
   }
 
   function pickChild(parentSlug: string, childSlug: string) {
@@ -54,7 +57,10 @@ export default function ShopPage() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto flex max-w-[1400px] flex-col md:flex-row">
+      <div className="md:hidden">
+        <ShopTabs items={list} />
+      </div>
+      <div className="mx-auto hidden max-w-[1400px] md:flex md:flex-row">
         <aside className="w-full shrink-0 border-b border-[#eee] bg-white md:w-[300px] md:border-b-0 md:border-r">
           <button
             type="button"
@@ -78,7 +84,8 @@ export default function ShopPage() {
               <span className="text-[11px] text-[#999]">{products.length}</span>
             </button>
             {shopNowTree.map((c) => {
-              const expanded = open === c.slug;
+              const hasChildren = c.children.length > 0;
+              const expanded = hasChildren && open === c.slug;
               const parentActive = parent === c.slug && !sub;
               return (
                 <div key={c.slug} className="border-b border-[#f0f0f0]">
@@ -103,14 +110,13 @@ export default function ShopPage() {
                           key={child.slug}
                           type="button"
                           onClick={() => pickChild(c.slug, child.slug)}
-                          className={`flex w-full items-center justify-between px-8 py-2 text-left text-[13px] ${
+                          className={`w-full px-8 py-2 text-left text-[13px] ${
                             sub === child.slug
                               ? "font-medium text-[#b0893a]"
                               : "text-[#555] hover:text-[#b0893a]"
                           }`}
                         >
-                          <span>{child.name}</span>
-                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[#ccc]" />
+                          {child.name}
                         </button>
                       ))}
                     </div>

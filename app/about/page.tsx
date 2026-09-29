@@ -82,7 +82,7 @@ const facts = [
 export default function AboutPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[52vh] overflow-hidden bg-navy-950 text-cream-50">
+      <section className="relative min-h-[38vh] overflow-hidden bg-navy-950 text-cream-50">
         <Image
           src={heroImg.workshop}
           alt="Marina Muse manufacturing facility"
@@ -91,7 +91,7 @@ export default function AboutPage() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/92 via-[#081525]/60 to-[#081525]/25" />
-        <div className="relative mx-auto flex min-h-[52vh] max-w-[1320px] flex-col justify-center px-5 py-16">
+        <div className="relative mx-auto flex min-h-[38vh] max-w-[1320px] flex-col justify-center px-5 py-10">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">About us</p>
           <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
             Marina Muse International
@@ -103,8 +103,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:py-20">
-        <div className="mx-auto grid max-w-[1320px] items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <section className="px-5 py-10 md:py-14">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative overflow-hidden rounded-3xl bg-[#081525] px-8 py-12 text-cream-50 md:px-12">
             <Image src={img.compassMap} alt="" fill className="object-cover opacity-20" />
             <div className="relative">
@@ -150,7 +150,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 md:py-20">
+      <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1320px]">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">The house, worldwide</p>
@@ -164,7 +164,7 @@ export default function AboutPage() {
               and durability.
             </p>
           </div>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+          <div className="mt-8 grid gap-6 lg:grid-cols-3">
             {ranges.map((range) => (
               <article
                 key={range.title}
@@ -197,8 +197,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:py-20">
-        <div className="mx-auto grid max-w-[1320px] items-center gap-12 md:grid-cols-2">
+      <section className="px-5 py-10 md:py-14">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-8 md:grid-cols-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
             <Image
               src={heroImg.telescope}
@@ -233,10 +233,10 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 md:py-20">
+      <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1320px]">
           <h2 className="text-center font-serif text-4xl">What we stand for</h2>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map((v) => (
               <div key={v.title} className="rounded-2xl border border-[#eee7db] bg-[#FAF7F2] p-6">
                 <v.icon className="h-6 w-6 text-[#C9A84C]" strokeWidth={1.5} />
@@ -248,7 +248,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-navy-950 py-16 text-cream-50">
+      <section className="relative overflow-hidden bg-navy-950 py-10 text-cream-50 md:py-12">
         <Image src={img.compassMap} alt="" fill className="object-cover opacity-25" />
         <div className="relative mx-auto grid max-w-[1320px] grid-cols-2 gap-6 px-5 md:grid-cols-4">
           {facts.map((s) => (

@@ -38,7 +38,7 @@ function CircleIcon({ children }: { children: React.ReactNode }) {
 export default function ShippingPage() {
   return (
     <div className="bg-white">
-      <section className="relative isolate min-h-[280px] overflow-hidden bg-[#0B1D36] md:min-h-[400px]">
+      <section className="relative isolate min-h-[240px] overflow-hidden bg-[#0B1D36] md:min-h-[320px]">
         <Image
           src="/shipping-hero.jpg"
           alt="Cargo ship, aircraft and truck at port"
@@ -51,7 +51,7 @@ export default function ShippingPage() {
           className="absolute inset-y-0 left-0 z-[1] hidden w-[54%] bg-[#0B1D36] md:block"
           style={{ clipPath: "polygon(0 0, 86% 0, 72% 100%, 0 100%)" }}
         />
-        <div className="relative z-[2] mx-auto flex min-h-[280px] max-w-[1240px] items-center px-5 py-12 md:min-h-[400px] md:py-14">
+        <div className="relative z-[2] mx-auto flex min-h-[240px] max-w-[1240px] items-center px-5 py-10 md:min-h-[320px] md:py-12">
           <div className="max-w-[520px] text-white">
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/85 md:text-[12px] md:tracking-[0.32em]">
               Reliable &nbsp;•&nbsp; Safe &nbsp;•&nbsp; On Time
@@ -99,7 +99,6 @@ export default function ShippingPage() {
                 <div className="flex h-12 w-12 items-center justify-center rounded-md bg-[#351C15] text-[11px] font-black text-[#FFB500]">
                   UPS
                 </div>
-                <span className="text-[13px] text-navy-500">and more...</span>
               </div>
               <p className="mt-2 text-[11px] tracking-[0.12em] text-navy-500">
                 DHL EXPRESS &nbsp;|&nbsp; FedEx EXPRESS &nbsp;|&nbsp; TNT &nbsp;|&nbsp; UPS &nbsp;|&nbsp; Etc...

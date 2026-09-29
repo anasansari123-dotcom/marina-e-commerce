@@ -6,7 +6,7 @@ import { heroImg } from "@/lib/images";
 import { company, companyDirections, companyMapSrc, companyTel, companyWhatsApp } from "@/lib/company";
 
 const desks = [
-  { title: "Retail & gifting", body: "Orders, tracking and product advice." },
+  { title: "Retail", body: "Orders, tracking and product advice." },
   { title: "Wholesale / B2B", body: "Catalogues, MOQs and trade terms." },
   { title: "OEM & custom", body: "Drawings, logos and sampling." },
 ];
@@ -14,7 +14,7 @@ const desks = [
 export default function ContactPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[46vh] overflow-hidden bg-navy-950 text-cream-50">
+      <section className="relative min-h-[36vh] overflow-hidden bg-navy-950 text-cream-50">
         <Image
           src={heroImg.harbor}
           alt="Harbour"
@@ -23,7 +23,7 @@ export default function ContactPage() {
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/90 via-[#081525]/55 to-[#081525]/20" />
-        <div className="relative mx-auto flex min-h-[46vh] max-w-[1320px] flex-col justify-center px-5 py-16">
+        <div className="relative mx-auto flex min-h-[36vh] max-w-[1320px] flex-col justify-center px-5 py-10">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">Contact us</p>
           <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
             Atelier & trade desk.
@@ -34,7 +34,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:py-20">
+      <section className="px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[1fr_1.05fr]">
           <div>
             <h2 className="font-serif text-3xl md:text-4xl">Reach {company.name}</h2>
@@ -62,12 +62,10 @@ export default function ContactPage() {
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#C9A84C]" />
-                <span className="flex flex-col gap-1">
-                  {company.emails.map((mail) => (
-                    <a key={mail} href={`mailto:${mail}`} className="hover:text-[#8C6E28]">
-                      {mail}
-                    </a>
-                  ))}
+                <span>
+                  <a href={`mailto:${company.email}`} className="hover:text-[#8C6E28]">
+                    {company.email}
+                  </a>
                 </span>
               </li>
               <li className="flex gap-3">
@@ -88,20 +86,13 @@ export default function ContactPage() {
               className="btn-gold mt-8 inline-flex gap-2"
             >
               <MessageCircle className="h-4 w-4" />
-              WhatsApp us
+              Chat on WhatsApp
             </a>
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
               {desks.map((d) => (
                 <div key={d.title} className="rounded-2xl border border-[#eee7db] bg-white p-4">
                   <p className="font-serif text-xl">{d.title}</p>
                   <p className="mt-1 text-sm text-navy-600">{d.body}</p>
-                  <span className="mt-3 flex flex-col gap-1">
-                    {company.emails.map((mail) => (
-                      <a key={mail} href={`mailto:${mail}`} className="text-xs text-[#8C6E28] underline">
-                        {mail}
-                      </a>
-                    ))}
-                  </span>
                 </div>
               ))}
             </div>
@@ -121,7 +112,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#eee7db] px-5 pb-16 md:pb-20">
+      <section className="border-t border-[#eee7db] px-5 pb-10 pt-8 md:pb-14">
         <div className="mx-auto max-w-[1320px]">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -150,7 +141,7 @@ export default function ContactPage() {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
-            <div className="border-t border-[#eee7db] bg-white p-4 md:pointer-events-none md:absolute md:bottom-auto md:left-8 md:right-auto md:top-8 md:max-w-xs md:rounded-2xl md:border-0 md:bg-white/95 md:p-4 md:shadow-soft">
+            <div className="border-t border-[#eee7db] bg-white p-4 md:absolute md:bottom-auto md:left-6 md:right-auto md:top-6 md:z-10 md:max-w-xs md:rounded-2xl md:border-0 md:bg-white/95 md:p-4 md:shadow-soft md:pointer-events-none">
               <p className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-[#8C6E28]">
                 <MapPin className="h-3.5 w-3.5" />
                 Factory

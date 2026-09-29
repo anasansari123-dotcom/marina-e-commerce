@@ -36,13 +36,43 @@ const config: Config = {
         },
       },
       fontFamily: {
-        serif: ["var(--font-cormorant)", "Georgia", "serif"],
-        display: ["var(--font-cinzel)", "Georgia", "serif"],
-        sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
+        serif: [
+          "ABCDiatype",
+          "-apple-system",
+          "Helvetica Neue",
+          "Droid Sans",
+          "Arial",
+          "sans-serif",
+        ],
+        display: [
+          "ABCDiatype",
+          "-apple-system",
+          "Helvetica Neue",
+          "Droid Sans",
+          "Arial",
+          "sans-serif",
+        ],
+        sans: [
+          "ABCDiatype",
+          "-apple-system",
+          "Helvetica Neue",
+          "Droid Sans",
+          "Arial",
+          "sans-serif",
+        ],
       },
       boxShadow: {
         gold: "0 10px 40px rgba(201, 168, 76, 0.18)",
         soft: "0 18px 50px rgba(11, 29, 54, 0.08)",
+      },
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee 38s linear infinite",
       },
       backgroundImage: {
         "navy-texture":

@@ -4,27 +4,38 @@
 
 :root {
   color-scheme: light;
+  --font-etsy: ABCDiatype, -apple-system, "Helvetica Neue", "Droid Sans", Arial, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  --site-nav: 104px;
+  --site-nav: 96px;
+  font-family: var(--font-etsy);
 }
 
 @media (min-width: 640px) {
   html {
-    --site-nav: 112px;
+    --site-nav: 108px;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   html {
-    --site-nav: 118px;
+    --site-nav: 116px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    --site-nav: 126px;
   }
 }
 
 body {
   @apply overflow-x-hidden bg-[#FAF7F2] text-navy-900 antialiased;
+  font-family: var(--font-etsy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .btn-gold {
@@ -58,4 +69,10 @@ body {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none !important;
+  }
 }

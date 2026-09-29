@@ -4,18 +4,18 @@ import Link from "next/link";
 
 export default function CollectionsPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:py-10">
       <p className="text-xs uppercase tracking-[0.3em] text-gold-700">Worlds of brass</p>
       <h1 className="mt-2 font-serif text-5xl text-navy-900">Collections</h1>
       <p className="mt-3 max-w-2xl text-navy-600">
         The same families of pieces you saw on the studio board — instruments, décor, hospitality and trade.
       </p>
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
         {collections.map((c) => (
           <Link
             key={c.slug}
             href={`/collections/${c.slug}`}
-            className="group relative min-h-[280px] overflow-hidden rounded-3xl"
+            className="group relative min-h-[220px] overflow-hidden rounded-3xl"
           >
             <Image
               src={c.image}

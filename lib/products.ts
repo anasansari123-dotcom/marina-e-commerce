@@ -95,14 +95,6 @@ export const collections: Collection[] = [
     image: img.sail,
   },
   {
-    slug: "corporate-gifts",
-    name: "Corporate Gifts",
-    tagline: "Branded, boxed, remembered",
-    description:
-      "Engraved compasses, desk sets and presentation boxes for boardrooms, hotels and diplomatic gifting.",
-    image: img.gift,
-  },
-  {
     slug: "custom-manufacturing",
     name: "Custom Manufacturing",
     tagline: "Your mark, our craft",
@@ -193,8 +185,16 @@ export const collections: Collection[] = [
     name: "Modern Brass Wall Sconce",
     tagline: "Wall light in brass",
     description:
-      "Modern brass wall sconces for hallways, hotels and dining rooms — single-arm, dual-arm, glass shade, outdoor and vintage finishes.",
-    image: img.sconceWall,
+      "Modern brass wall sconces for hallways, hotels and dining rooms — fluted ceramic, arched dome and cone finishes.",
+    image: "/sconce-dome.jpg",
+  },
+  {
+    slug: "lighting-lamps",
+    name: "Lighting lamps",
+    tagline: "Ceiling to garden",
+    description:
+      "Brass and mixed-metal lighting — ceiling and hanging lights, wall lights, table lamps, spot lights, picture lights, bathroom lights, flush mounts, floor lamps, chandeliers, rechargeable lamps and outdoor lights.",
+    image: img.lightCeiling,
   },
 ].map((c) => ({ ...c, image: imageForName(c.name, c.image) }));
 
@@ -218,7 +218,7 @@ const coreProducts: Product[] = [
     packaging: "Premium gift box",
     included: ["Compass", "Velvet pouch", "Care card", "Gift box"],
     description:
-      "A beautifully crafted pocket compass in solid brass, hand-aged to a warm antique patina. Designed for nautical interiors, corporate gifting and collectors who want a working instrument that still looks as if it sailed the 19th century.",
+      "A beautifully crafted pocket compass in solid brass, hand-aged to a warm antique patina. Designed for nautical interiors and collectors who want a working instrument that still looks as if it sailed the 19th century.",
     story:
       "Each lid is hinged, polished and then darkened by hand in our Roorkee factory. The rose is printed on a sealed card, the needle is balanced, and the case closes with a satisfying click — a small ritual of craft.",
     wholesaleFrom: 18,
@@ -243,7 +243,7 @@ const coreProducts: Product[] = [
     packaging: "Leather sleeve",
     included: ["Compass", "Leather sleeve", "Gift box"],
     description:
-      "A slim officer-style pocket compass with a sprung lid and luminous rose. Engraving-ready for corporate and wedding gifts.",
+      "A slim officer-style pocket compass with a sprung lid and luminous rose. Engraving-ready for retail and wholesale programmes.",
     story: "Modelled on instruments issued to merchant officers in the 1920s.",
     wholesaleFrom: 21,
     moq: 50,
@@ -317,7 +317,7 @@ const coreProducts: Product[] = [
     included: ["Field glasses", "Velvet box"],
     description:
       "Compact opera glasses with a mother-of-pearl inlay — a refined gift for evenings ashore.",
-    story: "A favourite of hotel concierge shops and theatre gift programmes.",
+    story: "A favourite of hotel shops and nautical retailers.",
     wholesaleFrom: 38,
     moq: 40,
   },
@@ -608,54 +608,6 @@ const coreProducts: Product[] = [
     featured: true,
   },
   {
-    slug: "corporate-compass-gift-set",
-    name: "Corporate Compass Gift Set",
-    sku: "MM-GFT-001",
-    price: 59,
-    rating: 4.8,
-    reviews: 91,
-    stock: "in-stock",
-    collection: "corporate-gifts",
-    badge: "Logo ready",
-    image: img.gift,
-    gallery: [img.gift, img.compassGold],
-    finish: "Antique or polished",
-    material: "Brass",
-    dimensions: 'Compass 3" with plaque',
-    weight: "280 g",
-    packaging: "Branded magnetic box",
-    included: ["Compass", "Name plaque", "Magnetic box", "Ribbon"],
-    description:
-      "Our most requested corporate gift: a working compass, optional logo engraving, and a presentation box that feels expensive in the hand.",
-    story: "MOQ 50 for logo. Sample in 7 days. Global shipping from India.",
-    wholesaleFrom: 26,
-    moq: 50,
-    featured: true,
-  },
-  {
-    slug: "executive-desk-set",
-    name: "Executive Nautical Desk Set",
-    sku: "MM-GFT-012",
-    price: 199,
-    rating: 4.9,
-    reviews: 27,
-    stock: "made-to-order",
-    collection: "corporate-gifts",
-    image: img.antiques5,
-    gallery: [img.antiques5, img.magnifier, img.compassBrass],
-    finish: "Antique brass on walnut",
-    material: "Walnut, brass, leather",
-    dimensions: '14" tray',
-    weight: "2.1 kg",
-    packaging: "Presentation chest",
-    included: ["Desk compass", "Magnifier", "Letter opener", "Walnut tray"],
-    description:
-      "A walnut tray with desk compass, brass magnifier and letter opener. Board-level gifting.",
-    story: "Each set can carry a company crest on the compass lid.",
-    wholesaleFrom: 118,
-    moq: 15,
-  },
-  {
     slug: "ship-bell-brass",
     name: "Ship’s Bell in Brass",
     sku: "MM-DEC-021",
@@ -783,7 +735,47 @@ function withNamedImage(p: Product): Product {
 
 export const products: Product[] = [...coreProducts, ...catalogProducts].map(withNamedImage);
 
-export const reviews = [
+export type ShopReview = {
+  name: string;
+  location: string;
+  rating: number;
+  title: string;
+  body: string;
+  product: string;
+  productSlug: string;
+  date: string;
+  reply?: string;
+  photo?: string;
+  avatarClass: string;
+};
+
+export const reviews: ShopReview[] = [
+  {
+    name: "Audra",
+    location: "United States",
+    rating: 5,
+    title: "Stunning on the deck",
+    body: "Beautifully crafted piece and looks beautiful on our 3rd level observation deck. Great quality and stunning telescope.",
+    product: "Maritime Telescope 24\"",
+    productSlug: "maritime-telescope-24",
+    date: "13 Jun, 2026",
+    reply:
+      "Thank you very much for your kind words! We are happy that it looks so beautiful on your observation deck 😊",
+    photo: img.ocean,
+    avatarClass: "bg-[#2BB673]",
+  },
+  {
+    name: "Ryan",
+    location: "Australia",
+    rating: 5,
+    title: "Matched the photos",
+    body: "The item was good quality and matched the listing photos. Solid brass, well packed, and arrived with tracking.",
+    product: "Officer Brass Binoculars",
+    productSlug: "officer-brass-binoculars",
+    date: "01 Jun, 2026",
+    reply: "Thank you Ryan — delighted it arrived in perfect condition. Enjoy the binoculars!",
+    avatarClass: "bg-[#2F3A8F]",
+  },
   {
     name: "James W.",
     location: "London",
@@ -791,14 +783,23 @@ export const reviews = [
     title: "Absolutely beautiful",
     body: "The quality and finish exceeded expectations. Gifted it to my father — he keeps it on his desk.",
     product: "Antique Brass Nautical Compass",
+    productSlug: "antique-brass-nautical-compass",
+    date: "18 May, 2026",
+    reply: "Thank you James. Please give our regards to your father — we love hearing these pieces find a home.",
+    photo: img.compassMap,
+    avatarClass: "bg-[#C9A84C]",
   },
   {
     name: "Priya S.",
     location: "Mumbai",
     rating: 5,
-    title: "Corporate gifting, sorted",
-    body: "We ordered 200 engraved compasses for a shipping conference. On time, boxed perfectly, clients still talk about them.",
-    product: "Corporate Compass Gift Set",
+    title: "Wholesale, sorted",
+    body: "We ordered 200 officer brass binoculars for our store. On time, boxed perfectly — still our bestseller.",
+    product: "Officer Brass Binoculars",
+    productSlug: "officer-brass-binoculars",
+    date: "02 Apr, 2026",
+    reply: "Thank you Priya. Always a pleasure supplying your store — the next restock is ready whenever you need it.",
+    avatarClass: "bg-[#8C4A3A]",
   },
   {
     name: "Marco D.",
@@ -807,6 +808,11 @@ export const reviews = [
     title: "Hotel programme",
     body: "Used the lanterns and porthole mirrors across 40 rooms. Guests photograph them constantly.",
     product: "Ship Lantern in Brass",
+    productSlug: "ship-lantern-brass",
+    date: "21 Mar, 2026",
+    reply: "Thank you Marco. Wonderful to hear they are photographing well in the rooms.",
+    photo: img.lanternVintage,
+    avatarClass: "bg-[#1B4B6B]",
   },
 ];
 

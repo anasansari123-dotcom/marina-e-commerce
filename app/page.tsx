@@ -12,7 +12,7 @@ export default function HomePage() {
       <HomeHero />
       <HomeCollections />
 
-      <section className="relative overflow-hidden bg-navy-900 py-20 text-cream-50">
+      <section className="relative overflow-hidden bg-navy-900 py-10 text-cream-50 md:py-14">
         <Image
           src={heroImg.harbor}
           alt="Harbour and working vessels"
@@ -50,15 +50,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#FAF7F2] px-5 py-20">
-        <div className="mx-auto grid max-w-[1320px] items-center gap-12 md:grid-cols-2">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
-            <Image
-              src={img.workshop}
-              alt="Craftsman finishing brass"
-              fill
-              className="object-cover"
-            />
+      <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
+        <div className="mx-auto grid max-w-[1320px] items-center gap-8 md:grid-cols-2">
+          <div className="grid h-[400px] w-full grid-cols-2 grid-rows-2 gap-3 sm:h-[480px] md:h-[540px]">
+            <div className="relative col-span-2 overflow-hidden rounded-3xl bg-[#1a1510] sm:col-span-1 sm:row-span-2">
+              <Image
+                src="/1.jpeg"
+                alt="Brass binoculars, telescope and compass"
+                fill
+                sizes="(max-width: 640px) 100vw, 25vw"
+                className="object-cover object-[28%_72%]"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-3xl bg-[#1a1510]">
+              <Image
+                src={img.compassGold}
+                alt="Antique brass compass on a nautical chart"
+                fill
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover object-center"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-3xl bg-[#1a1510]">
+              <Image
+                src={img.binoculars}
+                alt="Antique brass binoculars"
+                fill
+                sizes="(max-width: 640px) 50vw, 25vw"
+                className="object-cover object-center"
+              />
+            </div>
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">From Roorkee, Uttarakhand, India</p>
@@ -86,14 +107,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#F4F1EA] px-5 py-20">
+      <section className="bg-[#F4F1EA] px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1320px]">
           <div className="text-center">
             <div className="mx-auto mb-4 h-px w-16 bg-[#C9A84C]" />
             <h2 className="font-serif text-4xl text-navy-900 md:text-5xl">What Our Customers Say</h2>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {reviews.map((r) => (
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {reviews.filter((r) => ["James W.", "Priya S.", "Marco D."].includes(r.name)).map((r) => (
               <blockquote key={r.name} className="rounded-2xl bg-white p-8 shadow-[0_8px_30px_rgba(26,20,12,0.06)]">
                 <p className="font-serif text-2xl text-navy-900">“{r.title}”</p>
                 <p className="mt-4 text-sm leading-relaxed text-navy-700">{r.body}</p>

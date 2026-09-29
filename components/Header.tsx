@@ -14,7 +14,6 @@ const nav = [
   { href: "/wholesale", label: "B2B Wholesale Collection" },
   { href: "/custom-manufacturing", label: "Custom Manufacturing" },
   { href: "/shipping", label: "Shipping" },
-  { href: "/wishlist", label: "My Wishlist" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About us" },
   { href: "/contact", label: "Contact us" },
@@ -37,7 +36,7 @@ export function Header() {
 
   return (
     <header className="relative bg-[#0B1D36]">
-      <div className="mx-auto flex max-w-[1680px] items-center gap-3 px-3 py-2 sm:px-5 xl:px-6">
+      <div className="mx-auto flex max-w-[1680px] items-center gap-3 px-3 py-1 sm:px-5 xl:px-6">
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
           <BrandLogo size="header" priority />
         </Link>

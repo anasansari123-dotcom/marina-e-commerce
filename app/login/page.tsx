@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { BrandLogo } from "@/components/Logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,10 +10,7 @@ export default function LoginPage() {
   const [mode, setMode] = useState<"customer" | "wholesale">("customer");
 
   return (
-    <div className="mx-auto max-w-md px-4 py-16">
-      <div className="mb-8 overflow-hidden rounded-2xl bg-navy-950">
-        <BrandLogo size="hero" />
-      </div>
+    <div className="mx-auto max-w-md px-4 py-10 md:py-12">
       <h1 className="text-center font-serif text-4xl">
         {view === "login" ? "Login" : "Register"}
       </h1>

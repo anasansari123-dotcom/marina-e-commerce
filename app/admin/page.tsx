@@ -36,7 +36,7 @@ const nav: { id: Tab; icon: typeof LayoutDashboard; label: string }[] = [
 const orders = [
   { id: "MM-2041", customer: "James W.", item: "Antique Brass Compass × 2", total: 78, status: "Paid", country: "United Kingdom" },
   { id: "MM-2040", customer: "Harbour Hotels", item: 'Ship Wheel 24"', total: 189, status: "Packed", country: "United Arab Emirates" },
-  { id: "MM-2039", customer: "Priya S.", item: "Corporate Gift Set × 50", total: 1300, status: "B2B", country: "India" },
+  { id: "MM-2039", customer: "Priya S.", item: "Officer Brass Binoculars × 50", total: 1300, status: "B2B", country: "India" },
   { id: "MM-2038", customer: "Marco D.", item: "Ship Lantern × 12", total: 1020, status: "Shipped", country: "Spain" },
   { id: "MM-2037", customer: "Elena K.", item: "Officer Brass Binoculars", total: 129, status: "Pending", country: "Germany" },
   { id: "MM-2036", customer: "North Star Retail", item: "Pocket Compass × 80", total: 256, status: "Paid", country: "United States" },

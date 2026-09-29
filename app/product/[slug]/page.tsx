@@ -18,6 +18,7 @@ import {
   Truck,
 } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
+import { ShopTabs } from "@/components/ShopTabs";
 import { companyWhatsApp } from "@/lib/company";
 import { FreeShippingTag } from "@/components/FreeShippingTag";
 
@@ -39,6 +40,13 @@ export default function ProductPage() {
         .slice(0, 4),
     [product]
   );
+
+  const shopItems = useMemo(() => {
+    if (!product) return products;
+    const same = products.filter((p) => p.collection === product.collection);
+    const rest = products.filter((p) => p.collection !== product.collection);
+    return [...same, ...rest];
+  }, [product]);
 
   if (!product) {
     return (
@@ -67,8 +75,8 @@ export default function ProductPage() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-[1320px] px-5 py-8">
-        <p className="text-[11px] text-navy-600">
+      <div className="mx-auto max-w-[1320px] px-5 py-4 lg:py-8">
+        <p className="hidden text-[11px] text-navy-600 lg:block">
           <Link href="/">Home</Link>
           <span className="mx-1.5 text-navy-400">/</span>
           <Link href="/shop">Shop</Link>
@@ -82,14 +90,15 @@ export default function ProductPage() {
           {product.name}
         </p>
 
-        <div className="mt-6 grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="mt-0 grid items-start gap-6 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           <div>
-            <div className="relative aspect-[5/4] overflow-hidden rounded-2xl bg-[#2a2118]">
+            <div className="-mx-5 lg:mx-0">
+            <div className="relative aspect-square overflow-hidden rounded-none bg-[#f5f5f5] lg:aspect-[5/4] lg:rounded-2xl lg:bg-[#2a2118]">
               <Image
                 src={product.gallery[active] || product.image}
                 alt={product.name}
                 fill
-                className="object-cover"
+                className="object-contain p-4 lg:object-cover lg:p-0"
                 priority
               />
               <button
@@ -102,14 +111,15 @@ export default function ProductPage() {
                   className={`h-5 w-5 ${has(product.slug) ? "fill-red-500 text-red-500" : "text-navy-800"}`}
                 />
               </button>
-              <span className="absolute bottom-4 left-4 rounded-md bg-black/70 px-2.5 py-1 text-[10px] uppercase tracking-widest text-white">
+              <span className="absolute bottom-4 left-4 hidden rounded-md bg-black/70 px-2.5 py-1 text-[10px] uppercase tracking-widest text-white lg:inline">
                 360°
               </span>
-              <span className="absolute bottom-4 left-20 rounded-md bg-white/90 px-2.5 py-1 text-[10px] uppercase tracking-widest text-navy-900">
+              <span className="absolute bottom-4 left-20 hidden rounded-md bg-white/90 px-2.5 py-1 text-[10px] uppercase tracking-widest text-navy-900 lg:inline">
                 3D view
               </span>
             </div>
-            <div className="mt-3 grid grid-cols-4 gap-2.5">
+            </div>
+            <div className="mt-3 hidden grid-cols-4 gap-2.5 lg:grid">
               {product.gallery.slice(0, 4).map((src, i) => (
                 <button
                   key={src + i}
@@ -125,7 +135,7 @@ export default function ProductPage() {
           </div>
 
           <div>
-            <h1 className="text-[1.85rem] font-normal leading-tight text-[#222222] md:text-[2.15rem]">{product.name}</h1>
+            <h1 className="text-[1.35rem] font-normal leading-tight text-[#222222] md:text-[2.15rem]">{product.name}</h1>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
               <span className="flex items-center gap-0.5 text-[#C9A84C]">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -139,7 +149,7 @@ export default function ProductPage() {
               <span className="text-navy-400">|</span>
               <span className="text-navy-500">{product.sku}</span>
             </div>
-            <p className="mt-4 text-[1.75rem] font-bold text-[#222222] md:text-[2rem]">{formatPrice(product.price)}</p>
+            <p className="mt-3 text-[1.45rem] font-bold text-[#222222] md:mt-4 md:text-[2rem]">{formatPrice(product.price)}</p>
             <FreeShippingTag />
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-1.5 text-emerald-700">
@@ -151,7 +161,7 @@ export default function ProductPage() {
               </span>
             </div>
 
-            <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-5 grid grid-cols-2 gap-3">
               <button onClick={handleAdd} className="btn-navy">
                 {added ? "Added to Cart" : "Add to Cart"}
               </button>
@@ -168,7 +178,7 @@ export default function ProductPage() {
                     new CustomEvent("marina-chat-open", { detail: { product: product.slug } })
                   )
                 }
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-navy-800 px-4 py-2.5 text-[11px] uppercase tracking-[0.14em]"
+                className="hidden items-center justify-center gap-2 rounded-full border border-navy-800 px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] lg:inline-flex"
               >
                 <Sparkles className="h-3.5 w-3.5 text-[#C9A84C]" />
                 Ask AI About This Product
@@ -182,7 +192,7 @@ export default function ProductPage() {
               </a>
             </div>
 
-            <div className="mt-6 flex justify-between gap-4 border-t border-[#e6dfd2] pt-5 text-center text-[11px] text-navy-700">
+            <div className="mt-6 hidden justify-between gap-4 border-t border-[#e6dfd2] pt-5 text-center text-[11px] text-navy-700 lg:flex">
               <div className="flex-1">
                 <ShieldCheck className="mx-auto h-5 w-5 text-[#C9A84C]" />
                 <p className="mt-1">Secure Payment</p>
@@ -195,7 +205,7 @@ export default function ProductPage() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-2">
+        <div className="mt-8 hidden gap-8 lg:grid lg:grid-cols-2">
           <div>
             <div className="flex flex-wrap gap-1 border-b border-[#e6dfd2]">
               {tabs.map((t) => (
@@ -279,7 +289,7 @@ export default function ProductPage() {
         </div>
 
         {related.length > 0 && (
-          <div className="py-14">
+          <div className="hidden py-14 lg:block">
             <h2 className="font-serif text-3xl">You may also like</h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {related.map((p) => (
@@ -288,6 +298,10 @@ export default function ProductPage() {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="lg:hidden">
+        <ShopTabs items={shopItems} currentProduct={product} />
       </div>
     </div>
   );

@@ -36,6 +36,7 @@ export const shopCategories = [
   { slug: "jewellery", name: "Jewellery" },
   { slug: "hardware", name: "Hardware" },
   { slug: "modern-brass-wall-sconce", name: "Modern Brass Wall Sconce" },
+  { slug: "lighting-lamps", name: "Lighting lamps" },
   { slug: "ungrouped", name: "Ungrouped" },
 ];
 
@@ -49,10 +50,10 @@ const collectionMap: Record<string, string> = {
   "nautical-decor": "nautical-decor-gifts",
   "walking-canes": "walking-stick",
   "ship-wheels": "wooden-ship-wheel",
-  "corporate-gifts": "nautical-decor-gifts",
   "custom-manufacturing": "ungrouped",
   "new-arrivals": "ungrouped",
   "modern-brass-wall-sconce": "modern-brass-wall-sconce",
+  "lighting-lamps": "lighting-lamps",
 };
 
 const slugMap: Record<string, string> = {
@@ -79,7 +80,6 @@ export function formatOfferPrice(p: Product) {
   if (min >= max) return `${compactUsd(max)} USD`;
   return `${compactUsd(min)}-${compactUsd(max).replace("$", "")}`;
 }
-
 function item(
   data: Pick<Product, "slug" | "name" | "sku" | "price" | "collection" | "image"> &
     Partial<Product>
@@ -180,7 +180,7 @@ export const catalogProducts: Product[] = [
     price: 2.2,
     wholesaleFrom: 1.2,
     moq: 200,
-    collection: "corporate-gifts",
+    collection: "nautical-decor",
     category: "ungrouped",
     image: img.jewelry,
   }),
@@ -246,7 +246,7 @@ export const catalogProducts: Product[] = [
     price: 2.5,
     wholesaleFrom: 0.95,
     moq: 300,
-    collection: "corporate-gifts",
+    collection: "nautical-decor",
     category: "keyring-keychain",
     image: img.compassGold,
   }),
@@ -560,3 +560,4 @@ export const catalogProducts: Product[] = [
   }),
   ...shopNowProducts,
 ];
+

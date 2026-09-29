@@ -3,16 +3,11 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { ChatWidget } from "./ChatWidget";
+import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { TopBar } from "./TopBar";
 
-export function AppShell({
-  children,
-  footer,
-}: {
-  children: ReactNode;
-  footer: ReactNode;
-}) {
+export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
 
@@ -27,7 +22,7 @@ export function AppShell({
         <Header />
       </div>
       <main className="flex-1 pt-[var(--site-nav)]">{children}</main>
-      {footer}
+      <Footer />
       <ChatWidget />
     </>
   );

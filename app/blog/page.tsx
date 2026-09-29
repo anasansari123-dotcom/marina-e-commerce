@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="bg-[#0B1D36] px-5 py-16 text-cream-50">
+      <section className="bg-[#0B1D36] px-5 py-10 text-cream-50 md:py-12">
         <div className="mx-auto max-w-[1100px]">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">Journal</p>
           <h1 className="mt-3 font-serif text-5xl">Blog</h1>
@@ -20,7 +20,7 @@ export default function BlogPage() {
           </p>
         </div>
       </section>
-      <section className="px-5 py-16">
+      <section className="px-5 py-10 md:py-12">
         <div className="mx-auto grid max-w-[1100px] gap-8 md:grid-cols-3">
           {blogPosts.map((post) => (
             <article key={post.slug} className="overflow-hidden rounded-3xl bg-white shadow-soft">

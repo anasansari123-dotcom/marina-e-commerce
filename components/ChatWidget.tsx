@@ -44,7 +44,7 @@ function reply(input: string): Msg[] {
   return [
     {
       from: "bot",
-      text: "I can help with compasses, telescopes, décor, gifting or a B2B quote. Try “I need 50 brass compasses with my company logo.”",
+      text: "I can help with compasses, telescopes, décor or a B2B quote. Try “I need 50 brass compasses with my company logo.”",
     },
   ];
 }

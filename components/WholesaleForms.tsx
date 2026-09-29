@@ -44,7 +44,6 @@ export function WholesaleRegisterForm() {
           <option>Retailer</option>
           <option>Wholesaler / Importer</option>
           <option>Hotel & Hospitality</option>
-          <option>Corporate gifting</option>
           <option>E-commerce</option>
         </select>
       </label>
@@ -147,7 +146,7 @@ export function BulkQuoteForm() {
 
 export function TradeFormsPair() {
   return (
-    <section className="bg-[#FAF7F2] px-5 py-16">
+    <section className="bg-[#FAF7F2] px-5 py-10 md:py-12">
       <div className="mx-auto grid max-w-[1320px] gap-6 lg:grid-cols-2">
         <div className="rounded-2xl bg-white p-6 shadow-[0_10px_40px_rgba(26,20,12,0.06)] md:p-8">
           <h2 className="font-serif text-[1.85rem] text-navy-900">Create Your Wholesale Account</h2>

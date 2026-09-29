@@ -1,47 +1,44 @@
 "use client";
 
 import { CatalogCard } from "@/components/CatalogCard";
+import { ShopTabs } from "@/components/ShopTabs";
 import { getProductCategory } from "@/lib/catalog";
 import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
-import { products, type Product } from "@/lib/products";
+import { products } from "@/lib/products";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { useMemo, useState } from "react";
 
-const featuredSlugs = [
-  "pocket-brass-compass-wholesale",
-  "brass-nautical-binocular-officer",
-  "brass-shoe-horn-walking-set",
-  "polished-brass-ship-bell",
-];
-
 export function ShopNowCatalog() {
-  const [open, setOpen] = useState<string | null>("armor-breast-plate");
-  const [parent, setParent] = useState<string | null>("armor-breast-plate");
+  const [open, setOpen] = useState<string | null>(null);
+  const [parent, setParent] = useState<string | null>(null);
   const [sub, setSub] = useState<string | null>(null);
   const [catsOpen, setCatsOpen] = useState(false);
 
   const list = useMemo(() => {
-    if (sub) {
-      return products.filter((p) => p.subcategory === sub).slice(0, 4);
-    }
-    if (parent) {
-      return products.filter((p) => getProductCategory(p) === parent).slice(0, 4);
-    }
-    return featuredSlugs
-      .map((slug) => products.find((p) => p.slug === slug))
-      .filter((p): p is Product => Boolean(p));
+    if (sub) return products.filter((p) => p.subcategory === sub);
+    if (parent) return products.filter((p) => getProductCategory(p) === parent);
+    return products;
   }, [parent, sub]);
 
-  const title = findShopNowLabel(sub || parent);
+  const title = sub || parent ? findShopNowLabel(sub || parent) : "All products";
+
+  function showAll() {
+    setOpen(null);
+    setParent(null);
+    setSub(null);
+    setCatsOpen(false);
+  }
 
   function toggleParent(slug: string) {
-    if (open === slug) {
+    const node = shopNowTree.find((c) => c.slug === slug);
+    setParent(slug);
+    setSub(null);
+    setCatsOpen(false);
+    if (!node?.children.length) {
       setOpen(null);
       return;
     }
-    setOpen(slug);
-    setParent(slug);
-    setSub(null);
+    setOpen(open === slug ? null : slug);
   }
 
   function pickChild(parentSlug: string, childSlug: string) {
@@ -53,7 +50,10 @@ export function ShopNowCatalog() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto flex max-w-[1400px] flex-col md:flex-row">
+      <div className="md:hidden">
+        <ShopTabs items={list} />
+      </div>
+      <div className="mx-auto hidden max-w-[1400px] md:flex md:flex-row">
         <aside className="w-full shrink-0 border-b border-[#eee] bg-white md:w-[300px] md:border-b-0 md:border-r">
           <button
             type="button"
@@ -65,8 +65,20 @@ export function ShopNowCatalog() {
             {catsOpen ? <ChevronDown className="h-4 w-4 text-[#bbb]" /> : <ChevronRight className="h-4 w-4 text-[#bbb]" />}
           </button>
           <nav className={`${catsOpen ? "block" : "hidden"} max-h-[min(55vh,28rem)] overflow-y-auto py-2 md:block md:sticky md:top-[var(--site-nav)] md:max-h-[calc(100vh-var(--site-nav))]`}>
+            <p className="hidden px-4 pb-2 pt-3 text-[15px] font-medium text-[#b0893a] md:block">Product categories</p>
+            <button
+              type="button"
+              onClick={showAll}
+              className={`flex w-full items-center justify-between border-b border-[#f0f0f0] px-4 py-3 text-left text-[14px] ${
+                !parent && !sub ? "bg-[#faf7f2] font-medium text-[#b0893a]" : "text-[#222] hover:bg-[#fafafa]"
+              }`}
+            >
+              <span>All products</span>
+              <span className="text-[11px] text-[#999]">{products.length}</span>
+            </button>
             {shopNowTree.map((c) => {
-              const expanded = open === c.slug;
+              const hasChildren = c.children.length > 0;
+              const expanded = hasChildren && open === c.slug;
               const parentActive = parent === c.slug && !sub;
               return (
                 <div key={c.slug} className="border-b border-[#f0f0f0]">
@@ -91,14 +103,13 @@ export function ShopNowCatalog() {
                           key={child.slug}
                           type="button"
                           onClick={() => pickChild(c.slug, child.slug)}
-                          className={`flex w-full items-center justify-between px-8 py-2 text-left text-[13px] ${
+                          className={`w-full px-8 py-2 text-left text-[13px] ${
                             sub === child.slug
                               ? "font-medium text-[#b0893a]"
                               : "text-[#555] hover:text-[#b0893a]"
                           }`}
                         >
-                          <span>{child.name}</span>
-                          <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[#ccc]" />
+                          {child.name}
                         </button>
                       ))}
                     </div>

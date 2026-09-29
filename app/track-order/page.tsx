@@ -8,7 +8,7 @@ export default function TrackOrderPage() {
   const [ref, setRef] = useState("");
 
   return (
-    <div className="bg-[#FAF7F2] px-5 py-16">
+    <div className="bg-[#FAF7F2] px-5 py-10 md:py-12">
       <div className="mx-auto max-w-[640px]">
         <p className="text-[11px] uppercase tracking-[0.28em] text-[#8C6E28]">Orders</p>
         <h1 className="mt-2 font-serif text-4xl md:text-5xl">Track Order</h1>
