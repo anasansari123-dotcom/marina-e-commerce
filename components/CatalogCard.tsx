@@ -29,12 +29,13 @@ export function CatalogCard({
     return (
       <article className="group flex flex-col bg-white">
         <div className="relative aspect-square overflow-hidden rounded-[4px] bg-[#f5f5f5]">
-          <Link href={`/product/${product.slug}`} className="block h-full">
+          <Link href={`/product/${product.slug}`} className="relative block h-full">
             <Image
               src={product.image}
               alt={product.name}
               fill
-              className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              className="object-cover transition duration-300 group-hover:scale-[1.03]"
             />
           </Link>
           <button
@@ -47,12 +48,12 @@ export function CatalogCard({
           </button>
         </div>
         <Link href={`/product/${product.slug}`} className="mt-2 block">
-          <h3 className="line-clamp-2 min-h-[40px] text-[14px] font-normal leading-[1.35] text-[#222222]">
+          <h3 className="line-clamp-2 min-h-[34px] text-[12.5px] font-normal leading-[1.35] text-[#222222] sm:min-h-[40px] sm:text-[14px]">
             {product.name}
           </h3>
         </Link>
-        <p className="mt-1 text-[16px] font-bold leading-none text-[#222222]">{formatOfferPrice(product)}</p>
-        <p className="mt-1 text-[12px] text-[#595959]">Min. Order: {product.moq ?? 1} pieces</p>
+        <p className="mt-1 text-[14px] font-bold leading-none text-[#222222] sm:text-[16px]">{formatOfferPrice(product)}</p>
+        <p className="mt-1 text-[11px] text-[#595959] sm:text-[12px]">Min. Order: {product.moq ?? 1} pieces</p>
         <button
           type="button"
           onClick={() =>
@@ -60,9 +61,9 @@ export function CatalogCard({
               new CustomEvent("marina-chat-open", { detail: { product: product.slug } })
             )
           }
-          className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-[#ccc] py-2 text-[13px] text-[#333]"
+          className="mt-2 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-[#ccc] py-1.5 text-[12px] text-[#333] sm:mt-3 sm:py-2 sm:text-[13px]"
         >
-          <MessageCircle className="h-4 w-4" />
+          <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           Chat now
         </button>
       </article>
@@ -72,12 +73,13 @@ export function CatalogCard({
   return (
     <article className="group flex flex-col bg-white">
       <div className="relative aspect-square overflow-hidden rounded-[4px] bg-[#f5f5f5]">
-        <Link href={`/product/${product.slug}`} className="block h-full">
+        <Link href={`/product/${product.slug}`} className="relative block h-full">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition duration-300 group-hover:scale-[1.03]"
           />
         </Link>
         <button
@@ -90,12 +92,12 @@ export function CatalogCard({
         </button>
       </div>
       <Link href={`/product/${product.slug}`} className="mt-2 block">
-        <h3 className="line-clamp-2 text-[14px] font-normal leading-[1.35] text-[#222222]">
+        <h3 className="line-clamp-2 text-[12.5px] font-normal leading-[1.35] text-[#222222] sm:text-[14px]">
           {product.name}
         </h3>
       </Link>
-      <p className="mt-1 text-[16px] font-bold leading-tight text-[#222222]">{formatPrice(product.price)}</p>
-      <p className="mt-0.5 text-[13px] leading-tight text-[#595959]">
+      <p className="mt-1 text-[14px] font-bold leading-tight text-[#222222] sm:text-[16px]">{formatPrice(product.price)}</p>
+      <p className="mt-0.5 text-[11px] leading-tight text-[#595959] sm:text-[13px]">
         <span className="line-through">{formatPrice(listPrice)}</span>
         <span className="ml-1">({off}% off)</span>
       </p>

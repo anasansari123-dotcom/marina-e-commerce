@@ -1,6 +1,8 @@
 "use client";
 
-import { collections, formatPrice, getProduct, products, reviews } from "@/lib/products";
+import { formatPrice, getCollection, getProduct, products, reviews } from "@/lib/products";
+import { getProductCategory } from "@/lib/catalog";
+import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 import Image from "next/image";
@@ -33,20 +35,31 @@ export default function ProductPage() {
   const [tab, setTab] = useState<(typeof tabs)[number]>("Specifications");
   const [added, setAdded] = useState(false);
 
-  const related = useMemo(
-    () =>
-      products
-        .filter((p) => p.collection === product?.collection && p.slug !== product?.slug)
-        .slice(0, 4),
-    [product]
-  );
-
-  const shopItems = useMemo(() => {
-    if (!product) return products;
-    const same = products.filter((p) => p.collection === product.collection);
-    const rest = products.filter((p) => p.collection !== product.collection);
-    return [...same, ...rest];
+  const category = useMemo(() => {
+    if (!product) return null;
+    const slug = getProductCategory(product);
+    const inTree = shopNowTree.some((c) => c.slug === slug);
+    if (inTree) {
+      return {
+        label: findShopNowLabel(slug),
+        href: getCollection(slug) ? `/collections/${slug}` : `/collections/${product.collection}`,
+        items: products.filter((p) => getProductCategory(p) === slug),
+      };
+    }
+    const col = getCollection(product.collection);
+    return col
+      ? {
+          label: col.name,
+          href: `/collections/${col.slug}`,
+          items: products.filter((p) => p.collection === product.collection),
+        }
+      : null;
   }, [product]);
+
+  const related = useMemo(
+    () => (category?.items ?? []).filter((p) => p.slug !== product?.slug).slice(0, 4),
+    [category, product]
+  );
 
   if (!product) {
     return (
@@ -59,7 +72,6 @@ export default function ProductPage() {
     );
   }
 
-  const collection = collections.find((c) => c.slug === product.collection);
   const stockLabel =
     product.stock === "in-stock"
       ? "In Stock"
@@ -76,14 +88,16 @@ export default function ProductPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-[1320px] px-5 py-4 lg:py-8">
-        <p className="hidden text-[11px] text-navy-600 lg:block">
+        <p className="no-scrollbar -mx-5 overflow-x-auto whitespace-nowrap px-5 pb-3 text-[11px] text-navy-600 lg:mx-0 lg:px-0 lg:pb-0">
           <Link href="/">Home</Link>
           <span className="mx-1.5 text-navy-400">/</span>
           <Link href="/shop">Shop</Link>
-          {collection && (
+          {category && (
             <>
               <span className="mx-1.5 text-navy-400">/</span>
-              <Link href={`/collections/${collection.slug}`}>{collection.name}</Link>
+              <Link href={category.href} className="font-medium text-[#8C6E28] lg:font-normal lg:text-inherit">
+                {category.label}
+              </Link>
             </>
           )}
           <span className="mx-1.5 text-navy-400">/</span>
@@ -301,7 +315,12 @@ export default function ProductPage() {
       </div>
 
       <div className="lg:hidden">
-        <ShopTabs items={shopItems} currentProduct={product} />
+        <ShopTabs
+          items={products}
+          categoryItems={category?.items}
+          categoryLabel={category?.label}
+          currentProduct={product}
+        />
       </div>
     </div>
   );

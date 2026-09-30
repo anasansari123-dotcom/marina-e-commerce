@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Clock3, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { ContactForm } from "@/components/ContactForm";
-import { heroImg } from "@/lib/images";
 import { company, companyDirections, companyMapSrc, companyTel, companyWhatsApp } from "@/lib/company";
 
 const desks = [
@@ -14,16 +13,17 @@ const desks = [
 export default function ContactPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[36vh] overflow-hidden bg-navy-950 text-cream-50">
+      <section className="relative min-h-[340px] overflow-hidden bg-[#0d0a08] text-cream-50 md:min-h-[400px] lg:aspect-[1600/633] lg:max-h-[640px] lg:min-h-0">
         <Image
-          src={heroImg.harbor}
-          alt="Harbour"
+          src="/contact-us-slide.jpeg"
+          alt="Brass globe, binoculars and compass on a desk with a world route map and cargo ship"
           fill
-          className="object-cover object-center"
+          sizes="100vw"
+          className="object-cover object-[70%_center] lg:object-center"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/90 via-[#081525]/55 to-[#081525]/20" />
-        <div className="relative mx-auto flex min-h-[36vh] max-w-[1320px] flex-col justify-center px-5 py-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent lg:from-black/60 lg:via-black/20" />
+        <div className="relative mx-auto flex h-full min-h-[340px] max-w-[1320px] flex-col justify-center px-5 py-10 md:min-h-[400px] lg:min-h-0">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">Contact us</p>
           <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
             Atelier & trade desk.

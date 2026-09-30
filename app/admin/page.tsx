@@ -110,7 +110,7 @@ export default function AdminPage() {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-[236px] flex-col bg-[#0B1D36] text-white transition-transform lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-[236px] flex-col bg-[#031D38] text-white transition-transform lg:static lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -412,10 +412,10 @@ export default function AdminPage() {
             <div className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-4">
                 {[
-                  ["46", "Countries shipped"],
-                  ["320+", "B2B partners"],
-                  ["80k", "Pieces / year"],
-                  ["28+", "Years of craft"],
+                  ["30+", "Countries shipped"],
+                  ["50+", "B2B partners"],
+                  ["2K+", "Pieces / year"],
+                  ["16+", "Years of craft"],
                 ].map(([v, l]) => (
                   <div key={l} className="rounded-2xl bg-white p-5 shadow-[0_8px_30px_rgba(26,20,12,0.04)]">
                     <p className="font-serif text-3xl">{v}</p>

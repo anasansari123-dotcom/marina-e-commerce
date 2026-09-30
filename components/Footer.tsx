@@ -10,7 +10,7 @@ import {
   Youtube,
 } from "lucide-react";
 import { BrandLogo } from "./Logo";
-import { company, companyWhatsApp } from "@/lib/company";
+import { company } from "@/lib/company";
 
 const columns = [
   {
@@ -19,10 +19,11 @@ const columns = [
       ["B2C Retail Collection", "/shop"],
       ["Collections", "/collections"],
       ["My Wishlist", "/wishlist"],
+      ["Add to Cart", "/cart"],
     ],
   },
   {
-    title: "B2B",
+    title: "Business with Us",
     links: [
       ["B2B Wholesale Collection", "/wholesale"],
       ["Create Account", "/wholesale/register"],
@@ -59,13 +60,13 @@ export function Footer() {
   return (
     <footer className="mt-auto overflow-x-hidden bg-[#081525] text-cream-100">
       <div className="border-y border-white/10 bg-[#0B1D36]">
-        <div className="mx-auto grid max-w-[1320px] gap-5 px-5 py-5 sm:grid-cols-2 lg:grid-cols-4 lg:py-6">
+        <div className="mx-auto grid max-w-[1320px] gap-5 px-5 py-5 sm:grid-cols-2 lg:py-6 xl:flex xl:justify-between xl:gap-6">
           {promises.map((p) => (
             <div key={p.title} className="flex gap-3">
               <p.icon className="mt-0.5 h-5 w-5 shrink-0 text-[#C9A84C]" />
-              <div>
-                <p className="text-sm font-medium">{p.title}</p>
-                <p className="mt-1 text-xs text-cream-100/60">{p.body}</p>
+              <div className="min-w-0">
+                <p className="whitespace-nowrap text-sm font-medium">{p.title}</p>
+                <p className="mt-1 whitespace-nowrap text-xs text-cream-100/60">{p.body}</p>
               </div>
             </div>
           ))}
@@ -104,14 +105,6 @@ export function Footer() {
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-cream-100/65">
               {company.address[0]}, {company.address[1]}, {company.address[2]}
             </p>
-          </div>
-          <div className="space-y-1 text-sm text-cream-100/80">
-            <a href={`mailto:${company.email}`} className="block break-all hover:text-[#C9A84C]">
-              {company.email}
-            </a>
-            <a href={companyWhatsApp} target="_blank" rel="noreferrer" className="block hover:text-[#C9A84C]">
-              WhatsApp {company.phone}
-            </a>
           </div>
           <div className="flex flex-wrap gap-2.5">
             {socials.map(({ label, Icon }) => (

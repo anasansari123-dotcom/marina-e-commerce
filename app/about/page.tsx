@@ -82,16 +82,17 @@ const facts = [
 export default function AboutPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[38vh] overflow-hidden bg-navy-950 text-cream-50">
+      <section className="relative min-h-[340px] overflow-hidden bg-[#0d0a08] text-cream-50 md:min-h-[400px] lg:aspect-[1600/633] lg:max-h-[640px] lg:min-h-0">
         <Image
-          src={heroImg.workshop}
-          alt="Marina Muse manufacturing facility"
+          src="/about-us-slide.jpeg"
+          alt="Brass globe, telescope, lantern and compass on a dark marble desk"
           fill
-          className="object-cover object-center"
+          sizes="100vw"
+          className="object-cover object-[75%_center] lg:object-center"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/92 via-[#081525]/60 to-[#081525]/25" />
-        <div className="relative mx-auto flex min-h-[38vh] max-w-[1320px] flex-col justify-center px-5 py-10">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent lg:from-black/55 lg:via-black/15" />
+        <div className="relative mx-auto flex h-full min-h-[340px] max-w-[1320px] flex-col justify-center px-5 py-10 md:min-h-[400px] lg:min-h-0">
           <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">About us</p>
           <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
             Marina Muse International

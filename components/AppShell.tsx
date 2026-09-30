@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { ChatWidget } from "./ChatWidget";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -10,6 +10,21 @@ import { TopBar } from "./TopBar";
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
+  const navRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const root = document.documentElement;
+    const sync = () => root.style.setProperty("--site-nav", `${Math.round(el.getBoundingClientRect().height)}px`);
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--site-nav");
+    };
+  }, [isAdmin]);
 
   if (isAdmin) {
     return <div className="min-h-screen bg-[#F4F1EA]">{children}</div>;
@@ -17,11 +32,11 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div className="fixed inset-x-0 top-0 z-50">
+      <div ref={navRef} className="sticky top-0 z-50">
         <TopBar />
         <Header />
       </div>
-      <main className="flex-1 pt-[var(--site-nav)]">{children}</main>
+      <main className="flex-1">{children}</main>
       <Footer />
       <ChatWidget />
     </>

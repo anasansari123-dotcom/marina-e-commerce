@@ -21,12 +21,13 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group flex flex-col bg-white">
       <div className="relative aspect-square overflow-hidden rounded-[4px] bg-[#f5f5f5]">
-        <Link href={`/product/${product.slug}`} className="block h-full">
+        <Link href={`/product/${product.slug}`} className="relative block h-full">
           <Image
             src={product.image}
             alt={product.name}
             fill
-            className="object-contain p-3 transition duration-300 group-hover:scale-[1.03]"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition duration-300 group-hover:scale-[1.03]"
           />
         </Link>
         <button

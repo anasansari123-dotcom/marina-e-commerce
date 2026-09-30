@@ -17,7 +17,7 @@ import {
   Truck,
 } from "lucide-react";
 import { CustomFaq } from "@/components/CustomFaq";
-import { heroImg, img } from "@/lib/images";
+import { img } from "@/lib/images";
 import { companyWhatsApp } from "@/lib/company";
 
 export const metadata: Metadata = {
@@ -146,7 +146,7 @@ export default function CustomManufacturingPage() {
       </section>
 
       <section className="relative overflow-hidden bg-[#0B1D36] px-5 py-10 text-white md:py-14">
-        <Image src={heroImg.harbor} alt="" fill className="object-cover opacity-35" />
+        <Image src="/5-slide.jpeg" alt="" fill sizes="100vw" className="object-cover opacity-35" />
         <div className="absolute inset-0 bg-[#0B1D36]/55" />
         <div className="relative mx-auto max-w-[1200px]">
           <h2 className="text-center font-serif text-3xl md:text-4xl">Our Custom Manufacturing Process</h2>
@@ -222,7 +222,7 @@ export default function CustomManufacturingPage() {
       </section>
 
       <section className="relative overflow-hidden bg-[#0B1D36] px-5 py-10 text-center text-white md:py-14">
-        <Image src={heroImg.sail} alt="" fill className="object-cover opacity-40" />
+        <Image src="/2-slide.jpeg" alt="" fill sizes="100vw" className="object-cover opacity-40" />
         <div className="absolute inset-0 bg-[#081525]/60" />
         <div className="relative mx-auto max-w-2xl">
           <h2 className="font-serif text-3xl md:text-4xl">Have a Custom Requirement?</h2>

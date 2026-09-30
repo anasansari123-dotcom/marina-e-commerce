@@ -9,25 +9,31 @@
 
 html {
   scroll-behavior: smooth;
-  --site-nav: 96px;
+  --site-nav: 88px;
   font-family: var(--font-etsy);
 }
 
 @media (min-width: 640px) {
   html {
-    --site-nav: 108px;
+    --site-nav: 96px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   html {
-    --site-nav: 116px;
+    --site-nav: 92px;
   }
 }
 
 @media (min-width: 1280px) {
   html {
-    --site-nav: 126px;
+    --site-nav: 104px;
+  }
+}
+
+@media (min-width: 1536px) {
+  html {
+    --site-nav: 112px;
   }
 }
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { BrandLogo } from "@/components/Logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,9 +12,10 @@ export default function LoginPage() {
 
   return (
     <div className="mx-auto max-w-md px-4 py-10 md:py-12">
-      <h1 className="text-center font-serif text-4xl">
-        {view === "login" ? "Login" : "Register"}
-      </h1>
+      <Link href="/" className="flex justify-center">
+        <BrandLogo size="auth" priority />
+      </Link>
+      <h1 className="sr-only">{view === "login" ? "Login" : "Register"}</h1>
       <div className="mt-6 grid grid-cols-2 rounded-full bg-cream-300 p-1 text-sm">
         <button
           type="button"

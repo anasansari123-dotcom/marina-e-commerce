@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, ShoppingBag, User, X, Heart } from "lucide-react";
+import { Menu, ShoppingBag, User, X, Heart, LayoutDashboard } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "./Logo";
 import { useCart } from "@/lib/cart-context";
@@ -35,7 +35,7 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header className="relative bg-[#0B1D36]">
+    <header className="relative bg-[#031D38]">
       <div className="mx-auto flex max-w-[1680px] items-center gap-3 px-3 py-1 sm:px-5 xl:px-6">
         <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
           <BrandLogo size="header" priority />
@@ -63,6 +63,14 @@ export function Header() {
             <User className="h-4 w-4" />
             <span className="hidden sm:inline">Login</span>
           </Link>
+          <Link
+            href="/admin"
+            aria-label="Admin dashboard"
+            title="Admin dashboard"
+            className="hidden p-2 text-white/85 hover:text-[#C9A84C] sm:inline-flex"
+          >
+            <LayoutDashboard className="h-[18px] w-[18px]" />
+          </Link>
           <Link href="/wishlist" aria-label="My Wishlist" className="relative p-2 text-white/85 hover:text-[#C9A84C]">
             <Heart className="h-[18px] w-[18px]" />
             {wishCount > 0 && (
@@ -86,7 +94,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="absolute inset-x-0 top-full z-50 max-h-[min(70vh,calc(100dvh-var(--site-nav)))] overflow-y-auto border-t border-[#C9A84C]/20 bg-[#0B1D36] px-5 py-3 shadow-lg lg:hidden">
+        <div className="absolute inset-x-0 top-full z-50 max-h-[min(70vh,calc(100dvh-var(--site-nav)))] overflow-y-auto border-t border-[#C9A84C]/20 bg-[#031D38] px-5 py-3 shadow-lg lg:hidden">
           {nav.map((item) => (
             <Link
               key={item.href}
@@ -105,6 +113,14 @@ export function Header() {
             className="block py-2.5 text-xs uppercase tracking-[0.16em] text-white"
           >
             Login
+          </Link>
+          <Link
+            href="/admin"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2 py-2.5 text-xs uppercase tracking-[0.16em] text-white"
+          >
+            <LayoutDashboard className="h-4 w-4 text-[#C9A84C]" />
+            Admin Dashboard
           </Link>
         </div>
       )}

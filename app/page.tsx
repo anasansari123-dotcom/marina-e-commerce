@@ -4,7 +4,7 @@ import { reviews, trustStats } from "@/lib/products";
 import { HomeHero } from "@/components/HomeHero";
 import { HomeCollections } from "@/components/HomeCollections";
 import { ShieldCheck } from "lucide-react";
-import { heroImg, img } from "@/lib/images";
+import { img } from "@/lib/images";
 
 export default function HomePage() {
   return (
@@ -14,10 +14,11 @@ export default function HomePage() {
 
       <section className="relative overflow-hidden bg-navy-900 py-10 text-cream-50 md:py-14">
         <Image
-          src={heroImg.harbor}
-          alt="Harbour and working vessels"
+          src="/contact-us-slide.jpeg"
+          alt="Brass globe, binoculars and export cartons with a cargo ship"
           fill
-          className="object-cover opacity-35"
+          sizes="100vw"
+          className="object-cover object-right opacity-45"
         />
         <div className="relative mx-auto grid max-w-[1320px] items-center gap-10 px-5 md:grid-cols-2">
           <div>
@@ -55,11 +56,11 @@ export default function HomePage() {
           <div className="grid h-[400px] w-full grid-cols-2 grid-rows-2 gap-3 sm:h-[480px] md:h-[540px]">
             <div className="relative col-span-2 overflow-hidden rounded-3xl bg-[#1a1510] sm:col-span-1 sm:row-span-2">
               <Image
-                src="/1.jpeg"
-                alt="Brass binoculars, telescope and compass"
+                src="/about-us-slide.jpeg"
+                alt="Brass telescope, globe, lantern and compass"
                 fill
-                sizes="(max-width: 640px) 100vw, 25vw"
-                className="object-cover object-[28%_72%]"
+                sizes="(max-width: 640px) 130vw, 1400px"
+                className="object-cover object-[82%_center]"
               />
             </div>
             <div className="relative overflow-hidden rounded-3xl bg-[#1a1510]">
@@ -92,7 +93,7 @@ export default function HomePage() {
                 "Solid brass — not plated zinc",
                 "Hand patina, not a spray antique",
                 "OEM logos, packaging and private label",
-                "Export documentation for 46 countries",
+                "Export documentation for 30+ countries",
               ].map((line) => (
                 <li key={line} className="flex items-start gap-3">
                   <ShieldCheck className="mt-0.5 h-5 w-5 text-[#C9A84C]" />

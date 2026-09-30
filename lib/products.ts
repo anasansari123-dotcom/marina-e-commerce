@@ -196,6 +196,14 @@ export const collections: Collection[] = [
       "Brass and mixed-metal lighting — ceiling and hanging lights, wall lights, table lamps, spot lights, picture lights, bathroom lights, flush mounts, floor lamps, chandeliers, rechargeable lamps and outdoor lights.",
     image: img.lightCeiling,
   },
+  {
+    slug: "jewellery",
+    name: "Brass Jewellery",
+    tagline: "Handcrafted adornments",
+    description:
+      "Hand-finished brass bangles, bracelets, statement necklaces, clasp clutches and jewellery boxes from our Roorkee artisans.",
+    image: img.jewelryGold,
+  },
 ].map((c) => ({ ...c, image: imageForName(c.name, c.image) }));
 
 const coreProducts: Product[] = [
@@ -845,8 +853,8 @@ export function formatPrice(n: number) {
 }
 
 export const trustStats = [
-  { label: "Years of craft", value: "28+" },
-  { label: "Countries shipped", value: "46" },
-  { label: "B2B partners", value: "320+" },
-  { label: "Pieces a year", value: "80k" },
+  { label: "Years of craft", value: "16+" },
+  { label: "Countries shipped", value: "30+" },
+  { label: "B2B partners", value: "50+" },
+  { label: "Pieces a year", value: "2K+" },
 ];

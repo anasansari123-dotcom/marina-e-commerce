@@ -4,29 +4,46 @@ import { ProductCard } from "@/components/ProductCard";
 import { company } from "@/lib/company";
 import { img } from "@/lib/images";
 import { getProduct, products, reviews, type Product } from "@/lib/products";
-import { ChevronDown, Search, SlidersHorizontal, Star } from "lucide-react";
+import { Search, SlidersHorizontal, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const tabs = ["Items", "Reviews", "About"] as const;
+const ITEMS_PAGE = 12;
 type ShopTab = (typeof tabs)[number];
 
 export function ShopTabs({
   items,
+  categoryItems,
+  categoryLabel,
   currentProduct,
 }: {
   items: Product[];
+  categoryItems?: Product[];
+  categoryLabel?: string;
   currentProduct?: Product;
 }) {
+  const hasCategory = Boolean(categoryLabel && categoryItems && categoryItems.length > 0);
+  const [scope, setScope] = useState<"category" | "all">(hasCategory ? "category" : "all");
+  const base = scope === "category" && hasCategory ? categoryItems! : items;
   const [tab, setTab] = useState<ShopTab>("Items");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState("featured");
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [limit, setLimit] = useState(ITEMS_PAGE);
+
+  useEffect(() => {
+    setLimit(ITEMS_PAGE);
+  }, [query, sort, scope]);
+
+  useEffect(() => {
+    setScope(hasCategory ? "category" : "all");
+  }, [hasCategory, categoryLabel]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    let next = items.filter((p) => {
+    let next = base.filter((p) => {
       if (!q) return true;
       return (
         p.name.toLowerCase().includes(q) ||
@@ -38,7 +55,7 @@ export function ShopTabs({
     if (sort === "price-desc") next = [...next].sort((a, b) => b.price - a.price);
     if (sort === "rating") next = [...next].sort((a, b) => b.rating - a.rating);
     return next;
-  }, [items, query, sort]);
+  }, [base, query, sort]);
 
   return (
     <div className="bg-white">
@@ -68,21 +85,45 @@ export function ShopTabs({
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder={`Search all ${items.length} items`}
+              placeholder={
+                scope === "category" && hasCategory
+                  ? `Search ${base.length} items in ${categoryLabel}`
+                  : `Search all ${items.length} items`
+              }
               className="h-11 w-full rounded-full border border-[#d4d4d4] bg-white pl-4 pr-12 text-[15px] text-[#222] outline-none placeholder:text-[#8a8a8a]"
             />
             <Search className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#222]" />
           </label>
 
-          <div className="mt-3 flex items-center justify-between">
-            <button
-              type="button"
-              onClick={() => setFiltersOpen((v) => !v)}
-              className="inline-flex items-center gap-1 rounded-full border border-[#d4d4d4] bg-white px-3 py-1.5 text-[14px] text-[#222]"
-            >
-              All ({filtered.length})
-              <ChevronDown className="h-4 w-4 text-[#666]" />
-            </button>
+          <div className="mt-3 flex items-center justify-between gap-2">
+            <div className="no-scrollbar flex min-w-0 items-center gap-2 overflow-x-auto">
+              {hasCategory ? (
+                <button
+                  type="button"
+                  onClick={() => setScope("category")}
+                  aria-pressed={scope === "category"}
+                  className={`shrink-0 rounded-full border px-3 py-1.5 text-[13px] ${
+                    scope === "category"
+                      ? "border-[#1a1408] bg-[#1a1408] text-white"
+                      : "border-[#d4d4d4] bg-white text-[#222]"
+                  }`}
+                >
+                  {categoryLabel} ({categoryItems!.length})
+                </button>
+              ) : null}
+              <button
+                type="button"
+                onClick={() => setScope("all")}
+                aria-pressed={scope === "all"}
+                className={`shrink-0 rounded-full border px-3 py-1.5 text-[13px] ${
+                  scope === "all" || !hasCategory
+                    ? "border-[#1a1408] bg-[#1a1408] text-white"
+                    : "border-[#d4d4d4] bg-white text-[#222]"
+                }`}
+              >
+                All ({items.length})
+              </button>
+            </div>
             <button
               type="button"
               aria-label="Sort and filter"
@@ -107,12 +148,26 @@ export function ShopTabs({
           ) : null}
 
           <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-6">
-            {filtered.map((p) => (
+            {filtered.slice(0, limit).map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
           {filtered.length === 0 ? (
             <p className="py-10 text-center text-sm text-[#666]">No items match that search.</p>
+          ) : null}
+          {filtered.length > limit ? (
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <p className="text-xs text-[#888]">
+                Showing {limit} of {filtered.length}
+              </p>
+              <button
+                type="button"
+                onClick={() => setLimit((n) => n + ITEMS_PAGE)}
+                className="rounded-full border border-[#222] px-8 py-2.5 text-sm font-medium text-[#222]"
+              >
+                Load more
+              </button>
+            </div>
           ) : null}
         </div>
       )}
