@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Box, Factory, FileText, Handshake, Home, MapPin, Plane, Ship } from "lucide-react";
+import { BannerHero } from "@/components/BannerHero";
 
 export const metadata: Metadata = {
   title: "Shipping",
@@ -38,36 +39,16 @@ function CircleIcon({ children }: { children: React.ReactNode }) {
 export default function ShippingPage() {
   return (
     <div className="bg-white">
-      <section className="relative isolate min-h-[240px] overflow-hidden bg-[#0B1D36] md:min-h-[320px]">
-        <Image
-          src="/shipping-hero.jpg"
-          alt="Cargo ship, aircraft and truck at port"
-          fill
-          priority
-          className="object-cover object-[68%_center]"
-        />
-        <div className="absolute inset-0 z-[1] bg-[#0B1D36]/82 md:hidden" />
-        <div
-          className="absolute inset-y-0 left-0 z-[1] hidden w-[54%] bg-[#0B1D36] md:block"
-          style={{ clipPath: "polygon(0 0, 86% 0, 72% 100%, 0 100%)" }}
-        />
-        <div className="relative z-[2] mx-auto flex min-h-[240px] max-w-[1240px] items-center px-5 py-10 md:min-h-[320px] md:py-12">
-          <div className="max-w-[520px] text-white">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-white/85 md:text-[12px] md:tracking-[0.32em]">
-              Reliable &nbsp;•&nbsp; Safe &nbsp;•&nbsp; On Time
-            </p>
-            <h1 className="mt-3 font-serif text-[3.4rem] italic leading-[0.9] md:text-[5.2rem]">Shipping</h1>
-            <div className="mt-3 h-[3px] w-[72px] bg-[#C9A84C]" />
-            <p className="mt-5 font-serif text-[1.65rem] leading-snug md:text-[1.85rem]">
-              We deliver your orders <span className="text-[#C9A84C]">worldwide</span>
-            </p>
-            <p className="mt-4 max-w-[420px] text-[14px] leading-relaxed text-white/80">
-              We offer air &amp; sea shipping according to the requirement of our clients. From our base in
-              India to your destination, we ensure safe, secure and on-time delivery.
-            </p>
-          </div>
-        </div>
-      </section>
+      <BannerHero
+        src="/shipping-banner.jpeg"
+        alt="Shipping — we deliver your orders worldwide by air and sea. Cargo ship, aircraft and truck at port"
+        title="Shipping — We deliver your orders worldwide"
+        actionsAt={{ left: 3.6, top: 66 }}
+        actions={[
+          { href: "/wholesale/quote", label: "Request a Shipping Quote" },
+          { href: "/contact", label: "Contact Us", variant: "outline" },
+        ]}
+      />
 
       <section className="px-5 py-10 md:py-12">
         <div className="mx-auto max-w-[1180px] space-y-7">

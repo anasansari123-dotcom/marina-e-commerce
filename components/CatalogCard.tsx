@@ -1,74 +1,22 @@
 "use client";
 
-import { formatOfferPrice } from "@/lib/catalog";
-import { formatPrice, type Product } from "@/lib/products";
+import { MAX_ORDER_QTY, type Product } from "@/lib/products";
 import { useWishlist } from "@/lib/wishlist-context";
-import { Heart, MessageCircle } from "lucide-react";
+import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FreeShippingTag } from "./FreeShippingTag";
-
-function etsyListPrice(product: Product) {
-  if (product.compareAt && product.compareAt > product.price) return product.compareAt;
-  return Number((product.price / 0.57).toFixed(2));
-}
+import { PriceRow } from "./PriceRow";
 
 export function CatalogCard({
   product,
-  freeShipping = false,
+  wholesale = false,
 }: {
   product: Product;
-  freeShipping?: boolean;
+  wholesale?: boolean;
 }) {
   const { has, toggle } = useWishlist();
   const wished = has(product.slug);
-  const listPrice = etsyListPrice(product);
-  const off = Math.max(1, Math.round((1 - product.price / listPrice) * 100));
-
-  if (!freeShipping) {
-    return (
-      <article className="group flex flex-col bg-white">
-        <div className="relative aspect-square overflow-hidden rounded-[4px] bg-[#f5f5f5]">
-          <Link href={`/product/${product.slug}`} className="relative block h-full">
-            <Image
-              src={product.image}
-              alt={product.name}
-              fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              className="object-cover transition duration-300 group-hover:scale-[1.03]"
-            />
-          </Link>
-          <button
-            type="button"
-            aria-label={wished ? "Remove from wishlist" : "Add to wishlist"}
-            onClick={() => toggle(product.slug)}
-            className="absolute right-2 top-2 grid h-8 w-8 place-items-center text-[#222222]"
-          >
-            <Heart className={`h-[22px] w-[22px] ${wished ? "fill-[#222222] text-[#222222]" : "text-[#222222]"}`} />
-          </button>
-        </div>
-        <Link href={`/product/${product.slug}`} className="mt-2 block">
-          <h3 className="line-clamp-2 min-h-[34px] text-[12.5px] font-normal leading-[1.35] text-[#222222] sm:min-h-[40px] sm:text-[14px]">
-            {product.name}
-          </h3>
-        </Link>
-        <p className="mt-1 text-[14px] font-bold leading-none text-[#222222] sm:text-[16px]">{formatOfferPrice(product)}</p>
-        <p className="mt-1 text-[11px] text-[#595959] sm:text-[12px]">Min. Order: {product.moq ?? 1} pieces</p>
-        <button
-          type="button"
-          onClick={() =>
-            window.dispatchEvent(
-              new CustomEvent("marina-chat-open", { detail: { product: product.slug } })
-            )
-          }
-          className="mt-2 inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-[#ccc] py-1.5 text-[12px] text-[#333] sm:mt-3 sm:py-2 sm:text-[13px]"
-        >
-          <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          Chat now
-        </button>
-      </article>
-    );
-  }
 
   return (
     <article className="group flex flex-col bg-white">
@@ -96,11 +44,12 @@ export function CatalogCard({
           {product.name}
         </h3>
       </Link>
-      <p className="mt-1 text-[14px] font-bold leading-tight text-[#222222] sm:text-[16px]">{formatPrice(product.price)}</p>
-      <p className="mt-0.5 text-[11px] leading-tight text-[#595959] sm:text-[13px]">
-        <span className="line-through">{formatPrice(listPrice)}</span>
-        <span className="ml-1">({off}% off)</span>
-      </p>
+      <PriceRow price={product.price} className="mt-1" />
+      {wholesale && (
+        <p className="mt-0.5 text-[11px] font-medium text-[#595959] sm:text-[12px]">
+          Max. Order: {MAX_ORDER_QTY} pieces
+        </p>
+      )}
       <FreeShippingTag />
     </article>
   );

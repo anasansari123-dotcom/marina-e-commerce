@@ -1,6 +1,6 @@
 "use client";
 
-import { formatPrice } from "@/lib/products";
+import { MAX_ORDER_QTY, formatPrice } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,10 +41,18 @@ export default function CartPage() {
                       −
                     </button>
                     <span className="w-6 text-center text-sm">{qty}</span>
-                    <button className="px-3 py-1" onClick={() => setQty(product.slug, qty + 1)}>
+                    <button
+                      className="px-3 py-1 disabled:cursor-not-allowed disabled:opacity-30"
+                      disabled={qty >= MAX_ORDER_QTY}
+                      aria-label="Increase quantity"
+                      onClick={() => setQty(product.slug, qty + 1)}
+                    >
                       +
                     </button>
                   </div>
+                  {qty >= MAX_ORDER_QTY && (
+                    <span className="text-xs text-[#8C6E28]">Max. {MAX_ORDER_QTY} pieces per order</span>
+                  )}
                   <button className="text-sm text-navy-500 underline" onClick={() => remove(product.slug)}>
                     Remove
                   </button>

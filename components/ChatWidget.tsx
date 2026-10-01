@@ -1,7 +1,8 @@
 "use client";
 
+import { companyWhatsApp } from "@/lib/company";
 import { formatPrice, products } from "@/lib/products";
-import { Send, X } from "lucide-react";
+import { MessageCircle, Send, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -97,14 +98,26 @@ export function ChatWidget() {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-30 flex items-center gap-2 rounded-full bg-[#0B1D36] p-3 text-sm text-white shadow-lg hover:bg-navy-800 sm:bottom-6 sm:right-6 sm:px-4 sm:py-3"
-        aria-label="Ask Marina"
-      >
-        <WhatsAppIcon className="h-5 w-5 text-[#C9A84C]" />
-        <span className="hidden sm:inline">Ask Marina</span>
-      </button>
+      <div className="fixed bottom-[env(safe-area-inset-bottom)] right-3 z-30 flex items-center gap-2 sm:right-6">
+        <a
+          href={companyWhatsApp}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Chat on WhatsApp"
+          title="Chat on WhatsApp"
+          className="grid h-12 w-12 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition hover:scale-105 hover:bg-[#1ebe5b]"
+        >
+          <WhatsAppIcon className="h-6 w-6" />
+        </a>
+        <button
+          onClick={() => setOpen(true)}
+          className="flex h-12 w-12 items-center justify-center gap-2 rounded-full border border-[#C9A84C]/50 bg-[#031D38] text-sm text-white shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition hover:scale-105 hover:bg-navy-800 sm:w-auto sm:px-5"
+          aria-label="Ask Marina"
+        >
+          <MessageCircle className="h-5 w-5 text-[#C9A84C]" />
+          <span className="hidden sm:inline">Ask Marina</span>
+        </button>
+      </div>
 
       {open && (
         <div className="fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-50 flex h-[min(560px,calc(100dvh-var(--site-nav)-2rem))] w-auto max-w-[380px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl sm:inset-x-auto sm:right-5 sm:w-[min(100%-1.5rem,380px)]">

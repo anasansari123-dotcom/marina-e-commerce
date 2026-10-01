@@ -1,22 +1,16 @@
 "use client";
 
-import { formatPrice, type Product } from "@/lib/products";
+import { type Product } from "@/lib/products";
 import { useWishlist } from "@/lib/wishlist-context";
 import { Heart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FreeShippingTag } from "./FreeShippingTag";
-
-function etsyListPrice(product: Product) {
-  if (product.compareAt && product.compareAt > product.price) return product.compareAt;
-  return Number((product.price / 0.57).toFixed(2));
-}
+import { PriceRow } from "./PriceRow";
 
 export function ProductCard({ product }: { product: Product }) {
   const { has, toggle } = useWishlist();
   const wished = has(product.slug);
-  const listPrice = etsyListPrice(product);
-  const off = Math.max(1, Math.round((1 - product.price / listPrice) * 100));
 
   return (
     <article className="group flex flex-col bg-white">
@@ -46,11 +40,7 @@ export function ProductCard({ product }: { product: Product }) {
       <Link href={`/product/${product.slug}`} className="mt-2 block">
         <h3 className="line-clamp-2 text-[14px] font-normal leading-[1.35] text-[#222222]">{product.name}</h3>
       </Link>
-      <p className="mt-1 text-[16px] font-bold leading-tight text-[#222222]">{formatPrice(product.price)}</p>
-      <p className="mt-0.5 text-[13px] leading-tight text-[#595959]">
-        <span className="line-through">{formatPrice(listPrice)}</span>
-        <span className="ml-1">({off}% off)</span>
-      </p>
+      <PriceRow price={product.price} className="mt-1" />
       <FreeShippingTag />
     </article>
   );

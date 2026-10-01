@@ -16,6 +16,7 @@ import {
   Tag,
   Truck,
 } from "lucide-react";
+import { BannerHero } from "@/components/BannerHero";
 import { CustomFaq } from "@/components/CustomFaq";
 import { img } from "@/lib/images";
 import { companyWhatsApp } from "@/lib/company";
@@ -71,34 +72,15 @@ const buyers = [
 export default function CustomManufacturingPage() {
   return (
     <div className="bg-white">
-      <section className="relative min-h-[38vh] overflow-hidden bg-[#0B1D36] text-white md:min-h-[48vh]">
-        <Image
-          src="/custom-manufacturing-hero.jpg"
-          alt="Custom brass telescope and binoculars on a workshop table"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#081525]/88 via-[#081525]/40 to-transparent" />
-        <div className="relative mx-auto flex min-h-[38vh] max-w-[1200px] items-center px-5 py-10 md:min-h-[48vh] md:py-14">
-          <div className="max-w-xl">
-            <h1 className="font-serif text-4xl leading-[1.05] md:text-6xl">Custom Manufacturing</h1>
-            <p className="mt-4 font-serif text-xl text-white/95 md:text-[1.85rem]">
-              Custom Brass Telescopes &amp; Binoculars
-              <br />
-              Manufactured in Our Own Factory
-            </p>
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/80">
-              We create custom-made telescopes and binoculars as per your requirements. Your design, our
-              craftsmanship.
-            </p>
-            <Link href="/wholesale/quote" className="btn-gold mt-8 gap-2">
-              Request a Custom Quote
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <BannerHero
+        src="/custom-manufacturing-banner.jpeg"
+        alt="Custom Manufacturing — custom brass telescopes and binoculars manufactured in our own factory"
+        title="Custom Manufacturing — Custom Brass Telescopes & Binoculars Manufactured in Our Own Factory"
+        hotspots={[
+          { href: "/wholesale/quote", label: "Request a Custom Quote", left: 3.6, top: 72.4, width: 26, height: 10.4 },
+        ]}
+        actions={[{ href: "/wholesale/quote", label: "Request a Custom Quote" }]}
+      />
 
       <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1400px]">
@@ -172,19 +154,11 @@ export default function CustomManufacturingPage() {
       </section>
 
       <section className="bg-white px-5 py-10 md:py-14">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-10 md:grid-cols-2">
-          <div className="relative aspect-[5/4] overflow-hidden rounded-2xl">
-            <Image
-              src={img.tripodSpyglass}
-              alt="Brass telescope on a wooden tripod"
-              fill
-              className="object-cover"
-            />
-          </div>
+        <div className="mx-auto max-w-3xl text-center">
           <div>
             <h2 className="font-serif text-3xl md:text-4xl">Wholesale &amp; Business Orders</h2>
             <p className="mt-5 font-medium text-navy-800">Perfect for:</p>
-            <ul className="mt-3 space-y-2.5">
+            <ul className="mx-auto mt-3 grid w-fit gap-x-10 gap-y-2.5 text-left sm:grid-cols-2">
               {buyers.map((b) => (
                 <li key={b} className="flex items-center gap-2.5 text-navy-800">
                   <Check className="h-4 w-4 shrink-0 text-[#C9A84C]" strokeWidth={2.5} />
@@ -195,7 +169,7 @@ export default function CustomManufacturingPage() {
             <p className="mt-6 leading-relaxed text-navy-600">
               Let’s grow together. We offer competitive pricing for bulk and long-term orders.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/wholesale" className="btn-gold">
                 Wholesale collection
               </Link>
@@ -208,12 +182,9 @@ export default function CustomManufacturingPage() {
       </section>
 
       <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
-        <div className="mx-auto grid max-w-[1200px] items-center gap-10 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
-            <Image src={img.binoculars} alt="Brass binoculars in a presentation case" fill className="object-cover" />
-          </div>
+        <div className="mx-auto max-w-3xl">
           <div>
-            <h2 className="font-serif text-3xl md:text-4xl">Frequently Asked Questions</h2>
+            <h2 className="text-center font-serif text-3xl md:text-4xl">Frequently Asked Questions</h2>
             <div className="mt-6">
               <CustomFaq />
             </div>

@@ -8,7 +8,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { products, type Product } from "./products";
+import { MAX_ORDER_QTY, products, type Product } from "./products";
+
+const clampQty = (qty: number) => Math.min(MAX_ORDER_QTY, qty);
 
 export type CartLine = {
   slug: string;
@@ -36,7 +38,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
-      if (raw) setLines(JSON.parse(raw));
+      if (raw) setLines((JSON.parse(raw) as CartLine[]).map((l) => ({ ...l, qty: clampQty(l.qty) })));
     } catch {
       /* ignore */
     }
@@ -61,17 +63,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
           const found = prev.find((l) => l.slug === slug);
           if (found) {
             return prev.map((l) =>
-              l.slug === slug ? { ...l, qty: l.qty + qty } : l
+              l.slug === slug ? { ...l, qty: clampQty(l.qty + qty) } : l
             );
           }
-          return [...prev, { slug, qty }];
+          return [...prev, { slug, qty: clampQty(qty) }];
         }),
       remove: (slug) => setLines((prev) => prev.filter((l) => l.slug !== slug)),
       setQty: (slug, qty) =>
         setLines((prev) =>
           qty <= 0
             ? prev.filter((l) => l.slug !== slug)
-            : prev.map((l) => (l.slug === slug ? { ...l, qty } : l))
+            : prev.map((l) => (l.slug === slug ? { ...l, qty: clampQty(qty) } : l))
         ),
       clear: () => setLines([]),
       count: items.reduce((n, i) => n + i.qty, 0),

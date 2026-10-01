@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Clock3, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { BannerHero } from "@/components/BannerHero";
 import { ContactForm } from "@/components/ContactForm";
 import { company, companyDirections, companyMapSrc, companyTel, companyWhatsApp } from "@/lib/company";
 
@@ -13,28 +13,18 @@ const desks = [
 export default function ContactPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[340px] overflow-hidden bg-[#0d0a08] text-cream-50 md:min-h-[400px] lg:aspect-[1600/633] lg:max-h-[640px] lg:min-h-0">
-        <Image
-          src="/contact-us-slide.jpeg"
-          alt="Brass globe, binoculars and compass on a desk with a world route map and cargo ship"
-          fill
-          sizes="100vw"
-          className="object-cover object-[70%_center] lg:object-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent lg:from-black/60 lg:via-black/20" />
-        <div className="relative mx-auto flex h-full min-h-[340px] max-w-[1320px] flex-col justify-center px-5 py-10 md:min-h-[400px] lg:min-h-0">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">Contact us</p>
-          <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
-            Atelier & trade desk.
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/80">
-            Retail questions, wholesale pricing, or a drawing you want in brass — write to us. WhatsApp is often fastest.
-          </p>
-        </div>
-      </section>
+      <BannerHero
+        src="/contact-banner.jpeg"
+        alt="Contact us — Atelier & trade desk. Brass globe, binoculars and compass on a desk"
+        title="Contact us — Atelier & trade desk"
+        actionsAt={{ left: 3.6, top: 70 }}
+        actions={[
+          { href: companyWhatsApp, label: "Chat on WhatsApp", external: true },
+          { href: "#contact-form", label: "Send a Message", variant: "outline" },
+        ]}
+      />
 
-      <section className="px-5 py-10 md:py-14">
+      <section id="contact-form" className="scroll-mt-[var(--site-nav)] px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[1fr_1.05fr]">
           <div>
             <h2 className="font-serif text-3xl md:text-4xl">Reach {company.name}</h2>

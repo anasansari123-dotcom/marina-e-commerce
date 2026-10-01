@@ -1,6 +1,6 @@
 "use client";
 
-import { formatPrice, getCollection, getProduct, products, reviews } from "@/lib/products";
+import { getCollection, getProduct, products, reviews } from "@/lib/products";
 import { getProductCategory } from "@/lib/catalog";
 import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
 import { useCart } from "@/lib/cart-context";
@@ -23,6 +23,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { ShopTabs } from "@/components/ShopTabs";
 import { companyWhatsApp } from "@/lib/company";
 import { FreeShippingTag } from "@/components/FreeShippingTag";
+import { PriceRow } from "@/components/PriceRow";
 
 const tabs = ["Specifications", "Dimensions", "What's Included", "Reviews", "FAQs"] as const;
 
@@ -163,7 +164,7 @@ export default function ProductPage() {
               <span className="text-navy-400">|</span>
               <span className="text-navy-500">{product.sku}</span>
             </div>
-            <p className="mt-3 text-[1.45rem] font-bold text-[#222222] md:mt-4 md:text-[2rem]">{formatPrice(product.price)}</p>
+            <PriceRow price={product.price} size="page" className="mt-3 md:mt-4" />
             <FreeShippingTag />
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-1.5 text-emerald-700">
@@ -184,7 +185,7 @@ export default function ProductPage() {
               </Link>
             </div>
 
-            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-3 grid grid-cols-2 gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() =>
@@ -192,16 +193,16 @@ export default function ProductPage() {
                     new CustomEvent("marina-chat-open", { detail: { product: product.slug } })
                   )
                 }
-                className="hidden items-center justify-center gap-2 rounded-full border border-navy-800 px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] lg:inline-flex"
+                className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full border border-navy-800 px-1.5 py-2.5 text-[9px] uppercase tracking-[0.02em] sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
               >
-                <Sparkles className="h-3.5 w-3.5 text-[#C9A84C]" />
+                <Sparkles className="h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
                 Ask AI About This Product
               </button>
               <a
                 href={companyWhatsApp}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2.5 text-[11px] uppercase tracking-[0.14em] text-white"
+                className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full bg-[#25D366] px-1.5 py-2.5 text-[9px] uppercase tracking-[0.02em] text-white sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
               >
-                <MessageCircle className="h-3.5 w-3.5" />
+                <MessageCircle className="h-3.5 w-3.5 shrink-0" />
                 WhatsApp Us
               </a>
             </div>

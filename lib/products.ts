@@ -852,6 +852,13 @@ export function formatPrice(n: number) {
   }).format(n);
 }
 
+export const DISCOUNT_PERCENT = 30;
+export const MAX_ORDER_QTY = 20;
+
+export function listPrice(price: number) {
+  return Number((price / (1 - DISCOUNT_PERCENT / 100)).toFixed(2));
+}
+
 export const trustStats = [
   { label: "Years of craft", value: "16+" },
   { label: "Countries shipped", value: "30+" },

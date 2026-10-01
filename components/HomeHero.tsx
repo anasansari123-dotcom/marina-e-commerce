@@ -6,63 +6,53 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const btnBase =
-  "inline-flex flex-auto items-center justify-center whitespace-nowrap rounded-full px-3 py-2.5 text-center text-[9px] font-semibold uppercase tracking-[0.06em] transition duration-300 sm:px-5 sm:py-3 sm:text-[11px] sm:tracking-[0.1em]";
+  "inline-flex items-center justify-center whitespace-nowrap rounded-full text-center font-semibold uppercase transition duration-300";
 
 const slides = [
   {
-    src: "/1-slide.jpeg",
-    pos: "object-[40%_center]",
-    alt: "Brass spyglass and tripod telescope on a mountain overlook at sunset",
-    eyebrow: "Brass optics · Nautical · Exploration",
-    title: "See More.\nExplore Further.",
-    text: "Handcrafted brass telescopes and binoculars — real viewing, premium finish, worldwide shipping.",
+    src: "/hero-1.jpeg",
+    alt: "See More. Explore Further. Handcrafted brass telescopes and binoculars on a mountain overlook at sunset",
+    at: { left: "4.2%", top: "62%" },
+    m: { pos: "object-[0%_center]", left: "6.4%", top: "62%" },
     accent: "#E8D5A3",
     primaryCls: "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff1d0]",
-    secondaryCls: "border border-[#C9A84C] text-[#E8D5A3] hover:bg-[#C9A84C]/10",
+    secondaryCls: "border border-[#C9A84C] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#C9A84C]/20",
   },
   {
-    src: "/2-slide.jpeg",
-    pos: "object-[92%_center]",
-    alt: "Suit of armour, helmets, diving helmet and brass instruments on a Mediterranean harbour terrace",
-    eyebrow: "Armour · Instruments · Heritage",
-    title: "Forged for\nCollectors.",
-    text: "Armour, helmets, diving pieces and brass instruments from our Roorkee factory.",
+    src: "/hero-2.jpeg",
+    alt: "Forged for Collectors. Armour, helmets, diving pieces and brass instruments on a Mediterranean harbour terrace",
+    at: { left: "50%", top: "55%", center: true },
+    m: { pos: "object-center", left: "50%", top: "55%", center: true },
     accent: "#E08A2C",
     primaryCls: "bg-[#E08A2C] text-[#1a1208] hover:bg-[#f09a3c]",
-    secondaryCls: "border border-[#E08A2C] text-[#F3D5A0] hover:bg-[#E08A2C]/15",
+    secondaryCls: "border border-[#E08A2C] bg-[#081525]/35 text-[#F3D5A0] backdrop-blur-sm hover:bg-[#E08A2C]/20",
   },
   {
-    src: "/3-slide.jpeg",
-    pos: "object-[80%_center]",
-    alt: "Hammered copper cookware and brass serveware overlooking the Bosphorus at sunset",
-    eyebrow: "Kitchen · Table · Hospitality",
-    title: "Brass & Copper\nfor the Table.",
-    text: "Serveware, cookware and cutlery programmes for homes, hotels and wholesale.",
+    src: "/hero-3.jpeg",
+    alt: "Brass & Copper for the Table. Hammered copper cookware and brass serveware overlooking the Bosphorus",
+    at: { left: "4.5%", top: "59%" },
+    m: { pos: "object-[0%_center]", left: "6.8%", top: "59%" },
     accent: "#C9A227",
     primaryCls: "bg-[#C9A227] text-[#1a1408] hover:bg-[#d4b03a]",
-    secondaryCls: "border border-[#B87333] text-[#E8C4A0] hover:bg-[#B87333]/15",
+    secondaryCls: "border border-[#B87333] bg-[#081525]/35 text-[#E8C4A0] backdrop-blur-sm hover:bg-[#B87333]/20",
   },
   {
-    src: "/4-slide.jpeg",
-    pos: "object-[78%_center]",
-    alt: "Brass globe, telescope and lanterns with a cargo ship and world trade routes behind",
-    eyebrow: "Export · Wholesale · OEM",
-    title: "Built for Business.\nShipped Worldwide.",
-    text: "Wholesale lots, custom logos and export documents from India.",
+    src: "/hero-4.jpeg",
+    alt: "Built for Business. Shipped Worldwide. Brass globe, telescope and lanterns with a cargo ship behind",
+    at: { left: "5.5%", top: "57%" },
+    m: { pos: "object-[0%_center]", left: "8.3%", top: "57%" },
     accent: "#E0B455",
     primaryCls: "bg-[#E0B455] text-[#1a1208] hover:bg-[#ecc46a]",
-    secondaryCls: "border border-[#E0B455] text-[#F3DDA8] hover:bg-[#E0B455]/15",
+    secondaryCls: "border border-[#E0B455] bg-[#081525]/35 text-[#F3DDA8] backdrop-blur-sm hover:bg-[#E0B455]/20",
   },
   {
-    src: "/5-slide.jpeg",
-    pos: "object-[72%_center]",
-    alt: "Nautical study with brass telescope, globe, hourglass, compass and lanterns",
-    eyebrow: "Décor · Interiors · Gifting",
-    title: "Nautical Décor\nfor Every Room.",
-    text: "Lanterns, globes, clocks and brass accents for homes and hotels.",
+    src: "/hero-5.jpeg",
+    alt: "Nautical Décor for Every Room. Study with brass telescope, globe, hourglass, compass and lanterns",
+    at: { left: "17.5%", top: "54%" },
+    m: { pos: "object-[25%_center]", left: "13.6%", top: "54%" },
     accent: "#D4AF37",
     primaryCls: "bg-[#D4AF37] text-[#1a1408] hover:bg-[#e0c04a]",
-    secondaryCls: "border border-[#D4AF37] text-[#E8D5A3] hover:bg-[#D4AF37]/10",
+    secondaryCls: "border border-[#D4AF37] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#D4AF37]/20",
   },
 ];
 
@@ -87,8 +77,9 @@ export function HomeHero() {
 
   return (
     <section className="relative isolate overflow-hidden bg-[#081525] text-white">
+      <h1 className="sr-only">Marina Muse International — handcrafted brass, nautical and armour products</h1>
       <div
-        className="relative h-[min(80svh,620px)] min-h-[500px] w-full overflow-hidden sm:h-[580px] lg:aspect-[1600/633] lg:h-auto lg:max-h-[760px] lg:min-h-0"
+        className="relative mx-auto h-[60vw] w-full max-w-[1920px] overflow-hidden md:aspect-[1600/633] md:h-auto"
         onTouchStart={(e) => {
           touchX.current = e.touches[0].clientX;
         }}
@@ -108,71 +99,78 @@ export function HomeHero() {
             fill
             priority={idx === 0}
             sizes="100vw"
-            className={`object-cover ${s.pos} transition-opacity duration-700 lg:object-center ${
-              idx === i ? "opacity-100" : "opacity-0"
-            }`}
+            className={`object-cover ${s.m.pos} transition-opacity duration-700 md:object-center ${idx === i ? "opacity-100" : "opacity-0"}`}
           />
         ))}
 
-        <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#081525]/85 via-[#081525]/55 to-[#081525]/35 lg:hidden" />
-
-        <button
-          type="button"
-          aria-label="Previous slide"
-          onClick={prev}
-          className="absolute left-3 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#081525]/40 text-white backdrop-blur-sm hover:bg-[#081525]/70 sm:flex"
+        <div
+          key={`m-${slide.src}`}
+          className={`absolute z-20 flex animate-fadeIn items-center gap-1.5 md:hidden ${slide.m.center ? "-translate-x-1/2" : ""}`}
+          style={{ left: slide.m.left, top: slide.m.top }}
         >
-          <ChevronLeft className="h-5 w-5" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next slide"
-          onClick={next}
-          className="absolute right-3 top-1/2 z-30 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-[#081525]/40 text-white backdrop-blur-sm hover:bg-[#081525]/70 sm:flex"
-        >
-          <ChevronRight className="h-5 w-5" />
-        </button>
+          <Link
+            href="/shop"
+            className={`${btnBase} px-2.5 py-1.5 text-[8px] tracking-[0.04em] shadow-[0_4px_12px_rgba(0,0,0,0.3)] ${slide.primaryCls}`}
+          >
+            B2C Retail Collection
+          </Link>
+          <Link
+            href="/wholesale"
+            className={`${btnBase} px-2.5 py-1.5 text-[8px] tracking-[0.04em] ${slide.secondaryCls}`}
+          >
+            B2B Wholesale Collection
+          </Link>
+        </div>
 
-        <div className="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 gap-2 sm:bottom-5">
+        <div
+          key={slide.src}
+          className={`absolute z-20 hidden animate-fadeIn items-center gap-3 md:flex ${slide.at.center ? "-translate-x-1/2" : ""}`}
+          style={{ left: slide.at.left, top: slide.at.top }}
+        >
+          <Link
+            href="/shop"
+            className={`${btnBase} px-4 py-2 text-[10px] tracking-[0.1em] shadow-[0_6px_18px_rgba(0,0,0,0.3)] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px] ${slide.primaryCls}`}
+          >
+            B2C Retail Collection
+          </Link>
+          <Link
+            href="/wholesale"
+            className={`${btnBase} px-4 py-2 text-[10px] tracking-[0.1em] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px] ${slide.secondaryCls}`}
+          >
+            B2B Wholesale Collection
+          </Link>
+        </div>
+
+        <div className="absolute bottom-3 right-3 z-30 hidden gap-2 sm:flex lg:bottom-5 lg:right-5">
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={prev}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/30 bg-[#081525]/45 text-white backdrop-blur-sm hover:bg-[#081525]/75 lg:h-10 lg:w-10"
+          >
+            <ChevronLeft className="h-4 w-4 lg:h-5 lg:w-5" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={next}
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/30 bg-[#081525]/45 text-white backdrop-blur-sm hover:bg-[#081525]/75 lg:h-10 lg:w-10"
+          >
+            <ChevronRight className="h-4 w-4 lg:h-5 lg:w-5" />
+          </button>
+        </div>
+
+        <div className="absolute bottom-2 left-1/2 z-30 flex -translate-x-1/2 gap-1.5 sm:bottom-4 sm:gap-2">
           {slides.map((s, idx) => (
             <button
               key={s.src}
               type="button"
               aria-label={`Go to slide ${idx + 1}`}
               onClick={() => setI(idx)}
-              className={`h-1.5 rounded-full transition-all sm:h-2 ${idx === i ? "w-6 sm:w-7" : "w-1.5 bg-white/60 hover:bg-white sm:w-2"}`}
+              className={`h-1.5 rounded-full transition-all sm:h-2 ${idx === i ? "w-5 sm:w-7" : "w-1.5 bg-white/60 hover:bg-white sm:w-2"}`}
               style={idx === i ? { backgroundColor: slide.accent } : undefined}
             />
           ))}
-        </div>
-
-        <div className="pointer-events-none absolute inset-0 z-20 flex items-center px-5 sm:px-16 lg:px-20">
-          <div className="mx-auto w-full max-w-[1320px]">
-            <div className="pointer-events-auto w-full max-w-[34rem] text-left lg:rounded-2xl lg:bg-[#081525]/80 lg:px-8 lg:py-7 lg:shadow-[0_20px_50px_rgba(0,0,0,0.35)] lg:ring-1 lg:ring-white/15 lg:backdrop-blur-sm">
-              <p
-                className="text-[10px] uppercase tracking-[0.26em] drop-shadow transition-colors duration-500 sm:text-[11px]"
-                style={{ color: slide.accent }}
-              >
-                {slide.eyebrow}
-              </p>
-              <h1 className="mt-2 font-serif text-[2rem] leading-[1.08] tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] sm:mt-3 sm:text-4xl xl:text-[2.75rem]">
-                {slide.title.split("\n").map((line) => (
-                  <span key={line} className="block">
-                    {line}
-                  </span>
-                ))}
-              </h1>
-              <p className="mt-3 text-sm leading-relaxed text-white/90 drop-shadow sm:mt-4 sm:text-[15px]">{slide.text}</p>
-              <div className="mt-5 flex flex-wrap items-center justify-start gap-2 sm:mt-7 sm:gap-3">
-                <Link href="/shop" className={`${btnBase} ${slide.primaryCls}`}>
-                  B2C Retail Collection
-                </Link>
-                <Link href="/wholesale" className={`${btnBase} ${slide.secondaryCls}`}>
-                  B2B Wholesale Collection
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

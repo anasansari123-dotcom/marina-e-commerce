@@ -58,8 +58,8 @@ const promises = [
 
 export function Footer() {
   return (
-    <footer className="mt-auto overflow-x-hidden bg-[#081525] text-cream-100">
-      <div className="border-y border-white/10 bg-[#0B1D36]">
+    <footer className="mt-auto overflow-x-hidden bg-[#031D38] text-cream-100">
+      <div className="border-y border-white/10 bg-[#031D38]">
         <div className="mx-auto grid max-w-[1320px] gap-5 px-5 py-5 sm:grid-cols-2 lg:py-6 xl:flex xl:justify-between xl:gap-6">
           {promises.map((p) => (
             <div key={p.title} className="flex gap-3">
@@ -113,7 +113,7 @@ export function Footer() {
                 aria-label={label}
                 aria-disabled="true"
                 title={label}
-                className="inline-flex h-10 w-10 cursor-default items-center justify-center rounded-full bg-[#C9A84C] text-[#081525]"
+                className="inline-flex h-10 w-10 cursor-default items-center justify-center rounded-full bg-[#C9A84C] text-[#031D38]"
               >
                 <Icon className="h-4 w-4" />
               </span>

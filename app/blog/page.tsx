@@ -22,9 +22,6 @@ export default function BlogPage() {
         />
         <h1 className="sr-only">Blog</h1>
       </section>
-      <p className="bg-[#1a120b] px-5 py-3 text-center text-sm text-white/80 sm:hidden">
-        Craft, collections and trade — from the Marina Muse atelier.
-      </p>
       <section className="px-5 py-10 md:py-12">
         <div className="mx-auto grid max-w-[1100px] gap-8 md:grid-cols-3">
           {blogPosts.map((post) => (

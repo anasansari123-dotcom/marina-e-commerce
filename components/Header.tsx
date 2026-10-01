@@ -108,13 +108,6 @@ export function Header() {
             </Link>
           ))}
           <Link
-            href="/login"
-            onClick={() => setOpen(false)}
-            className="block py-2.5 text-xs uppercase tracking-[0.16em] text-white"
-          >
-            Login
-          </Link>
-          <Link
             href="/admin"
             onClick={() => setOpen(false)}
             className="flex items-center gap-2 py-2.5 text-xs uppercase tracking-[0.16em] text-white"

@@ -185,7 +185,7 @@ export function ShopNowCatalog({
             }
           >
             {list.slice(0, limit).map((p) => (
-              <CatalogCard key={p.slug} product={p} freeShipping={retail} />
+              <CatalogCard key={p.slug} product={p} wholesale={!retail} />
             ))}
           </div>
           {list.length === 0 ? (

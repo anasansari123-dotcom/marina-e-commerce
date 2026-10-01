@@ -6,6 +6,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { BannerHero } from "@/components/BannerHero";
 import { heroImg, img } from "@/lib/images";
 
 const pillars = [
@@ -82,27 +83,16 @@ const facts = [
 export default function AboutPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative min-h-[340px] overflow-hidden bg-[#0d0a08] text-cream-50 md:min-h-[400px] lg:aspect-[1600/633] lg:max-h-[640px] lg:min-h-0">
-        <Image
-          src="/about-us-slide.jpeg"
-          alt="Brass globe, telescope, lantern and compass on a dark marble desk"
-          fill
-          sizes="100vw"
-          className="object-cover object-[75%_center] lg:object-center"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent lg:from-black/55 lg:via-black/15" />
-        <div className="relative mx-auto flex h-full min-h-[340px] max-w-[1320px] flex-col justify-center px-5 py-10 md:min-h-[400px] lg:min-h-0">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">About us</p>
-          <h1 className="mt-3 max-w-3xl font-serif text-4xl leading-[1.08] md:text-[3.4rem]">
-            Marina Muse International
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/80">
-            Exporter, manufacturer &amp; supplier of handcrafted nautical, brass and armour
-            products from our factory in Roorkee, Uttarakhand, India.
-          </p>
-        </div>
-      </section>
+      <BannerHero
+        src="/about-banner.jpeg"
+        alt="About Marina Muse International — exporter, manufacturer & supplier of handcrafted nautical, brass and armour products from Roorkee, India"
+        title="About Marina Muse International"
+        actionsAt={{ left: 5.6, top: 71 }}
+        actions={[
+          { href: "/shop", label: "B2C Retail Collection" },
+          { href: "/wholesale", label: "B2B Wholesale Collection", variant: "outline" },
+        ]}
+      />
 
       <section className="px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1320px] items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">

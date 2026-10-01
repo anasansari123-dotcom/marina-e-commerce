@@ -4,7 +4,6 @@ import { reviews, trustStats } from "@/lib/products";
 import { HomeHero } from "@/components/HomeHero";
 import { HomeCollections } from "@/components/HomeCollections";
 import { ShieldCheck } from "lucide-react";
-import { img } from "@/lib/images";
 
 export default function HomePage() {
   return (
@@ -51,44 +50,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
-        <div className="mx-auto grid max-w-[1320px] items-center gap-8 md:grid-cols-2">
-          <div className="grid h-[400px] w-full grid-cols-2 grid-rows-2 gap-3 sm:h-[480px] md:h-[540px]">
-            <div className="relative col-span-2 overflow-hidden rounded-3xl bg-[#1a1510] sm:col-span-1 sm:row-span-2">
-              <Image
-                src="/about-us-slide.jpeg"
-                alt="Brass telescope, globe, lantern and compass"
-                fill
-                sizes="(max-width: 640px) 130vw, 1400px"
-                className="object-cover object-[82%_center]"
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-3xl bg-[#1a1510]">
-              <Image
-                src={img.compassGold}
-                alt="Antique brass compass on a nautical chart"
-                fill
-                sizes="(max-width: 640px) 50vw, 25vw"
-                className="object-cover object-center"
-              />
-            </div>
-            <div className="relative overflow-hidden rounded-3xl bg-[#1a1510]">
-              <Image
-                src={img.binoculars}
-                alt="Antique brass binoculars"
-                fill
-                sizes="(max-width: 640px) 50vw, 25vw"
-                className="object-cover object-center"
-              />
-            </div>
-          </div>
+      <section className="bg-[#FAF7F2] px-5 pb-6 pt-10 md:pb-8 md:pt-14">
+        <div className="mx-auto max-w-3xl text-center">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">From Roorkee, Uttarakhand, India</p>
             <h2 className="mt-3 font-serif text-4xl md:text-5xl">The foundry behind the finish</h2>
-            <p className="mt-5 leading-relaxed text-navy-700">
+            <p className="mx-auto mt-5 max-w-2xl leading-relaxed text-navy-700">
               Marina Muse works with master casters, engravers and polishers whose families have worked brass for generations. We age, assemble and inspect every compass, lantern and helm before it leaves the atelier.
             </p>
-            <ul className="mt-6 space-y-3 text-navy-800">
+            <ul className="mx-auto mt-6 grid w-fit gap-x-10 gap-y-3 text-left text-navy-800 sm:grid-cols-2">
               {[
                 "Solid brass — not plated zinc",
                 "Hand patina, not a spray antique",
@@ -108,10 +78,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#F4F1EA] px-5 py-10 md:py-14">
+      <section className="bg-[#F4F1EA] px-5 pb-10 pt-6 md:pb-14 md:pt-8">
         <div className="mx-auto max-w-[1320px]">
           <div className="text-center">
-            <div className="mx-auto mb-4 h-px w-16 bg-[#C9A84C]" />
+            <div className="mx-auto mb-3 h-px w-16 bg-[#C9A84C]" />
             <h2 className="font-serif text-4xl text-navy-900 md:text-5xl">What Our Customers Say</h2>
           </div>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
