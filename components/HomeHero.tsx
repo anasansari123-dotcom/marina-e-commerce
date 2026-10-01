@@ -13,7 +13,6 @@ const slides = [
     src: "/hero-1.jpeg",
     alt: "See More. Explore Further. Handcrafted brass telescopes and binoculars on a mountain overlook at sunset",
     at: { left: "4.2%", top: "62%" },
-    m: { pos: "object-[0%_center]", left: "6.4%", top: "62%" },
     accent: "#E8D5A3",
     primaryCls: "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff1d0]",
     secondaryCls: "border border-[#C9A84C] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#C9A84C]/20",
@@ -22,7 +21,6 @@ const slides = [
     src: "/hero-2.jpeg",
     alt: "Forged for Collectors. Armour, helmets, diving pieces and brass instruments on a Mediterranean harbour terrace",
     at: { left: "50%", top: "55%", center: true },
-    m: { pos: "object-center", left: "50%", top: "55%", center: true },
     accent: "#E08A2C",
     primaryCls: "bg-[#E08A2C] text-[#1a1208] hover:bg-[#f09a3c]",
     secondaryCls: "border border-[#E08A2C] bg-[#081525]/35 text-[#F3D5A0] backdrop-blur-sm hover:bg-[#E08A2C]/20",
@@ -31,7 +29,6 @@ const slides = [
     src: "/hero-3.jpeg",
     alt: "Brass & Copper for the Table. Hammered copper cookware and brass serveware overlooking the Bosphorus",
     at: { left: "4.5%", top: "59%" },
-    m: { pos: "object-[0%_center]", left: "6.8%", top: "59%" },
     accent: "#C9A227",
     primaryCls: "bg-[#C9A227] text-[#1a1408] hover:bg-[#d4b03a]",
     secondaryCls: "border border-[#B87333] bg-[#081525]/35 text-[#E8C4A0] backdrop-blur-sm hover:bg-[#B87333]/20",
@@ -40,7 +37,6 @@ const slides = [
     src: "/hero-4.jpeg",
     alt: "Built for Business. Shipped Worldwide. Brass globe, telescope and lanterns with a cargo ship behind",
     at: { left: "5.5%", top: "57%" },
-    m: { pos: "object-[0%_center]", left: "8.3%", top: "57%" },
     accent: "#E0B455",
     primaryCls: "bg-[#E0B455] text-[#1a1208] hover:bg-[#ecc46a]",
     secondaryCls: "border border-[#E0B455] bg-[#081525]/35 text-[#F3DDA8] backdrop-blur-sm hover:bg-[#E0B455]/20",
@@ -49,7 +45,6 @@ const slides = [
     src: "/hero-5.jpeg",
     alt: "Nautical Décor for Every Room. Study with brass telescope, globe, hourglass, compass and lanterns",
     at: { left: "17.5%", top: "54%" },
-    m: { pos: "object-[25%_center]", left: "13.6%", top: "54%" },
     accent: "#D4AF37",
     primaryCls: "bg-[#D4AF37] text-[#1a1408] hover:bg-[#e0c04a]",
     secondaryCls: "border border-[#D4AF37] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#D4AF37]/20",
@@ -79,7 +74,7 @@ export function HomeHero() {
     <section className="relative isolate overflow-hidden bg-[#081525] text-white">
       <h1 className="sr-only">Marina Muse International — handcrafted brass, nautical and armour products</h1>
       <div
-        className="relative mx-auto h-[60vw] w-full max-w-[1920px] overflow-hidden md:aspect-[1600/633] md:h-auto"
+        className="relative mx-auto aspect-[1600/633] w-full max-w-[1920px] overflow-hidden"
         onTouchStart={(e) => {
           touchX.current = e.touches[0].clientX;
         }}
@@ -99,43 +94,24 @@ export function HomeHero() {
             fill
             priority={idx === 0}
             sizes="100vw"
-            className={`object-cover ${s.m.pos} transition-opacity duration-700 md:object-center ${idx === i ? "opacity-100" : "opacity-0"}`}
+            className={`object-cover transition-opacity duration-700 ${idx === i ? "opacity-100" : "opacity-0"}`}
           />
         ))}
 
         <div
-          key={`m-${slide.src}`}
-          className={`absolute z-20 flex animate-fadeIn items-center gap-1.5 md:hidden ${slide.m.center ? "-translate-x-1/2" : ""}`}
-          style={{ left: slide.m.left, top: slide.m.top }}
-        >
-          <Link
-            href="/shop"
-            className={`${btnBase} px-2.5 py-1.5 text-[8px] tracking-[0.04em] shadow-[0_4px_12px_rgba(0,0,0,0.3)] ${slide.primaryCls}`}
-          >
-            B2C Retail Collection
-          </Link>
-          <Link
-            href="/wholesale"
-            className={`${btnBase} px-2.5 py-1.5 text-[8px] tracking-[0.04em] ${slide.secondaryCls}`}
-          >
-            B2B Wholesale Collection
-          </Link>
-        </div>
-
-        <div
           key={slide.src}
-          className={`absolute z-20 hidden animate-fadeIn items-center gap-3 md:flex ${slide.at.center ? "-translate-x-1/2" : ""}`}
+          className={`absolute z-20 flex animate-fadeIn items-center gap-1.5 sm:gap-2 md:gap-3 ${slide.at.center ? "-translate-x-1/2" : ""}`}
           style={{ left: slide.at.left, top: slide.at.top }}
         >
           <Link
             href="/shop"
-            className={`${btnBase} px-4 py-2 text-[10px] tracking-[0.1em] shadow-[0_6px_18px_rgba(0,0,0,0.3)] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px] ${slide.primaryCls}`}
+            className={`${btnBase} px-2 py-1 text-[7px] tracking-[0.04em] shadow-[0_4px_12px_rgba(0,0,0,0.3)] sm:px-3 sm:py-1.5 sm:text-[9px] md:px-4 md:py-2 md:text-[10px] md:tracking-[0.1em] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px] ${slide.primaryCls}`}
           >
             B2C Retail Collection
           </Link>
           <Link
             href="/wholesale"
-            className={`${btnBase} px-4 py-2 text-[10px] tracking-[0.1em] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px] ${slide.secondaryCls}`}
+            className={`${btnBase} px-2 py-1 text-[7px] tracking-[0.04em] sm:px-3 sm:py-1.5 sm:text-[9px] md:px-4 md:py-2 md:text-[10px] md:tracking-[0.1em] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px] ${slide.secondaryCls}`}
           >
             B2B Wholesale Collection
           </Link>
