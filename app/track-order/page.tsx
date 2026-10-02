@@ -11,7 +11,7 @@ export default function TrackOrderPage() {
     <div className="bg-[#FAF7F2] px-5 py-10 md:py-12">
       <div className="mx-auto max-w-[640px]">
         <p className="text-[11px] uppercase tracking-[0.28em] text-[#8C6E28]">Orders</p>
-        <h1 className="mt-2 font-serif text-4xl md:text-5xl">Track Order</h1>
+        <h1 className="mt-2 font-serif text-3xl md:text-5xl">Track Order</h1>
         <p className="mt-3 text-navy-600">
           Enter your order number and email. We will show the latest shipping status for retail and wholesale despatches.
         </p>

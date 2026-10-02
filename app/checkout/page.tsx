@@ -14,7 +14,7 @@ export default function CheckoutPage() {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-gold-600" />
-        <h1 className="mt-4 font-serif text-4xl">Order received</h1>
+        <h1 className="mt-4 font-serif text-3xl md:text-4xl">Order received</h1>
         <p className="mt-3 text-navy-600">
           A confirmation is on its way. Brass takes a moment — shipping takes five to seven days.
         </p>
@@ -28,7 +28,7 @@ export default function CheckoutPage() {
   if (items.length === 0) {
     return (
       <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <h1 className="font-serif text-4xl">Nothing to check out</h1>
+        <h1 className="font-serif text-3xl md:text-4xl">Nothing to check out</h1>
         <Link href="/shop" className="btn-gold mt-8">
           Shop
         </Link>
@@ -46,7 +46,7 @@ export default function CheckoutPage() {
           setDone(true);
         }}
       >
-        <h1 className="font-serif text-4xl">Checkout</h1>
+        <h1 className="font-serif text-3xl md:text-4xl">Checkout</h1>
         <input className="input" required placeholder="Full name" />
         <input className="input" type="email" required placeholder="Email" />
         <input className="input" required placeholder="Address" />

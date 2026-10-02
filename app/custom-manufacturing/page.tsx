@@ -11,13 +11,13 @@ import {
   FileText,
   Mail,
   Maximize2,
-  MessageCircle,
   Settings,
   Tag,
   Truck,
 } from "lucide-react";
 import { BannerHero } from "@/components/BannerHero";
 import { CustomFaq } from "@/components/CustomFaq";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { img } from "@/lib/images";
 import { companyWhatsApp } from "@/lib/company";
 
@@ -67,6 +67,7 @@ const buyers = [
   "Interior / Lifestyle Businesses",
   "Export Orders",
   "International Buyers",
+  "Corporate Gifting",
 ];
 
 export default function CustomManufacturingPage() {
@@ -80,6 +81,7 @@ export default function CustomManufacturingPage() {
           { href: "/wholesale/quote", label: "Request a Custom Quote", left: 3.6, top: 72.4, width: 26, height: 10.4 },
         ]}
         actions={[{ href: "/wholesale/quote", label: "Request a Custom Quote" }]}
+        mobileActions={false}
       />
 
       <section className="bg-white px-5 py-10 md:py-14">
@@ -90,10 +92,10 @@ export default function CustomManufacturingPage() {
           <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-6">
             {reasons.map((r) => (
               <div key={r.title} className="min-w-0 text-center">
-                <div className="mx-auto grid h-[84px] w-[84px] place-items-center rounded-full bg-[#0B1D36] text-[#C9A84C]">
-                  <r.icon className="h-8 w-8" strokeWidth={1.5} />
+                <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0B1D36] text-[#C9A84C] md:h-[84px] md:w-[84px]">
+                  <r.icon className="h-6 w-6 md:h-8 md:w-8" strokeWidth={1.5} />
                 </div>
-                <h3 className="mt-4 text-sm font-semibold text-navy-900">{r.title}</h3>
+                <h3 className="mt-3 text-sm font-semibold text-navy-900 md:mt-4">{r.title}</h3>
                 <p
                   className={
                     r.title === "Custom Lens & Optical Specifications"
@@ -136,10 +138,10 @@ export default function CustomManufacturingPage() {
             {process.map((step, i) => (
               <div key={step.title} className="flex items-start">
                 <div className="w-[150px] text-center md:w-[160px]">
-                  <div className="mx-auto grid h-[72px] w-[72px] place-items-center rounded-full bg-[#C9A84C] text-[#0B1D36]">
-                    <step.icon className="h-7 w-7" strokeWidth={1.75} />
+                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#C9A84C] text-[#0B1D36] md:h-[72px] md:w-[72px]">
+                    <step.icon className="h-6 w-6 md:h-7 md:w-7" strokeWidth={1.75} />
                   </div>
-                  <p className="mt-4 text-sm font-semibold">
+                  <p className="mt-3 text-sm font-semibold md:mt-4">
                     {step.n}. {step.title}
                   </p>
                   <p className="mt-1 text-[12px] leading-relaxed text-white/75">{step.body}</p>
@@ -156,9 +158,10 @@ export default function CustomManufacturingPage() {
       <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-3xl text-center">
           <div>
-            <h2 className="font-serif text-3xl md:text-4xl">Wholesale &amp; Business Orders</h2>
-            <p className="mt-5 font-medium text-navy-800">Perfect for:</p>
-            <ul className="mx-auto mt-3 grid w-fit gap-x-10 gap-y-2.5 text-left sm:grid-cols-2">
+            <h2 className="whitespace-nowrap font-serif text-[clamp(1.35rem,5.8vw,2.25rem)] md:text-4xl">
+              Wholesale &amp; Business Orders
+            </h2>
+            <ul className="mx-auto mt-6 grid w-fit gap-x-10 gap-y-2.5 text-left sm:grid-cols-2">
               {buyers.map((b) => (
                 <li key={b} className="flex items-center gap-2.5 text-navy-800">
                   <Check className="h-4 w-4 shrink-0 text-[#C9A84C]" strokeWidth={2.5} />
@@ -169,11 +172,11 @@ export default function CustomManufacturingPage() {
             <p className="mt-6 leading-relaxed text-navy-600">
               Let’s grow together. We offer competitive pricing for bulk and long-term orders.
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/wholesale" className="btn-gold">
+            <div className="mx-auto mt-8 grid w-fit gap-3 sm:grid-cols-2">
+              <Link href="/wholesale" className="btn-gold w-full">
                 Wholesale collection
               </Link>
-              <Link href="/wholesale/quote" className="btn-navy">
+              <Link href="/wholesale/quote" className="btn-navy w-full">
                 Request a Custom Quote
               </Link>
             </div>
@@ -200,13 +203,18 @@ export default function CustomManufacturingPage() {
           <p className="mt-4 text-white/80">
             Tell us what you need. Our team will review your requirements and provide a quotation.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link href="/wholesale/quote" className="btn-gold gap-2">
+          <div className="mx-auto mt-8 grid w-fit gap-3 sm:grid-cols-2">
+            <Link href="/wholesale/quote" className="btn-gold w-full gap-2">
               Request a Custom Quote
               <ArrowRight className="h-4 w-4" />
             </Link>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" className="btn-outline gap-2">
-              <MessageCircle className="h-4 w-4" />
+            <a
+              href={WHATSAPP}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[#20bd5a] sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em]"
+            >
+              <WhatsAppIcon className="h-4 w-4 text-white" />
               WhatsApp Us
             </a>
           </div>

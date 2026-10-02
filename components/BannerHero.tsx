@@ -45,6 +45,7 @@ export function BannerHero({
   hotspots = [],
   actions = [],
   actionsAt,
+  mobileActions = true,
 }: {
   src: string;
   alt: string;
@@ -52,12 +53,13 @@ export function BannerHero({
   hotspots?: BannerHotspot[];
   actions?: BannerAction[];
   actionsAt?: { left: number; top: number };
+  mobileActions?: boolean;
 }) {
   return (
     <section className="bg-[#081525]">
       <h1 className="sr-only">{title}</h1>
       <div className="relative mx-auto aspect-[1600/633] w-full max-w-[1920px] overflow-hidden">
-        <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover" />
+        <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover object-center" />
         {hotspots.map((h) => (
           <Link
             key={h.label}
@@ -82,7 +84,7 @@ export function BannerHero({
           </div>
         )}
       </div>
-      {actions.length > 0 && (
+      {mobileActions && actions.length > 0 && (
         <div className="flex flex-wrap items-center justify-center gap-2 px-4 py-3.5 md:hidden">
           {actions.map((a) => (
             <ActionLink key={a.label} a={a} className="flex-auto px-4 py-2.5 text-[11px] tracking-[0.08em]" />

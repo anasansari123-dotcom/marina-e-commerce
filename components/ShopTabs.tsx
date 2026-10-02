@@ -1,5 +1,6 @@
 "use client";
 
+import { CatalogCard } from "@/components/CatalogCard";
 import { ProductCard } from "@/components/ProductCard";
 import { company } from "@/lib/company";
 import { img } from "@/lib/images";
@@ -18,11 +19,13 @@ export function ShopTabs({
   categoryItems,
   categoryLabel,
   currentProduct,
+  wholesale = false,
 }: {
   items: Product[];
   categoryItems?: Product[];
   categoryLabel?: string;
   currentProduct?: Product;
+  wholesale?: boolean;
 }) {
   const hasCategory = Boolean(categoryLabel && categoryItems && categoryItems.length > 0);
   const [scope, setScope] = useState<"category" | "all">(hasCategory ? "category" : "all");
@@ -66,7 +69,7 @@ export function ShopTabs({
               key={t}
               type="button"
               onClick={() => setTab(t)}
-              className={`relative py-3.5 text-[15px] ${
+              className={`relative py-3 text-[14px] sm:py-3.5 sm:text-[15px] ${
                 tab === t ? "font-semibold text-[#1a1408]" : "font-normal text-[#1a1408]/70"
               }`}
             >
@@ -80,8 +83,8 @@ export function ShopTabs({
       </div>
 
       {tab === "Items" && (
-        <div className="px-3 pb-8 pt-4">
-          <label className="relative block">
+        <div className="px-3 pb-8 pt-4 lg:px-0 lg:pt-6">
+          <label className="relative block lg:max-w-xl">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -90,7 +93,7 @@ export function ShopTabs({
                   ? `Search ${base.length} items in ${categoryLabel}`
                   : `Search all ${items.length} items`
               }
-              className="h-11 w-full rounded-full border border-[#d4d4d4] bg-white pl-4 pr-12 text-[15px] text-[#222] outline-none placeholder:text-[#8a8a8a]"
+              className="h-10 w-full rounded-full border border-[#d4d4d4] bg-white pl-4 pr-12 text-[14px] text-[#222] outline-none placeholder:text-[#8a8a8a] sm:h-11 sm:text-[15px]"
             />
             <Search className="pointer-events-none absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[#222]" />
           </label>
@@ -147,10 +150,14 @@ export function ShopTabs({
             </select>
           ) : null}
 
-          <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-6">
-            {filtered.slice(0, limit).map((p) => (
-              <ProductCard key={p.slug} product={p} />
-            ))}
+          <div className="mt-4 grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-8">
+            {filtered.slice(0, limit).map((p) =>
+              wholesale ? (
+                <CatalogCard key={p.slug} product={p} wholesale />
+              ) : (
+                <ProductCard key={p.slug} product={p} />
+              ),
+            )}
           </div>
           {filtered.length === 0 ? (
             <p className="py-10 text-center text-sm text-[#666]">No items match that search.</p>
@@ -181,7 +188,7 @@ export function ShopTabs({
 
 function ReviewsPanel() {
   return (
-    <div className="px-4 pb-10 pt-5">
+    <div className="px-4 pb-10 pt-5 lg:max-w-3xl lg:px-0 lg:pt-6">
       <p className="text-[13px] text-[#595959]">{reviews.length} shop reviews</p>
       <div className="mt-5 space-y-8">
         {reviews.map((r) => {
@@ -256,7 +263,7 @@ function ReviewsPanel() {
 
 function AboutPanel({ product }: { product?: Product }) {
   return (
-    <div className="px-4 pb-10 pt-5">
+    <div className="px-4 pb-10 pt-5 lg:max-w-3xl lg:px-0 lg:pt-6">
       <div className="flex items-center gap-3">
         <span className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-full bg-[#0B1D36] text-[15px] font-semibold text-[#C9A84C]">
           MM
@@ -295,9 +302,18 @@ function AboutPanel({ product }: { product?: Product }) {
       ) : null}
 
       <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-xl bg-[#f3f3f3]">
-        <Image src={img.workshop} alt="Marina Muse workshop in Roorkee" fill className="object-cover" />
+        <Image
+          key={product?.slug ?? "workshop"}
+          src={product?.image ?? img.workshop}
+          alt={product?.name ?? "Marina Muse workshop in Roorkee"}
+          fill
+          sizes="(max-width: 1024px) 100vw, 768px"
+          className="object-cover"
+        />
       </div>
-      <p className="mt-2 text-[12px] text-[#888]">Our manufacturing facility, Roorkee</p>
+      <p className="mt-2 text-[12px] text-[#888]">
+        {product ? `${product.name} — handcrafted in Roorkee` : "Our manufacturing facility, Roorkee"}
+      </p>
 
       <p className="mt-6 text-[13px] leading-relaxed text-[#595959]">
         {company.address.join(", ")}

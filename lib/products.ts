@@ -853,7 +853,7 @@ export function formatPrice(n: number) {
 }
 
 export const DISCOUNT_PERCENT = 30;
-export const MAX_ORDER_QTY = 20;
+export const B2B_MIN_ORDER_QTY = 20;
 
 export function listPrice(price: number) {
   return Number((price / (1 - DISCOUNT_PERCENT / 100)).toFixed(2));

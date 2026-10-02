@@ -1,13 +1,13 @@
-"use client";
+﻿"use client";
 
-import { getCollection, getProduct, products, reviews } from "@/lib/products";
+import { B2B_MIN_ORDER_QTY, getCollection, getProduct, products } from "@/lib/products";
 import { getProductCategory } from "@/lib/catalog";
 import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
   Check,
@@ -19,21 +19,18 @@ import {
   Star,
   Truck,
 } from "lucide-react";
-import { ProductCard } from "@/components/ProductCard";
 import { ShopTabs } from "@/components/ShopTabs";
 import { companyWhatsApp } from "@/lib/company";
 import { FreeShippingTag } from "@/components/FreeShippingTag";
 import { PriceRow } from "@/components/PriceRow";
 
-const tabs = ["Specifications", "Dimensions", "What's Included", "Reviews", "FAQs"] as const;
-
 export default function ProductPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = getProduct(slug);
+  const b2b = useSearchParams().get("b2b") === "1";
   const { add } = useCart();
   const { has, toggle } = useWishlist();
   const [active, setActive] = useState(0);
-  const [tab, setTab] = useState<(typeof tabs)[number]>("Specifications");
   const [added, setAdded] = useState(false);
 
   const category = useMemo(() => {
@@ -57,15 +54,10 @@ export default function ProductPage() {
       : null;
   }, [product]);
 
-  const related = useMemo(
-    () => (category?.items ?? []).filter((p) => p.slug !== product?.slug).slice(0, 4),
-    [category, product]
-  );
-
   if (!product) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-24 text-center">
-        <h1 className="font-serif text-4xl">Piece not found</h1>
+        <h1 className="font-serif text-3xl md:text-4xl">Piece not found</h1>
         <Link href="/shop" className="btn-navy mt-6">
           Back to shop
         </Link>
@@ -81,7 +73,7 @@ export default function ProductPage() {
         : "Made to order";
 
   const handleAdd = () => {
-    add(product.slug, 1);
+    add(product.slug, b2b ? B2B_MIN_ORDER_QTY : 1, { b2b });
     setAdded(true);
     setTimeout(() => setAdded(false), 1800);
   };
@@ -165,7 +157,10 @@ export default function ProductPage() {
               <span className="text-navy-500">{product.sku}</span>
             </div>
             <PriceRow price={product.price} size="page" className="mt-3 md:mt-4" />
-            <FreeShippingTag />
+            {b2b && (
+              <p className="mt-1 text-[13px] font-medium text-[#595959]">Min. Order: {B2B_MIN_ORDER_QTY}</p>
+            )}
+            {!b2b && <FreeShippingTag />}
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-1.5 text-emerald-700">
                 <Check className="h-4 w-4" /> {stockLabel}
@@ -219,108 +214,15 @@ export default function ProductPage() {
             </div>
           </div>
         </div>
-
-        <div className="mt-8 hidden gap-8 lg:grid lg:grid-cols-2">
-          <div>
-            <div className="flex flex-wrap gap-1 border-b border-[#e6dfd2]">
-              {tabs.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setTab(t)}
-                  className={`px-3 py-2.5 text-[13px] ${
-                    tab === t
-                      ? "border-b-2 border-[#C9A84C] font-medium text-navy-900"
-                      : "text-navy-500"
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
-            <div className="py-6">
-              {tab === "Specifications" && (
-                <table className="w-full text-sm">
-                  <tbody>
-                    {[
-                      ["Material", product.material],
-                      ["Finish", product.finish],
-                      ["Dimensions", product.dimensions],
-                      ["Weight", product.weight],
-                      ["Packaging", product.packaging],
-                    ].map(([k, v]) => (
-                      <tr key={k} className="border-b border-[#eee7db]">
-                        <td className="py-2.5 text-navy-500">{k}</td>
-                        <td className="py-2.5 font-medium">{v}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
-              {tab === "Dimensions" && (
-                <p className="text-sm text-navy-700">{product.dimensions}. Packed weight typically {product.weight}.</p>
-              )}
-              {tab === "What's Included" && (
-                <ul className="space-y-2 text-sm">
-                  {product.included.map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <Check className="h-4 w-4 text-[#C9A84C]" /> {item}
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {tab === "Reviews" && (
-                <div className="space-y-4">
-                  {reviews.map((r) => (
-                    <div key={r.name}>
-                      <p className="text-sm font-medium">{r.name} · {r.location}</p>
-                      <p className="mt-1 text-sm text-navy-700">{r.body}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-              {tab === "FAQs" && (
-                <div className="space-y-3 text-sm">
-                  <p><strong>Does the compass work?</strong> Yes — needles are balanced.</p>
-                  <p><strong>Can you engrave a logo?</strong> Yes, from 50 pieces.</p>
-                  <p><strong>Do you ship worldwide?</strong> Yes, from India with tracking.</p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div>
-            <h3 className="font-serif text-2xl">Product Description</h3>
-            <p className="mt-3 text-sm leading-relaxed text-navy-700">{product.description}</p>
-            <p className="mt-3 text-sm leading-relaxed text-navy-700">{product.story}</p>
-            <h3 className="mt-8 font-serif text-2xl">Customer Reviews</h3>
-            <div className="mt-4 space-y-4">
-              {reviews.slice(0, 2).map((r) => (
-                <blockquote key={r.name} className="border-l-2 border-[#C9A84C] pl-4">
-                  <p className="text-sm text-navy-800">“{r.body}”</p>
-                  <p className="mt-1 text-xs text-navy-500">{r.name}, {r.location}</p>
-                </blockquote>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {related.length > 0 && (
-          <div className="hidden py-14 lg:block">
-            <h2 className="font-serif text-3xl">You may also like</h2>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {related.map((p) => (
-                <ProductCard key={p.slug} product={p} />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
 
-      <div className="lg:hidden">
+      <div className="lg:mx-auto lg:max-w-[1320px] lg:px-5 lg:pb-14">
         <ShopTabs
           items={products}
           categoryItems={category?.items}
           categoryLabel={category?.label}
           currentProduct={product}
+          wholesale={b2b}
         />
       </div>
     </div>

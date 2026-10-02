@@ -11,11 +11,13 @@ html {
   scroll-behavior: smooth;
   --site-nav: 88px;
   font-family: var(--font-etsy);
+  font-size: 15px;
 }
 
 @media (min-width: 640px) {
   html {
     --site-nav: 96px;
+    font-size: 16px;
   }
 }
 
@@ -45,15 +47,15 @@ body {
 }
 
 .btn-gold {
-  @apply inline-flex items-center justify-center rounded-full bg-[#C9A84C] px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#1a1408] transition hover:bg-[#d4b45a];
+  @apply inline-flex items-center justify-center rounded-full bg-[#C9A84C] px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#1a1408] transition hover:bg-[#d4b45a] sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em];
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-full border border-[#C9A84C] px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E8D5A3] transition hover:bg-[#C9A84C]/10;
+  @apply inline-flex items-center justify-center rounded-full border border-[#C9A84C] px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#E8D5A3] transition hover:bg-[#C9A84C]/10 sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em];
 }
 
 .btn-navy {
-  @apply inline-flex items-center justify-center rounded-full bg-navy-900 px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-cream-50 transition hover:bg-navy-800;
+  @apply inline-flex items-center justify-center rounded-full bg-navy-900 px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-cream-50 transition hover:bg-navy-800 sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em];
 }
 
 .input {

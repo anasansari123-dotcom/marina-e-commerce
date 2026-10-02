@@ -23,7 +23,7 @@ export default async function CollectionDetail({
           <Link href="/collections" className="text-xs uppercase tracking-[0.28em] text-gold-300">
             Collections
           </Link>
-          <h1 className="mt-2 font-serif text-4xl md:text-5xl">{collection.name}</h1>
+          <h1 className="mt-2 font-serif text-3xl md:text-5xl">{collection.name}</h1>
           <p className="mt-3 max-w-xl text-cream-100/80">{collection.description}</p>
         </div>
       </section>

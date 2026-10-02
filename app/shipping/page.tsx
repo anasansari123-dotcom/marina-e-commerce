@@ -44,6 +44,7 @@ export default function ShippingPage() {
         alt="Shipping — we deliver your orders worldwide by air and sea. Cargo ship, aircraft and truck at port"
         title="Shipping — We deliver your orders worldwide"
         actionsAt={{ left: 3.6, top: 66 }}
+        mobileActions={false}
         actions={[
           { href: "/wholesale/quote", label: "Request a Shipping Quote" },
           { href: "/contact", label: "Contact Us", variant: "outline" },

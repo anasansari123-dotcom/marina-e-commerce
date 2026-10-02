@@ -18,6 +18,7 @@ export default function ContactPage() {
         alt="Contact us — Atelier & trade desk. Brass globe, binoculars and compass on a desk"
         title="Contact us — Atelier & trade desk"
         actionsAt={{ left: 3.6, top: 70 }}
+        mobileActions={false}
         actions={[
           { href: companyWhatsApp, label: "Chat on WhatsApp", external: true },
           { href: "#contact-form", label: "Send a Message", variant: "outline" },

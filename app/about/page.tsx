@@ -88,6 +88,7 @@ export default function AboutPage() {
         alt="About Marina Muse International — exporter, manufacturer & supplier of handcrafted nautical, brass and armour products from Roorkee, India"
         title="About Marina Muse International"
         actionsAt={{ left: 5.6, top: 71 }}
+        mobileActions={false}
         actions={[
           { href: "/shop", label: "B2C Retail Collection" },
           { href: "/wholesale", label: "B2B Wholesale Collection", variant: "outline" },
@@ -96,16 +97,16 @@ export default function AboutPage() {
 
       <section className="px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1320px] items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative overflow-hidden rounded-3xl bg-[#081525] px-8 py-12 text-cream-50 md:px-12">
+          <div className="relative overflow-hidden rounded-3xl bg-[#081525] px-6 py-8 text-cream-50 md:px-12 md:py-12">
             <Image src={img.compassMap} alt="" fill className="object-cover opacity-20" />
             <div className="relative">
-              <div className="grid h-24 w-24 place-items-center rounded-full border border-[#C9A84C] font-serif text-3xl text-[#C9A84C]">
+              <div className="grid h-16 w-16 place-items-center rounded-full border border-[#C9A84C] font-serif text-2xl text-[#C9A84C] md:h-24 md:w-24 md:text-3xl">
                 MM
               </div>
-              <p className="mt-8 text-[11px] uppercase tracking-[0.28em] text-[#C9A84C]">
+              <p className="mt-5 text-[11px] uppercase tracking-[0.28em] text-[#C9A84C] md:mt-8">
                 CEO &amp; Founder
               </p>
-              <h2 className="mt-3 font-serif text-4xl leading-tight md:text-[2.6rem]">
+              <h2 className="mt-3 font-serif text-3xl leading-tight md:text-[2.6rem]">
                 Mr. Mohammad Muaaz
               </h2>
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
@@ -116,7 +117,7 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">Our house</p>
-            <h2 className="mt-2 font-serif text-4xl md:text-5xl">Dedicated since 2011</h2>
+            <h2 className="mt-2 font-serif text-3xl md:text-5xl">Dedicated since 2011</h2>
             <p className="mt-5 leading-relaxed text-navy-700">
               Since 2011, Marina Muse International has been dedicated to the manufacturing and export of
               handcrafted products from India. Under the guidance of our Founder, Mr. Mohammad Muaaz,
@@ -129,11 +130,11 @@ export default function AboutPage() {
               We serve customers worldwide and offer both standard collections and customised
               manufacturing according to individual requirements.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/shop" className="btn-gold">
+            <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
+              <Link href="/shop" className="btn-gold w-full sm:w-auto">
                 B2C Retail Collection
               </Link>
-              <Link href="/wholesale" className="btn-navy">
+              <Link href="/wholesale" className="btn-navy w-full sm:w-auto">
                 B2B Wholesale Collection
               </Link>
             </div>
@@ -145,7 +146,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[1320px]">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">The house, worldwide</p>
-            <h2 className="mt-2 font-serif text-4xl md:text-[2.75rem]">
+            <h2 className="mt-2 font-serif text-3xl md:text-[2.75rem]">
               Marina Muse International
             </h2>
             <p className="mt-5 leading-relaxed text-navy-700">
@@ -200,7 +201,7 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">Instruments &amp; programmes</p>
-            <h2 className="mt-2 font-serif text-4xl">Built to view, finished to last</h2>
+            <h2 className="mt-2 font-serif text-3xl md:text-4xl">Built to view, finished to last</h2>
             <p className="mt-5 leading-relaxed text-navy-700">
               Our telescopes and binoculars are designed for actual viewing as well as premium
               presentation, with different models, lens sizes and specifications available.
@@ -212,11 +213,11 @@ export default function AboutPage() {
               and aim to deliver authentic handcrafted products with professional service and
               customer satisfaction.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/custom-manufacturing" className="btn-gold">
+            <div className="mt-8 grid gap-3 sm:flex sm:flex-wrap">
+              <Link href="/custom-manufacturing" className="btn-gold w-full sm:w-auto">
                 Custom manufacturing
               </Link>
-              <Link href="/contact" className="btn-navy">
+              <Link href="/contact" className="btn-navy w-full sm:w-auto">
                 Speak with us
               </Link>
             </div>
@@ -226,12 +227,12 @@ export default function AboutPage() {
 
       <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1320px]">
-          <h2 className="text-center font-serif text-4xl">What we stand for</h2>
+          <h2 className="text-center font-serif text-3xl md:text-4xl">What we stand for</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map((v) => (
               <div key={v.title} className="rounded-2xl border border-[#eee7db] bg-[#FAF7F2] p-6">
                 <v.icon className="h-6 w-6 text-[#C9A84C]" strokeWidth={1.5} />
-                <h3 className="mt-4 font-serif text-2xl">{v.title}</h3>
+                <h3 className="mt-4 font-serif text-xl md:text-2xl">{v.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-navy-600">{v.body}</p>
               </div>
             ))}

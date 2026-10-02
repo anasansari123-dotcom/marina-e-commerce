@@ -59,7 +59,7 @@ const promises = [
 export function Footer() {
   return (
     <footer className="mt-auto overflow-x-hidden bg-[#031D38] text-cream-100">
-      <div className="border-y border-white/10 bg-[#031D38]">
+      <div className="border-y border-white/10 bg-[#0D3159]">
         <div className="mx-auto grid max-w-[1320px] gap-5 px-5 py-5 sm:grid-cols-2 lg:py-6 xl:flex xl:justify-between xl:gap-6">
           {promises.map((p) => (
             <div key={p.title} className="flex gap-3">

@@ -2,7 +2,7 @@
 
 import { CatalogCard } from "@/components/CatalogCard";
 import { getProductCategory } from "@/lib/catalog";
-import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
+import { findShopNowLabel, shopNowSubtree, shopNowTree } from "@/lib/shop-now-data";
 import { products } from "@/lib/products";
 import { ChevronDown, ChevronRight, LayoutGrid, LayoutList } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -24,12 +24,24 @@ export function ShopNowCatalog({
   const [limit, setLimit] = useState(PAGE_SIZE);
 
   useEffect(() => {
+    const slug = new URLSearchParams(window.location.search).get("category");
+    const node = shopNowTree.find((c) => c.slug === slug);
+    if (!node) return;
+    setParent(node.slug);
+    setSub(null);
+    setOpen(node.children.length ? node.slug : null);
+  }, []);
+
+  useEffect(() => {
     setLimit(PAGE_SIZE);
   }, [parent, sub, sort]);
 
   const list = useMemo(() => {
     let next = [...products];
-    if (sub) next = next.filter((p) => p.subcategory === sub);
+    if (sub) {
+      const slugs = shopNowSubtree(sub);
+      next = next.filter((p) => p.subcategory && slugs.includes(p.subcategory));
+    }
     else if (parent) next = next.filter((p) => getProductCategory(p) === parent);
 
     if (sort === "price-asc") next.sort((a, b) => (a.wholesaleFrom ?? a.price) - (b.wholesaleFrom ?? b.price));
@@ -116,18 +128,42 @@ export function ShopNowCatalog({
                   </button>
                   {expanded ? (
                     <div className="bg-white pb-1 md:bg-[#fcfcfc]">
-                      {c.children.map((child) => (
-                        <button
-                          key={child.slug}
-                          type="button"
-                          onClick={() => pickChild(c.slug, child.slug)}
-                          className={`w-full py-2 pl-3 pr-1.5 text-left text-[10.5px] leading-snug md:px-8 md:text-[13px] ${
-                            sub === child.slug ? "font-semibold text-[#b0893a]" : "text-[#555] hover:text-[#b0893a]"
-                          }`}
-                        >
-                          {child.name}
-                        </button>
-                      ))}
+                      {c.children.map((child) => {
+                        const types = child.children ?? [];
+                        const childOpen = types.length > 0 && shopNowSubtree(child.slug).includes(sub ?? "");
+                        return (
+                          <div key={child.slug}>
+                            <button
+                              type="button"
+                              onClick={() => pickChild(c.slug, child.slug)}
+                              className={`flex w-full items-center justify-between gap-1 py-2 pl-3 pr-1.5 text-left text-[10.5px] leading-snug md:px-8 md:text-[13px] ${
+                                sub === child.slug ? "font-semibold text-[#b0893a]" : "text-[#555] hover:text-[#b0893a]"
+                              }`}
+                            >
+                              <span>{child.name}</span>
+                              {types.length > 0 &&
+                                (childOpen ? (
+                                  <ChevronDown className="hidden h-3.5 w-3.5 shrink-0 text-[#bbb] md:block" />
+                                ) : (
+                                  <ChevronRight className="hidden h-3.5 w-3.5 shrink-0 text-[#bbb] md:block" />
+                                ))}
+                            </button>
+                            {childOpen &&
+                              types.map((t) => (
+                                <button
+                                  key={t.slug}
+                                  type="button"
+                                  onClick={() => pickChild(c.slug, t.slug)}
+                                  className={`w-full py-1.5 pl-5 pr-1.5 text-left text-[10px] leading-snug md:pl-12 md:pr-4 md:text-[12.5px] ${
+                                    sub === t.slug ? "font-semibold text-[#b0893a]" : "text-[#777] hover:text-[#b0893a]"
+                                  }`}
+                                >
+                                  {t.name}
+                                </button>
+                              ))}
+                          </div>
+                        );
+                      })}
                     </div>
                   ) : null}
                 </div>

@@ -8,6 +8,7 @@ export default function WholesalePage() {
         src="/b2b-banner.jpeg"
         alt="B2B / Wholesale — Built for Businesses, Priced for Volume. Cargo port at sunset."
         title="B2B Wholesale — Built for Businesses. Priced for Volume."
+        mobileActions={false}
         hotspots={[
           { href: "/wholesale/register", label: "Create Wholesale Account", left: 5.5, top: 53, width: 24.6, height: 10.4 },
           { href: "/login", label: "Login", left: 18.7, top: 65.2, width: 4.2, height: 5.6 },

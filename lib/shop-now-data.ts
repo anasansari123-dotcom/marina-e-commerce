@@ -1,7 +1,16 @@
 import type { Product } from "./products";
 import { img } from "./images";
 
-export type ShopNowChild = { slug: string; name: string };
+export type ShopNowChild = { slug: string; name: string; children?: ShopNowChild[] };
+
+const kitchenTypes = (material: string) => [
+  { slug: `${material}-cookware`, name: "Cookware" },
+  { slug: `${material}-cutleries`, name: "Cutleries" },
+  { slug: `${material}-drinkware`, name: "Drinkware" },
+  { slug: `${material}-servewares`, name: "Servewares" },
+  { slug: `${material}-storage-wares`, name: "Storage wares" },
+  { slug: `${material}-tea-strainer-infuser`, name: "Tea Strainer/Infuser" },
+];
 export type ShopNowParent = {
   slug: string;
   name: string;
@@ -180,8 +189,8 @@ export const shopNowTree: ShopNowParent[] = [
     slug: "kitchen-product",
     name: "Kitchen Product",
     children: [
-      { slug: "wooden-kitchen", name: "Wooden" },
-      { slug: "brass-kitchen", name: "Brass" },
+      { slug: "wooden-kitchen", name: "Wooden", children: kitchenTypes("wooden") },
+      { slug: "brass-kitchen", name: "Brass", children: kitchenTypes("brass") },
     ],
   },
   {
@@ -219,7 +228,10 @@ export const shopNowTree: ShopNowParent[] = [
   {
     slug: "modern-brass-wall-sconce",
     name: "Modern Brass Wall Sconce",
-    children: [],
+    children: [
+      { slug: "brass-wall-sconce", name: "Brass" },
+      { slug: "wooden-wall-sconce", name: "Wooden" },
+    ],
   },
   {
     slug: "lighting-lamps",
@@ -389,8 +401,8 @@ export const shopNowProducts: Product[] = [
   listing("nautical-decor-gifts", "home-appliances", "Nautical Home Accents", "MM-DEC-HA", 19, "nautical-decor", wood[3]),
   listing("nautical-decor-gifts", "crystal-wood-crafts", "Crystal & Wood Desk Crafts", "MM-DEC-CW", 24, "nautical-decor", wood[0]),
   listing("nautical-decor-gifts", "armillary", "Brass Armillary Sphere", "MM-DEC-AR", 39, "nautical-instruments", img.globe),
-  listing("kitchen-product", "wooden-kitchen", "Hand-Carved Wooden Kitchen Board", "MM-KIT-WD", 14, "nautical-decor", wood[0]),
-  listing("kitchen-product", "brass-kitchen", "Solid Brass Kitchen Serving Set", "MM-KIT-BR", 22, "nautical-decor", lamps[2]),
+  { ...listing("kitchen-product", "wooden-kitchen", "Hand-Carved Wooden Kitchen Board", "MM-KIT-WD", 14, "nautical-decor", wood[0]), subcategory: "wooden-servewares" },
+  { ...listing("kitchen-product", "brass-kitchen", "Solid Brass Kitchen Serving Set", "MM-KIT-BR", 22, "nautical-decor", lamps[2]), subcategory: "brass-servewares" },
   listing("decor", "show-pieces", "Brass Showpiece Sculpture", "MM-DCR-SP", 36, "nautical-decor", img.globe),
   listing("decor", "candle-holders", "Antique Brass Candle Holder", "MM-DCR-CH", 18, "nautical-decor", lamps[0]),
   listing("decor", "table-decor", "Brass Table Decor Set", "MM-DCR-TD", 16, "nautical-decor", img.decorOffice),
@@ -603,6 +615,7 @@ export const shopNowProducts: Product[] = [
     wholesaleFrom: 32,
     collection: "modern-brass-wall-sconce",
     category: "modern-brass-wall-sconce",
+    subcategory: "brass-wall-sconce",
     finish: "Glazed ceramic & polished brass",
     material: "Ceramic shade, solid brass finial",
     image: "/sconce-fluted.jpg",
@@ -618,6 +631,7 @@ export const shopNowProducts: Product[] = [
     wholesaleFrom: 36,
     collection: "modern-brass-wall-sconce",
     category: "modern-brass-wall-sconce",
+    subcategory: "brass-wall-sconce",
     finish: "Antique brass & opal glass",
     material: "Solid brass arm, opal glass dome",
     image: "/sconce-dome.jpg",
@@ -633,6 +647,7 @@ export const shopNowProducts: Product[] = [
     wholesaleFrom: 34,
     collection: "modern-brass-wall-sconce",
     category: "modern-brass-wall-sconce",
+    subcategory: "brass-wall-sconce",
     finish: "Brushed antique brass",
     material: "Solid brass cone shade and backplate",
     image: "/sconce-cone.jpg",
@@ -640,6 +655,27 @@ export const shopNowProducts: Product[] = [
     description:
       "Cone brass wall sconce on a curved arm — compact, warm and export-ready for modern interiors and hotel programmes.",
   }),
+  ...[
+    { slug: "fluted", name: "Wooden Fluted Wall Sconce", image: "/sconce-fluted.jpg", price: 44 },
+    { slug: "dome", name: "Walnut Arched Dome Wall Sconce", image: "/sconce-dome.jpg", price: 49 },
+    { slug: "cone", name: "Teak Cone Wall Sconce", image: "/sconce-cone.jpg", price: 46 },
+  ].map((s, i) =>
+    product({
+      slug: `wooden-${s.slug}-wall-sconce`,
+      name: s.name,
+      sku: `MM-WSC-WD-0${i + 1}`,
+      price: s.price,
+      wholesaleFrom: Number((s.price * 0.68).toFixed(2)),
+      collection: "modern-brass-wall-sconce",
+      category: "modern-brass-wall-sconce",
+      subcategory: "wooden-wall-sconce",
+      finish: "Natural wood & antique brass",
+      material: "Hand-turned hardwood arm, brass fittings",
+      image: s.image,
+      gallery: [s.image, "/sconce-dome.jpg", "/sconce-cone.jpg", "/sconce-fluted.jpg"].filter((g, j, a) => a.indexOf(g) === j),
+      description: `${s.name} with a hand-turned hardwood arm and brass fittings — warm modern lighting for homes, hotels and hospitality projects.`,
+    })
+  ),
   listing("lighting-lamps", "ceiling-hanging-lights", "Brass Ceiling Hanging Light", "MM-LL-CH", 68, "lighting-lamps", img.lightCeiling),
   listing("lighting-lamps", "wall-lights", "Antique Brass Wall Light", "MM-LL-WL", 42, "lighting-lamps", img.lightWall),
   listing("lighting-lamps", "table-lamps", "Brass Table Lamp", "MM-LL-TL", 38, "lighting-lamps", img.lightTable),
@@ -735,10 +771,16 @@ export const shopNowProducts: Product[] = [
     description:
       "Full-brass marine telescope on a matching brass tripod. Export-ready for retailers, hotels and nautical collections.",
   }),
-  extra("kitchen-product", "wooden-kitchen", 2, "Wooden Serving Spoon Set", "MM-KIT-WD-02", 11, "nautical-decor", img.serveTray, [img.serveTray, img.storageBox, img.cutleryTable]),
-  extra("kitchen-product", "wooden-kitchen", 3, "Carved Wooden Spice Box", "MM-KIT-WD-03", 16, "nautical-decor", img.storageBox, [img.storageBox, img.servePottery, img.workshop]),
-  extra("kitchen-product", "brass-kitchen", 2, "Brass Kitchen Ladle Set", "MM-KIT-BR-02", 19, "nautical-decor", img.cutleryGold, [img.cutleryGold, img.serveBowl, lamps[2]]),
-  extra("kitchen-product", "brass-kitchen", 3, "Brass Cookware Kadhai", "MM-KIT-BR-03", 32, "nautical-decor", img.servePottery, [img.servePottery, img.serveBowl, img.cutlerySet]),
+  { ...extra("kitchen-product", "wooden-kitchen", 2, "Wooden Serving Spoon Set", "MM-KIT-WD-02", 11, "nautical-decor", img.serveTray, [img.serveTray, img.storageBox, img.cutleryTable]), subcategory: "wooden-cutleries" },
+  { ...extra("kitchen-product", "wooden-kitchen", 3, "Carved Wooden Spice Box", "MM-KIT-WD-03", 16, "nautical-decor", img.storageBox, [img.storageBox, img.servePottery, img.workshop]), subcategory: "wooden-storage-wares" },
+  extra("kitchen-product", "wooden-cookware", 1, "Wooden Cooking Spatula Set", "MM-KIT-WD-04", 12, "nautical-decor", img.servePottery, [img.servePottery, img.cutleryGold, img.storageJar]),
+  extra("kitchen-product", "wooden-drinkware", 1, "Turned Wooden Tankard Mug", "MM-KIT-WD-05", 15, "nautical-decor", img.drinkwareCup, [img.drinkwareCup, img.drinkwareCoffee, img.woodenKitchen]),
+  extra("kitchen-product", "wooden-tea-strainer-infuser", 1, "Wooden Handle Tea Strainer", "MM-KIT-WD-06", 8, "nautical-decor", img.teaStrainer, [img.teaStrainer, img.teaInfuser, img.drinkwareTea]),
+  { ...extra("kitchen-product", "brass-kitchen", 2, "Brass Kitchen Ladle Set", "MM-KIT-BR-02", 19, "nautical-decor", img.cutleryGold, [img.cutleryGold, img.serveBowl, lamps[2]]), subcategory: "brass-cutleries" },
+  { ...extra("kitchen-product", "brass-kitchen", 3, "Brass Cookware Kadhai", "MM-KIT-BR-03", 32, "nautical-decor", img.servePottery, [img.servePottery, img.serveBowl, img.cutlerySet]), subcategory: "brass-cookware" },
+  extra("kitchen-product", "brass-drinkware", 1, "Hammered Brass Tumbler Set", "MM-KIT-BR-04", 24, "nautical-decor", img.drinkwareTea, [img.drinkwareTea, img.drinkwareCup, img.cutleryGold]),
+  extra("kitchen-product", "brass-storage-wares", 1, "Brass Storage Canister", "MM-KIT-BR-05", 27, "nautical-decor", img.storageCanister, [img.storageCanister, img.storageJar, img.serveBowl]),
+  extra("kitchen-product", "brass-tea-strainer-infuser", 1, "Brass Tea Infuser", "MM-KIT-BR-06", 9, "nautical-decor", img.teaInfuser, [img.teaInfuser, img.teaStrainer, img.teaPot]),
   extra("decor", "candle-holders", 2, "Brass Pillar Candle Stand", "MM-DCR-CH-02", 16, "nautical-decor", lamps[1], [lamps[1], lamps[2], img.lanternCandle]),
   extra("decor", "candle-holders", 3, "Twin-Arm Candle Holder", "MM-DCR-CH-03", 22, "nautical-decor", lamps[2], [lamps[2], lamps[0], img.lanternVintage]),
   extra("decor", "key-chain", 2, "Antique Brass Key Fob", "MM-DCR-KC-02", 4, "nautical-decor", comps[0], [comps[0], comps[2], img.watch]),
@@ -788,12 +830,28 @@ export const shopNowProducts: Product[] = [
   extra("lighting-lamps", "outdoor-lights", 3, "Garden Outdoor Light", "MM-LL-OD-03", 61, "lighting-lamps", img.lightOutdoor3, [img.lightOutdoor3, img.lightOutdoor, img.lanternVintage]),
 ];
 
+function findChild(slug: string) {
+  for (const parent of shopNowTree) {
+    for (const child of parent.children) {
+      if (child.slug === slug) return { parent, child, leaf: null };
+      const leaf = child.children?.find((l) => l.slug === slug);
+      if (leaf) return { parent, child, leaf };
+    }
+  }
+  return null;
+}
+
 export function findShopNowLabel(slug: string | null) {
   if (!slug) return "Shop Now";
-  for (const parent of shopNowTree) {
-    if (parent.slug === slug) return parent.name;
-    const child = parent.children.find((c) => c.slug === slug);
-    if (child) return child.name;
-  }
-  return "Shop Now";
+  const parent = shopNowTree.find((p) => p.slug === slug);
+  if (parent) return parent.name;
+  const hit = findChild(slug);
+  if (!hit) return "Shop Now";
+  return hit.leaf ? `${hit.child.name} ${hit.leaf.name}` : hit.child.name;
+}
+
+export function shopNowSubtree(slug: string) {
+  const hit = findChild(slug);
+  if (!hit || hit.leaf) return [slug];
+  return [slug, ...(hit.child.children ?? []).map((l) => l.slug)];
 }
