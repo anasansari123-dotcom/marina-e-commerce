@@ -117,7 +117,7 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">Our house</p>
-            <h2 className="mt-2 font-serif text-3xl md:text-5xl">Dedicated since 2011</h2>
+              <h2 className="mt-2 font-serif text-[1.65rem] md:text-5xl">Dedicated since 2011</h2>
             <p className="mt-5 leading-relaxed text-navy-700">
               Since 2011, Marina Muse International has been dedicated to the manufacturing and export of
               handcrafted products from India. Under the guidance of our Founder, Mr. Mohammad Muaaz,
@@ -146,7 +146,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-[1320px]">
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">The house, worldwide</p>
-            <h2 className="mt-2 font-serif text-3xl md:text-[2.75rem]">
+            <h2 className="mt-2 font-serif text-[1.65rem] md:text-[2.75rem]">
               Marina Muse International
             </h2>
             <p className="mt-5 leading-relaxed text-navy-700">
@@ -201,7 +201,7 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[#8C6E28]">Instruments &amp; programmes</p>
-            <h2 className="mt-2 font-serif text-3xl md:text-4xl">Built to view, finished to last</h2>
+            <h2 className="mt-2 font-serif text-[1.65rem] md:text-4xl">Built to view, finished to last</h2>
             <p className="mt-5 leading-relaxed text-navy-700">
               Our telescopes and binoculars are designed for actual viewing as well as premium
               presentation, with different models, lens sizes and specifications available.
@@ -227,7 +227,7 @@ export default function AboutPage() {
 
       <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1320px]">
-          <h2 className="text-center font-serif text-3xl md:text-4xl">What we stand for</h2>
+          <h2 className="text-center font-serif text-[1.65rem] md:text-4xl">What we stand for</h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {pillars.map((v) => (
               <div key={v.title} className="rounded-2xl border border-[#eee7db] bg-[#FAF7F2] p-6">

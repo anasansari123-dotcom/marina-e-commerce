@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative aspect-[1600/633] max-h-[640px] w-full overflow-hidden bg-[#1a120b]">
+      <section className="relative aspect-[2/1] max-h-[640px] w-full overflow-hidden bg-[#1a120b] sm:aspect-[1600/633]">
         <Image
           src="/blog-slide.jpeg"
           alt="Marina Muse blog — craft, collections and trade from the atelier"
           fill
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-left sm:object-center"
           priority
         />
         <h1 className="sr-only">Blog</h1>
@@ -35,9 +35,9 @@ export default function BlogPage() {
                   className="object-cover object-[75%_center]"
                 />
               </Link>
-              <div className="p-6">
+              <div className="p-5 md:p-6">
                 <p className="text-[11px] uppercase tracking-[0.2em] text-[#8C6E28]">{post.date}</p>
-                <h2 className="mt-2 font-serif text-2xl">
+                <h2 className="mt-2 font-serif text-xl md:text-2xl">
                   <Link href={`/blog/${post.slug}`} className="hover:text-[#8C6E28]">
                     {post.title}
                   </Link>

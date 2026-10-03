@@ -74,16 +74,16 @@ function CategoryTile({
           />
         </div>
       </div>
-      <p className="mt-1.5 text-[10px] font-medium leading-tight text-[#3A6EA5] sm:text-[12px] lg:mt-2.5 lg:text-[13px]">{name}</p>
+      <p className="mt-1.5 min-h-[2.5em] text-[10px] font-medium leading-tight text-[#3A6EA5] sm:text-[12px] lg:mt-2.5 lg:min-h-0 lg:text-[13px]">{name}</p>
     </Link>
   );
 }
 
 export function HomeCollections() {
   return (
-    <section className="px-5 py-10 md:py-14">
+    <section className="px-5 pb-6 pt-4 md:pb-8 md:pt-5">
       <div className="mx-auto max-w-[1320px]">
-        <h2 className="text-center font-serif text-3xl text-[#3A6EA5] md:text-[2.85rem]">
+        <h2 className="text-center font-serif text-[1.75rem] text-[#3A6EA5] md:text-[2.85rem]">
           Explore Our Collections
         </h2>
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, RotateCcw, Truck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const btnBase =
@@ -24,6 +24,7 @@ const slides = [
     src: "/hero-2.jpeg",
     alt: "Forged for Collectors. Armour, helmets, diving pieces and brass instruments on a Mediterranean harbour terrace",
     at: { left: "50%", top: "55%", center: true },
+    pos: "object-[42%_center] sm:object-[46%_center]",
     accent: "#E08A2C",
     primaryCls:
       "bg-[#E08A2C] text-[#1a1208] hover:bg-[#f09a3c]",
@@ -94,7 +95,7 @@ export function HomeHero() {
       <div
         className="
           relative mx-auto w-full max-w-[1920px]
-          aspect-[1600/633]
+          aspect-[2/1] sm:aspect-[1600/633]
           overflow-hidden
         "
         onTouchStart={(e) => {
@@ -121,9 +122,9 @@ export function HomeHero() {
             fill
             priority={idx === 0}
             sizes="100vw"
-            className={`object-cover object-center transition-opacity duration-700 ${
-              idx === i ? "opacity-100" : "pointer-events-none opacity-0"
-            }`}
+            className={`object-cover transition-opacity duration-700 ${
+              s.pos ?? "object-left sm:object-center"
+            } ${idx === i ? "opacity-100" : "pointer-events-none opacity-0"}`}
           />
         ))}
 
@@ -238,6 +239,29 @@ export function HomeHero() {
             />
           ))}
         </div>
+      </div>
+
+      <div className="grid grid-cols-2 divide-x divide-[#031D38]/15 bg-[#C9A84C] text-[#031D38]">
+        <Link
+          href="/shipping"
+          className="flex items-center justify-center gap-2 px-2 py-2.5 transition hover:bg-[#d4b45a] sm:gap-3 sm:px-6 sm:py-3.5"
+        >
+          <Truck className="h-5 w-5 shrink-0 text-[#031D38] sm:h-6 sm:w-6" strokeWidth={1.7} />
+          <span className="min-w-0 text-left">
+            <span className="block text-[12px] font-semibold leading-tight sm:text-[15px]">Worldwide Shipping</span>
+            <span className="mt-0.5 block text-[10px] leading-tight text-[#031D38]/75 sm:text-[12px]">On all orders worldwide</span>
+          </span>
+        </Link>
+        <Link
+          href="/returns"
+          className="flex items-center justify-center gap-2 px-2 py-2.5 transition hover:bg-[#d4b45a] sm:gap-3 sm:px-6 sm:py-3.5"
+        >
+          <RotateCcw className="h-5 w-5 shrink-0 text-[#031D38] sm:h-6 sm:w-6" strokeWidth={1.7} />
+          <span className="min-w-0 text-left">
+            <span className="block text-[12px] font-semibold leading-tight sm:text-[15px]">Easy Return</span>
+            <span className="mt-0.5 block text-[10px] leading-tight text-[#031D38]/75 sm:text-[12px]">14-day return support</span>
+          </span>
+        </Link>
       </div>
     </section>
   );

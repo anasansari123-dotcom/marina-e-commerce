@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FreeShippingTag } from "./FreeShippingTag";
 import { PriceRow } from "./PriceRow";
+import { ProductName } from "./ProductName";
 
 export function CatalogCard({
   product,
@@ -40,9 +41,12 @@ export function CatalogCard({
           <Heart className={`h-[22px] w-[22px] ${wished ? "fill-[#222222] text-[#222222]" : ""}`} />
         </button>
       </div>
-      <Link href={href} className="mt-2 block">
-        <h3 className="line-clamp-2 text-[12.5px] font-normal leading-[1.35] text-[#222222] sm:text-[14px]">
-          {product.name}
+      <Link href={href} className="mt-2 block min-w-0" aria-label={product.name}>
+        <h3>
+          <ProductName
+            name={product.name}
+            className="text-[12.5px] font-normal leading-[1.35] text-[#222222] sm:text-[14px]"
+          />
         </h3>
       </Link>
       <PriceRow price={product.price} className="mt-1" />

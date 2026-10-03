@@ -172,7 +172,7 @@ export function ShopTabs({
                 onClick={() => setLimit((n) => n + ITEMS_PAGE)}
                 className="rounded-full border border-[#222] px-8 py-2.5 text-sm font-medium text-[#222]"
               >
-                Load more
+                Show more
               </button>
             </div>
           ) : null}

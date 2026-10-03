@@ -11,8 +11,10 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import {
   Check,
+  Factory,
   Heart,
   MessageCircle,
+  Package,
   RotateCcw,
   ShieldCheck,
   Sparkles,
@@ -97,7 +99,7 @@ export default function ProductPage() {
           {product.name}
         </p>
 
-        <div className="mt-0 grid items-start gap-6 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+        <div className="mt-0 grid items-start gap-6 lg:mt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch lg:gap-10">
           <div>
             <div className="-mx-5 lg:mx-0">
             <div className="relative aspect-square overflow-hidden rounded-none bg-[#f5f5f5] lg:aspect-[5/4] lg:rounded-2xl lg:bg-[#2a2118]">
@@ -141,7 +143,7 @@ export default function ProductPage() {
             </div>
           </div>
 
-          <div>
+          <div className="flex min-h-0 flex-col">
             <h1 className="text-[1.35rem] font-normal leading-tight text-[#222222] md:text-[2.15rem]">{product.name}</h1>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
               <span className="flex items-center gap-0.5 text-[#C9A84C]">
@@ -188,28 +190,80 @@ export default function ProductPage() {
                     new CustomEvent("marina-chat-open", { detail: { product: product.slug } })
                   )
                 }
-                className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full border border-navy-800 px-1.5 py-2.5 text-[9px] uppercase tracking-[0.02em] sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
+                className="inline-flex min-w-0 items-center justify-center gap-0.5 whitespace-nowrap rounded-full border border-navy-800 px-1.5 py-2.5 text-[7px] font-semibold uppercase tracking-[0.01em] sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
               >
-                <Sparkles className="h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
-                Ask AI About This Product
+                <Sparkles className="h-3 w-3 shrink-0 text-[#C9A84C] sm:h-3.5 sm:w-3.5" />
+                Ask Marina About This Product
               </button>
               <a
                 href={companyWhatsApp}
-                className="inline-flex items-center justify-center gap-1 whitespace-nowrap rounded-full bg-[#25D366] px-1.5 py-2.5 text-[9px] uppercase tracking-[0.02em] text-white sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
+                className="inline-flex min-w-0 items-center justify-center gap-0.5 whitespace-nowrap rounded-full bg-[#25D366] px-1.5 py-2.5 text-[7px] font-semibold uppercase tracking-[0.01em] text-white sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
               >
-                <MessageCircle className="h-3.5 w-3.5 shrink-0" />
+                <MessageCircle className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
                 WhatsApp Us
               </a>
             </div>
 
-            <div className="mt-6 hidden justify-between gap-4 border-t border-[#e6dfd2] pt-5 text-center text-[11px] text-navy-700 lg:flex">
-              <div className="flex-1">
+            <div className="mt-6 grid grid-cols-2 items-center gap-3 border-t border-[#e6dfd2] pt-5 text-center text-[11px] text-navy-700 sm:grid-cols-3 sm:gap-4">
+              <div>
                 <ShieldCheck className="mx-auto h-5 w-5 text-[#C9A84C]" />
                 <p className="mt-1">Secure Payment</p>
               </div>
-              <div className="flex-1">
+              <div>
                 <RotateCcw className="mx-auto h-5 w-5 text-[#C9A84C]" />
-                <p className="mt-1">Easy Returns 7 Days</p>
+                <p className="mt-1">Easy Returns 14 Days</p>
+              </div>
+              <Link
+                href="/returns"
+                className="btn-gold col-span-2 h-11 w-full sm:col-span-1 sm:h-12"
+              >
+                Start a Return
+              </Link>
+            </div>
+
+            <div className="mt-5 hidden flex-1 rounded-2xl border border-[#e6dfd2] bg-[#FAF7F2] p-4 md:p-5 lg:block">
+              <h2 className="text-[13px] font-semibold uppercase tracking-[0.16em] text-[#8C6E28]">
+                What&apos;s included
+              </h2>
+              <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {(product.included.length ? product.included : ["Product", "Export packing"]).map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-[13px] text-navy-800">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <h2 className="mt-5 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#8C6E28]">
+                Order protection
+              </h2>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {[
+                  { icon: ShieldCheck, label: "Inspected before dispatch" },
+                  { icon: Package, label: "Export carton packing" },
+                  { icon: Truck, label: "Worldwide shipping options" },
+                  { icon: Factory, label: "Made in Roorkee, India" },
+                ].map((f) => (
+                  <div key={f.label} className="flex items-start gap-2 rounded-lg bg-white px-3 py-2.5">
+                    <f.icon className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C]" />
+                    <p className="text-[12px] leading-snug text-navy-800">{f.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 flex flex-wrap gap-2">
+                <Link href="/shipping" className="rounded-full border border-[#C9A84C]/50 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-navy-800 hover:bg-[#C9A84C]/15">
+                  Shipping
+                </Link>
+                <Link href="/custom-manufacturing" className="rounded-full border border-[#C9A84C]/50 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-navy-800 hover:bg-[#C9A84C]/15">
+                  Custom manufacturing
+                </Link>
+                <Link
+                  href={b2b ? "/wholesale/quote" : "/wholesale"}
+                  className="rounded-full border border-[#C9A84C]/50 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-navy-800 hover:bg-[#C9A84C]/15"
+                >
+                  {b2b ? "Bulk quote" : "Wholesale"}
+                </Link>
               </div>
             </div>
           </div>

@@ -33,11 +33,11 @@ export function HomeAllProducts() {
   }
 
   return (
-    <section ref={ref} className="scroll-mt-24 bg-white px-4 py-10 md:px-5 md:py-14">
+    <section ref={ref} className="scroll-mt-24 bg-white px-4 pb-10 pt-4 md:px-5 md:pb-14 md:pt-5">
       <div className="mx-auto max-w-[1320px]">
         <div className="text-center">
           <div className="mx-auto mb-3 h-px w-16 bg-[#C9A84C]" />
-          <h2 className="font-serif text-3xl text-navy-900 md:text-5xl">All Products</h2>
+          <h2 className="font-serif text-[1.75rem] text-navy-900 md:text-5xl">All Products</h2>
         </div>
 
         <div className="mt-6 flex justify-center">

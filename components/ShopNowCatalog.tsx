@@ -78,15 +78,59 @@ export function ShopNowCatalog({
     setSub(childSlug);
   }
 
+  const openParent = shopNowTree.find((c) => c.slug === parent);
+  const mobileChildren = openParent?.children ?? [];
+
   return (
     <div className="bg-white">
+      <div className="border-b border-[#eee] bg-[#fcfbf8] md:hidden">
+        <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-3">
+          <button
+            type="button"
+            onClick={showAll}
+            className={`shrink-0 rounded-full border px-3 py-1.5 text-[12px] ${
+              !filtered ? "border-[#031D38] bg-[#031D38] text-white" : "border-[#ddd] bg-white text-[#222]"
+            }`}
+          >
+            All
+          </button>
+          {shopNowTree.map((c) => (
+            <button
+              key={c.slug}
+              type="button"
+              onClick={() => toggleParent(c.slug)}
+              className={`shrink-0 rounded-full border px-3 py-1.5 text-[12px] ${
+                parent === c.slug ? "border-[#031D38] bg-[#031D38] text-white" : "border-[#ddd] bg-white text-[#222]"
+              }`}
+            >
+              {c.name}
+            </button>
+          ))}
+        </div>
+        {mobileChildren.length > 0 ? (
+          <div className="no-scrollbar flex gap-2 overflow-x-auto border-t border-[#eee] bg-white px-4 py-2.5">
+            {mobileChildren.map((child) => (
+              <button
+                key={child.slug}
+                type="button"
+                onClick={() => pickChild(parent!, child.slug)}
+                className={`shrink-0 rounded-full px-3 py-1 text-[11px] ${
+                  sub === child.slug || (sub && shopNowSubtree(child.slug).includes(sub))
+                    ? "bg-[#C9A84C]/20 font-semibold text-[#7a5c12]"
+                    : "bg-[#f4f1ea] text-[#444]"
+                }`}
+              >
+                {child.name}
+              </button>
+            ))}
+          </div>
+        ) : null}
+      </div>
+
       <div className="mx-auto flex max-w-[1400px] flex-row">
-        <aside className="w-[96px] shrink-0 border-r border-[#eee] bg-[#fcfbf8] sm:w-[140px] md:w-[300px] md:bg-white">
-          <nav className="no-scrollbar sticky top-[var(--site-nav)] max-h-[calc(100dvh-var(--site-nav))] overflow-y-auto pb-6 md:py-2">
-            <p className="px-2 pb-2 pt-3 text-[10px] font-semibold uppercase tracking-[0.08em] text-[#b0893a] md:px-4 md:text-[15px] md:font-medium md:normal-case md:tracking-normal">
-              <span className="md:hidden">Categories</span>
-              <span className="hidden md:inline">Product categories</span>
-            </p>
+        <aside className="hidden w-[300px] shrink-0 border-r border-[#eee] bg-white md:block">
+          <nav className="no-scrollbar sticky top-[var(--site-nav)] max-h-[calc(100dvh-var(--site-nav))] overflow-y-auto py-2 pb-6">
+            <p className="px-4 pb-2 pt-3 text-[15px] font-medium text-[#b0893a]">Product categories</p>
             <button
               type="button"
               onClick={showAll}
@@ -172,9 +216,9 @@ export function ShopNowCatalog({
           </nav>
         </aside>
 
-        <div className="min-w-0 flex-1 px-2 py-4 sm:px-4 md:py-6 lg:px-6">
+        <div className="min-w-0 flex-1 px-4 py-4 md:py-6 lg:px-6">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2 md:mb-4 md:gap-3">
-            <Title className="w-full font-serif text-base leading-tight text-navy-900 sm:w-auto sm:text-2xl">
+            <Title className="w-full font-serif text-lg leading-tight text-navy-900 sm:w-auto sm:text-2xl">
               {title}
               <span className="ml-1.5 text-[11px] font-normal text-[#999] sm:ml-2 sm:text-[13px]">({list.length})</span>
             </Title>
@@ -237,7 +281,7 @@ export function ShopNowCatalog({
                 onClick={() => setLimit((n) => n + PAGE_SIZE)}
                 className="rounded-full border border-[#222] px-6 py-2 text-[13px] font-medium text-[#222] transition hover:bg-[#222] hover:text-white sm:px-8 sm:py-2.5 sm:text-sm"
               >
-                Load more
+                Show more
               </button>
             </div>
           ) : null}

@@ -25,7 +25,7 @@ export function ContactForm() {
         setDone(true);
       }}
     >
-      <h2 className="font-serif text-3xl">Send an Enquiry</h2>
+      <h2 className="font-serif text-2xl md:text-3xl">Send an Enquiry</h2>
       <div className="mt-5 grid grid-cols-2 rounded-full bg-[#F4F1EA] p-1 text-sm">
         <button
           type="button"

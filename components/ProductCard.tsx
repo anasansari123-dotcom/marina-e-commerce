@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FreeShippingTag } from "./FreeShippingTag";
 import { PriceRow } from "./PriceRow";
+import { ProductName } from "./ProductName";
 
 export function ProductCard({ product }: { product: Product }) {
   const { has, toggle } = useWishlist();
@@ -37,8 +38,10 @@ export function ProductCard({ product }: { product: Product }) {
           <Heart className={`h-[22px] w-[22px] ${wished ? "fill-[#222222] text-[#222222]" : ""}`} />
         </button>
       </div>
-      <Link href={`/product/${product.slug}`} className="mt-2 block">
-        <h3 className="line-clamp-2 text-[14px] font-normal leading-[1.35] text-[#222222]">{product.name}</h3>
+      <Link href={`/product/${product.slug}`} className="mt-2 block min-w-0" aria-label={product.name}>
+        <h3>
+          <ProductName name={product.name} className="text-[14px] font-normal leading-[1.35] text-[#222222]" />
+        </h3>
       </Link>
       <PriceRow price={product.price} className="mt-1" />
       <FreeShippingTag />

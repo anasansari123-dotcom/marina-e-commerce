@@ -28,7 +28,7 @@ export default function ContactPage() {
       <section id="contact-form" className="scroll-mt-[var(--site-nav)] px-5 py-10 md:py-14">
         <div className="mx-auto grid max-w-[1320px] gap-10 lg:grid-cols-[1fr_1.05fr]">
           <div>
-            <h2 className="font-serif text-3xl md:text-4xl">Reach {company.name}</h2>
+            <h2 className="font-serif text-[1.65rem] md:text-4xl">Reach {company.name}</h2>
             <p className="mt-4 max-w-md text-navy-600">
               We reply within one business day. For urgent wholesale samples, WhatsApp the trade desk.
             </p>
@@ -74,7 +74,7 @@ export default function ContactPage() {
               href={companyWhatsApp}
               target="_blank"
               rel="noreferrer"
-              className="btn-gold mt-8 inline-flex gap-2"
+              className="btn-gold mt-8 flex w-full justify-center gap-2 sm:inline-flex sm:w-auto"
             >
               <MessageCircle className="h-4 w-4" />
               Chat on WhatsApp
@@ -108,7 +108,7 @@ export default function ContactPage() {
           <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="text-[11px] uppercase tracking-[0.28em] text-[#8C6E28]">Visit us</p>
-              <h2 className="mt-2 font-serif text-3xl md:text-4xl">Find the atelier</h2>
+              <h2 className="mt-2 font-serif text-[1.65rem] md:text-4xl">Find the atelier</h2>
               <p className="mt-2 max-w-lg text-navy-600">
                 Corporate office &amp; factory — {company.address.join(", ")}. Appointments welcome for
                 wholesale buyers and OEM sampling.
@@ -118,7 +118,7 @@ export default function ContactPage() {
               href={companyDirections}
               target="_blank"
               rel="noreferrer"
-              className="btn-gold inline-flex gap-2"
+              className="btn-gold inline-flex w-full justify-center gap-2 sm:w-auto"
             >
               Get directions
               <ExternalLink className="h-4 w-4" />

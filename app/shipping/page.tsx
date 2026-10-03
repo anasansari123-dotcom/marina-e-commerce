@@ -30,7 +30,7 @@ const markets = [
 
 function CircleIcon({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid h-[78px] w-[78px] shrink-0 place-items-center rounded-full bg-[#0B1D36] text-white shadow-[0_6px_16px_rgba(11,29,54,0.18)]">
+    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#0B1D36] text-white shadow-[0_6px_16px_rgba(11,29,54,0.18)] md:h-[78px] md:w-[78px] [&_svg]:h-6 [&_svg]:w-6 md:[&_svg]:h-8 md:[&_svg]:w-8">
       {children}
     </div>
   );
@@ -67,7 +67,7 @@ export default function ShippingPage() {
             </div>
             <div>
               <p className="text-[13px] text-navy-700">We use trusted couriers for air shipments</p>
-              <div className="mt-3 flex flex-wrap items-center gap-4">
+            <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
                 <div className="flex h-11 items-center bg-[#FFCC00] px-3 text-[22px] font-black italic tracking-tight text-[#D40511]">
                   DHL
                 </div>
@@ -150,7 +150,7 @@ export default function ShippingPage() {
       <section className="relative overflow-hidden border-t border-[#e8eef5] bg-[#F3F7FB] px-5 py-10">
         <div className="relative mx-auto grid max-w-[1180px] items-center gap-8 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
-            <h2 className="font-serif text-[2rem] text-[#0B1D36] md:text-[2.15rem]">Our Global Reach</h2>
+            <h2 className="font-serif text-[1.65rem] text-[#0B1D36] md:text-[2.15rem]">Our Global Reach</h2>
             <p className="mt-3 max-w-[340px] text-[13px] leading-relaxed text-navy-600">
               We export to our valued customers around the world. Our main markets include Europe, USA, UK,
               Canada, Australia and Middle East, along with other international clients.
@@ -163,7 +163,7 @@ export default function ShippingPage() {
               fill
               className="object-contain object-right opacity-90"
             />
-            <div className="relative z-[1] flex flex-wrap items-end gap-5 pt-2 lg:max-w-[78%]">
+            <div className="grid grid-cols-4 gap-x-3 gap-y-4 sm:flex sm:flex-wrap sm:items-end sm:gap-5">
               {markets.map((m) => (
                 <div key={m.name} className="text-center">
                   <div className="relative mx-auto h-[54px] w-[54px] overflow-hidden rounded-full bg-white shadow-[0_4px_12px_rgba(11,29,54,0.12)] ring-1 ring-[#d7e2ee]">

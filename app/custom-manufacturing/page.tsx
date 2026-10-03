@@ -86,7 +86,7 @@ export default function CustomManufacturingPage() {
 
       <section className="bg-white px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1400px]">
-          <h2 className="text-center font-serif text-3xl md:text-4xl">
+          <h2 className="text-center font-serif text-[1.65rem] leading-snug md:text-4xl">
             Why Choose Our Custom Manufacturing?
           </h2>
           <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-4 md:gap-x-6">
@@ -95,7 +95,7 @@ export default function CustomManufacturingPage() {
                 <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0B1D36] text-[#C9A84C] md:h-[84px] md:w-[84px]">
                   <r.icon className="h-6 w-6 md:h-8 md:w-8" strokeWidth={1.5} />
                 </div>
-                <h3 className="mt-3 text-sm font-semibold text-navy-900 md:mt-4">{r.title}</h3>
+                <h3 className="mt-3 min-h-[2.6rem] text-sm font-semibold leading-snug text-navy-900 md:mt-4 md:min-h-0">{r.title}</h3>
                 <p
                   className={
                     r.title === "Custom Lens & Optical Specifications"
@@ -113,7 +113,7 @@ export default function CustomManufacturingPage() {
 
       <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
         <div className="mx-auto max-w-[1400px]">
-          <h2 className="text-center font-serif text-3xl md:text-4xl">What Can Be Customized?</h2>
+          <h2 className="text-center font-serif text-[1.65rem] leading-snug md:text-4xl">What Can Be Customized?</h2>
           <div className="mt-8 grid grid-cols-3 gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-9 lg:gap-3">
               {customizable.map((c) => (
                 <div key={c.label} className="min-w-0 text-center">
@@ -133,11 +133,11 @@ export default function CustomManufacturingPage() {
         <Image src="/5-slide.jpeg" alt="" fill sizes="100vw" className="object-cover opacity-35" />
         <div className="absolute inset-0 bg-[#0B1D36]/55" />
         <div className="relative mx-auto max-w-[1200px]">
-          <h2 className="text-center font-serif text-3xl md:text-4xl">Our Custom Manufacturing Process</h2>
-          <div className="mt-8 flex flex-wrap items-start justify-center gap-y-8">
+          <h2 className="text-center font-serif text-[1.65rem] leading-snug md:text-4xl">Our Custom Manufacturing Process</h2>
+          <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 md:flex md:flex-wrap md:items-start md:justify-center md:gap-y-8">
             {process.map((step, i) => (
-              <div key={step.title} className="flex items-start">
-                <div className="w-[150px] text-center md:w-[160px]">
+              <div key={step.title} className="flex items-start justify-center">
+                <div className="w-full text-center md:w-[160px]">
                   <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#C9A84C] text-[#0B1D36] md:h-[72px] md:w-[72px]">
                     <step.icon className="h-6 w-6 md:h-7 md:w-7" strokeWidth={1.75} />
                   </div>
@@ -172,7 +172,7 @@ export default function CustomManufacturingPage() {
             <p className="mt-6 leading-relaxed text-navy-600">
               Let’s grow together. We offer competitive pricing for bulk and long-term orders.
             </p>
-            <div className="mx-auto mt-8 grid w-fit gap-3 sm:grid-cols-2">
+            <div className="mx-auto mt-8 grid w-full max-w-sm gap-3 sm:w-fit sm:grid-cols-2">
               <Link href="/wholesale" className="btn-gold w-full">
                 Wholesale collection
               </Link>
@@ -187,7 +187,7 @@ export default function CustomManufacturingPage() {
       <section className="bg-[#FAF7F2] px-5 py-10 md:py-14">
         <div className="mx-auto max-w-3xl">
           <div>
-            <h2 className="text-center font-serif text-3xl md:text-4xl">Frequently Asked Questions</h2>
+            <h2 className="text-center font-serif text-[1.65rem] leading-snug md:text-4xl">Frequently Asked Questions</h2>
             <div className="mt-6">
               <CustomFaq />
             </div>
@@ -199,11 +199,11 @@ export default function CustomManufacturingPage() {
         <Image src="/2-slide.jpeg" alt="" fill sizes="100vw" className="object-cover opacity-40" />
         <div className="absolute inset-0 bg-[#081525]/60" />
         <div className="relative mx-auto max-w-2xl">
-          <h2 className="font-serif text-3xl md:text-4xl">Have a Custom Requirement?</h2>
+          <h2 className="font-serif text-[1.65rem] leading-snug md:text-4xl">Have a Custom Requirement?</h2>
           <p className="mt-4 text-white/80">
             Tell us what you need. Our team will review your requirements and provide a quotation.
           </p>
-          <div className="mx-auto mt-8 grid w-fit gap-3 sm:grid-cols-2">
+          <div className="mx-auto mt-8 grid w-full max-w-sm gap-3 sm:w-fit sm:grid-cols-2">
             <Link href="/wholesale/quote" className="btn-gold w-full gap-2">
               Request a Custom Quote
               <ArrowRight className="h-4 w-4" />

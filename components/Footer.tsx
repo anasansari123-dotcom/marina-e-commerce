@@ -38,6 +38,7 @@ const columns = [
       ["Contact Us", "/contact"],
       ["Blog", "/blog"],
       ["Shipping", "/shipping"],
+      ["Returns", "/returns"],
     ],
   },
 ];
@@ -65,8 +66,8 @@ export function Footer() {
             <div key={p.title} className="flex gap-3">
               <p.icon className="mt-0.5 h-5 w-5 shrink-0 text-[#C9A84C]" />
               <div className="min-w-0">
-                <p className="whitespace-nowrap text-sm font-medium">{p.title}</p>
-                <p className="mt-1 whitespace-nowrap text-xs text-cream-100/60">{p.body}</p>
+                <p className="text-sm font-medium sm:whitespace-nowrap">{p.title}</p>
+                <p className="mt-1 text-xs text-cream-100/60 sm:whitespace-nowrap">{p.body}</p>
               </div>
             </div>
           ))}

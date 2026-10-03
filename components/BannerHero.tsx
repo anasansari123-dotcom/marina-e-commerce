@@ -58,8 +58,8 @@ export function BannerHero({
   return (
     <section className="bg-[#081525]">
       <h1 className="sr-only">{title}</h1>
-      <div className="relative mx-auto aspect-[1600/633] w-full max-w-[1920px] overflow-hidden">
-        <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover object-center" />
+      <div className="relative mx-auto aspect-[2/1] w-full max-w-[1920px] overflow-hidden sm:aspect-[1600/633]">
+        <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover object-left sm:object-center" />
         {hotspots.map((h) => (
           <Link
             key={h.label}
