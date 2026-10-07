@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const frames = {
   header: "h-12 max-w-[46vw] sm:h-14 sm:max-w-none lg:h-[52px] xl:h-16 2xl:h-[68px]",
-  footer: "h-16 overflow-hidden rounded-lg sm:h-[4.5rem] md:h-20",
+  footer: "h-10 max-w-[180px] overflow-hidden sm:h-12 sm:max-w-[220px] md:h-14",
   hero: "mx-auto h-24 max-w-full overflow-hidden rounded-2xl sm:h-36 md:h-48",
   admin: "h-14 max-w-full overflow-hidden rounded-lg",
   auth: "mx-auto h-24 max-w-full overflow-hidden rounded-2xl shadow-soft sm:h-28",

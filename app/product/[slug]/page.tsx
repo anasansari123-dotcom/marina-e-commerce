@@ -190,14 +190,14 @@ export default function ProductPage() {
                     new CustomEvent("marina-chat-open", { detail: { product: product.slug } })
                   )
                 }
-                className="inline-flex min-w-0 items-center justify-center gap-0.5 whitespace-nowrap rounded-full border border-navy-800 px-1.5 py-2.5 text-[7px] font-semibold uppercase tracking-[0.01em] sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
+                className="inline-flex h-11 min-w-0 items-center justify-center gap-1 whitespace-nowrap rounded-full border border-navy-800 px-2 text-[8px] font-semibold uppercase tracking-[0.04em] sm:h-12 sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
               >
                 <Sparkles className="h-3 w-3 shrink-0 text-[#C9A84C] sm:h-3.5 sm:w-3.5" />
                 Ask Marina About This Product
               </button>
               <a
                 href={companyWhatsApp}
-                className="inline-flex min-w-0 items-center justify-center gap-0.5 whitespace-nowrap rounded-full bg-[#25D366] px-1.5 py-2.5 text-[7px] font-semibold uppercase tracking-[0.01em] text-white sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
+                className="inline-flex h-11 min-w-0 items-center justify-center gap-1 whitespace-nowrap rounded-full bg-[#25D366] px-2 text-[8px] font-semibold uppercase tracking-[0.04em] text-white sm:h-12 sm:gap-2 sm:px-4 sm:text-[11px] sm:tracking-[0.14em]"
               >
                 <MessageCircle className="h-3 w-3 shrink-0 sm:h-3.5 sm:w-3.5" />
                 WhatsApp Us
@@ -207,7 +207,9 @@ export default function ProductPage() {
             <div className="mt-6 grid grid-cols-2 items-center gap-3 border-t border-[#e6dfd2] pt-5 text-center text-[11px] text-navy-700 sm:grid-cols-3 sm:gap-4">
               <div>
                 <ShieldCheck className="mx-auto h-5 w-5 text-[#C9A84C]" />
-                <p className="mt-1">Secure Payment</p>
+                <Link href="/payment" className="mt-1 block hover:text-[#8C6E28]">
+                  Secure Payment
+                </Link>
               </div>
               <div>
                 <RotateCcw className="mx-auto h-5 w-5 text-[#C9A84C]" />
@@ -215,7 +217,7 @@ export default function ProductPage() {
               </div>
               <Link
                 href="/returns"
-                className="btn-gold col-span-2 h-11 w-full sm:col-span-1 sm:h-12"
+                className="btn-gold col-span-2 w-full sm:col-span-1"
               >
                 Start a Return
               </Link>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { BannerHero } from "@/components/BannerHero";
 import { blogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
@@ -11,17 +12,12 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <div className="bg-[#FAF7F2]">
-      <section className="relative aspect-[2/1] max-h-[640px] w-full overflow-hidden bg-[#1a120b] sm:aspect-[1600/633]">
-        <Image
-          src="/blog-slide.jpeg"
-          alt="Marina Muse blog — craft, collections and trade from the atelier"
-          fill
-          sizes="100vw"
-          className="object-cover object-left sm:object-center"
-          priority
-        />
-        <h1 className="sr-only">Blog</h1>
-      </section>
+      <BannerHero
+        src="/blog-slide.jpeg"
+        alt="Marina Muse blog — craft, collections and trade from the atelier"
+        title="Blog"
+        mobileFocus="object-left"
+      />
       <section className="px-5 py-10 md:py-12">
         <div className="mx-auto grid max-w-[1100px] gap-8 md:grid-cols-3">
           {blogPosts.map((post) => (

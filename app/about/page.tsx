@@ -87,12 +87,6 @@ export default function AboutPage() {
         src="/about-banner.jpeg"
         alt="About Marina Muse International — exporter, manufacturer & supplier of handcrafted nautical, brass and armour products from Roorkee, India"
         title="About Marina Muse International"
-        actionsAt={{ left: 5.6, top: 71 }}
-        mobileActions={false}
-        actions={[
-          { href: "/shop", label: "B2C Retail Collection" },
-          { href: "/wholesale", label: "B2B Wholesale Collection", variant: "outline" },
-        ]}
       />
 
       <section className="px-5 py-10 md:py-14">

@@ -45,22 +45,13 @@ export default function HomePage() {
               Open a trade account
             </p>
             <div className="flex flex-col gap-3.5">
-              <Link
-                href="/wholesale/register"
-                className="btn-gold h-12 w-full px-4 text-center text-[11px] sm:h-[3.35rem] sm:text-[12px] md:text-[13px]"
-              >
+              <Link href="/wholesale/register" className="btn-gold w-full">
                 Create Wholesale Account
               </Link>
-              <Link
-                href="/login"
-                className="btn-outline h-12 w-full px-4 text-center text-[11px] sm:h-[3.35rem] sm:text-[12px] md:text-[13px]"
-              >
+              <Link href="/login" className="btn-outline w-full">
                 Already a member? Login
               </Link>
-              <Link
-                href="/about"
-                className="btn-outline h-12 w-full px-4 text-center text-[11px] sm:h-[3.35rem] sm:text-[12px] md:text-[13px]"
-              >
+              <Link href="/about" className="btn-outline w-full">
                 Our Story
               </Link>
             </div>

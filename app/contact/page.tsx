@@ -17,12 +17,6 @@ export default function ContactPage() {
         src="/contact-banner.jpeg"
         alt="Contact us — Atelier & trade desk. Brass globe, binoculars and compass on a desk"
         title="Contact us — Atelier & trade desk"
-        actionsAt={{ left: 3.6, top: 70 }}
-        mobileActions={false}
-        actions={[
-          { href: companyWhatsApp, label: "Chat on WhatsApp", external: true },
-          { href: "#contact-form", label: "Send a Message", variant: "outline" },
-        ]}
       />
 
       <section id="contact-form" className="scroll-mt-[var(--site-nav)] px-5 py-10 md:py-14">
@@ -126,7 +120,7 @@ export default function ContactPage() {
           </div>
           <div className="relative overflow-hidden rounded-3xl border border-[#eee7db] bg-white shadow-soft">
             <iframe
-              title={`${company.name} factory map — Roorkee, Uttarakhand, India`}
+              title={`${company.name} factory map — Charthawal, Muzaffarnagar, Uttar Pradesh, India`}
               src={companyMapSrc}
               className="h-[280px] w-full md:h-[480px]"
               loading="lazy"

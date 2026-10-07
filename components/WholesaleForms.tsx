@@ -1,8 +1,69 @@
 "use client";
 
-import { collections, products } from "@/lib/products";
+import { products } from "@/lib/products";
 import { CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+
+const catalogProducts = [...products].sort((a, b) => a.name.localeCompare(b.name));
+
+function ProductPicker({
+  name,
+  label,
+  labelClassName = "text-navy-700",
+}: {
+  name: string;
+  label: string;
+  labelClassName?: string;
+}) {
+  const [value, setValue] = useState("");
+  const other = value === "other";
+
+  return (
+    <div className="block text-[13px]">
+      <label>
+        <span className={`mb-1.5 block ${labelClassName}`}>{label}</span>
+        <select
+          name={name}
+          className="input"
+          required
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        >
+          <option value="" disabled>
+            Select a product
+          </option>
+          <optgroup label="B2C Retail Collection">
+            {catalogProducts.map((p) => (
+              <option key={`${name}-b2c-${p.slug}`} value={`b2c:${p.slug}`}>
+                {p.name}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label="B2B Wholesale Collection">
+            {catalogProducts.map((p) => (
+              <option key={`${name}-b2b-${p.slug}`} value={`b2b:${p.slug}`}>
+                {p.name}
+              </option>
+            ))}
+          </optgroup>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      {other && (
+        <label className="mt-3 block">
+          <span className={`mb-1.5 block ${labelClassName}`}>Product name</span>
+          <input
+            name={`${name}Other`}
+            type="text"
+            className="input"
+            required
+            placeholder="Type the product name"
+          />
+        </label>
+      )}
+    </div>
+  );
+}
 
 export function WholesaleRegisterForm() {
   const [done, setDone] = useState(false);
@@ -25,16 +86,21 @@ export function WholesaleRegisterForm() {
         setDone(true);
       }}
     >
-      {[
-        ["Company Name", "company", "text"],
-        ["Contact Person", "contact", "text"],
-        ["Company Email", "email", "email"],
-        ["Phone", "phone", "tel"],
-        ["Website", "website", "url"],
-      ].map(([label, name, type]) => (
+      {(
+        [
+          ["Company Name", "company", "text", false],
+          ["Contact Person", "contact", "text", true],
+          ["Company Email", "email", "email", true],
+          ["Phone", "phone", "tel", true],
+          ["Website", "website", "url", false],
+        ] as const
+      ).map(([label, name, type, required]) => (
         <label key={name} className="block text-[13px]">
-          <span className="mb-1.5 block text-navy-700">{label}</span>
-          <input required={name !== "website"} name={name} type={type} className="input" />
+          <span className="mb-1.5 block text-navy-700">
+            {label}
+            {required ? "" : " (optional)"}
+          </span>
+          <input required={required} name={name} type={type} className="input" />
         </label>
       ))}
       <label className="block text-[13px]">
@@ -49,25 +115,9 @@ export function WholesaleRegisterForm() {
       </label>
       <label className="block text-[13px]">
         <span className="mb-1.5 block text-navy-700">Tax ID / VAT / GST</span>
-        <input name="tax" className="input" />
+        <input name="tax" className="input" required />
       </label>
-      <label className="block text-[13px]">
-        <span className="mb-1.5 block text-navy-700">Expected Quantity</span>
-        <select name="qty" className="input" required>
-          <option>50 – 200</option>
-          <option>200 – 1,000</option>
-          <option>1,000+</option>
-          <option>Container programme</option>
-        </select>
-      </label>
-      <label className="block text-[13px] md:col-span-2">
-        <span className="mb-1.5 block text-navy-700">Products Interested In</span>
-        <select name="interest" className="input">
-          {collections.map((c) => (
-            <option key={c.slug}>{c.name}</option>
-          ))}
-        </select>
-      </label>
+      <ProductPicker name="interest" label="Products Interested In" />
       <button type="submit" className="btn-gold mt-2 w-full md:col-span-2">
         Submit Application
       </button>
@@ -96,14 +146,7 @@ export function BulkQuoteForm() {
         setDone(true);
       }}
     >
-      <label className="block text-[13px]">
-        <span className="mb-1.5 block">Product</span>
-        <select className="input" required defaultValue="Antique Brass Nautical Compass">
-          {products.map((p) => (
-            <option key={p.slug}>{p.name}</option>
-          ))}
-        </select>
-      </label>
+      <ProductPicker name="product" label="Product" labelClassName="" />
       <label className="block text-[13px]">
         <span className="mb-1.5 block">Quantity</span>
         <input className="input" type="number" min={12} defaultValue={50} required />

@@ -130,18 +130,18 @@ export function ShopNowCatalog({
       <div className="mx-auto flex max-w-[1400px] flex-row">
         <aside className="hidden w-[300px] shrink-0 border-r border-[#eee] bg-white md:block">
           <nav className="no-scrollbar sticky top-[var(--site-nav)] max-h-[calc(100dvh-var(--site-nav))] overflow-y-auto py-2 pb-6">
-            <p className="px-4 pb-2 pt-3 text-[15px] font-medium text-[#b0893a]">Product categories</p>
+            <p className="px-2 pb-2 pt-3 text-[13px] font-medium text-[#b0893a] sm:px-4 sm:text-[15px]">Product categories</p>
             <button
               type="button"
               onClick={showAll}
               className={`flex w-full items-center justify-between border-b border-l-[3px] border-b-[#f0f0f0] px-2 py-2.5 text-left text-[11px] leading-snug md:px-4 md:py-3 md:text-[14px] ${
                 !filtered
-                  ? "border-l-[#C9A84C] bg-white font-semibold text-[#b0893a] md:bg-[#faf7f2] md:font-medium"
+                  ? "border-l-[#C9A84C] bg-[#faf7f2] font-medium text-[#b0893a]"
                   : "border-l-transparent text-[#222] hover:bg-[#fafafa]"
               }`}
             >
               <span>All products</span>
-              <span className="hidden text-[11px] text-[#999] md:inline">{products.length}</span>
+              <span className="text-[11px] text-[#999]">{products.length}</span>
             </button>
             {shopNowTree.map((c) => {
               const hasChildren = c.children.length > 0;
@@ -155,7 +155,7 @@ export function ShopNowCatalog({
                     onClick={() => toggleParent(c.slug)}
                     className={`flex w-full items-center justify-between gap-1 border-l-[3px] px-2 py-2.5 text-left text-[11px] leading-snug md:px-4 md:py-3 md:text-[14px] ${
                       parentActive
-                        ? "border-l-[#C9A84C] bg-white font-semibold text-[#b0893a] md:bg-[#faf7f2] md:font-medium"
+                        ? "border-l-[#C9A84C] bg-[#faf7f2] font-medium text-[#b0893a]"
                         : inBranch
                           ? "border-l-[#C9A84C]/40 font-medium text-[#222]"
                           : "border-l-transparent text-[#222] hover:bg-[#fafafa]"
@@ -164,9 +164,9 @@ export function ShopNowCatalog({
                     <span className="min-w-0 break-words">{c.name}</span>
                     {hasChildren ? (
                       expanded ? (
-                        <ChevronDown className="hidden h-4 w-4 shrink-0 text-[#bbb] md:block" />
+                        <ChevronDown className="h-4 w-4 shrink-0 text-[#bbb]" />
                       ) : (
-                        <ChevronRight className="hidden h-4 w-4 shrink-0 text-[#bbb] md:block" />
+                        <ChevronRight className="h-4 w-4 shrink-0 text-[#bbb]" />
                       )
                     ) : null}
                   </button>
@@ -187,9 +187,9 @@ export function ShopNowCatalog({
                               <span>{child.name}</span>
                               {types.length > 0 &&
                                 (childOpen ? (
-                                  <ChevronDown className="hidden h-3.5 w-3.5 shrink-0 text-[#bbb] md:block" />
+                                  <ChevronDown className="h-3.5 w-3.5 shrink-0 text-[#bbb]" />
                                 ) : (
-                                  <ChevronRight className="hidden h-3.5 w-3.5 shrink-0 text-[#bbb] md:block" />
+                                  <ChevronRight className="h-3.5 w-3.5 shrink-0 text-[#bbb]" />
                                 ))}
                             </button>
                             {childOpen &&
@@ -218,16 +218,16 @@ export function ShopNowCatalog({
 
         <div className="min-w-0 flex-1 px-4 py-4 md:py-6 lg:px-6">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2 md:mb-4 md:gap-3">
-            <Title className="w-full font-serif text-lg leading-tight text-navy-900 sm:w-auto sm:text-2xl">
+            <Title className="min-w-0 flex-1 font-serif text-lg leading-tight text-navy-900 sm:text-2xl">
               {title}
               <span className="ml-1.5 text-[11px] font-normal text-[#999] sm:ml-2 sm:text-[13px]">({list.length})</span>
             </Title>
-            <div className="flex w-full items-center gap-2 sm:w-auto sm:gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}
                 aria-label="Sort products"
-                className="min-w-0 flex-1 rounded-full border border-[#ddd] bg-white px-3 py-1 text-[12px] sm:flex-none sm:px-4 sm:py-1.5 sm:text-sm"
+                className="min-w-0 rounded-full border border-[#ddd] bg-white px-3 py-1 text-[12px] sm:px-4 sm:py-1.5 sm:text-sm"
               >
                 <option value="new">New</option>
                 <option value="price-asc">Price: Low to high</option>

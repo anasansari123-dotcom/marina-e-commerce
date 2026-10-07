@@ -47,15 +47,15 @@ body {
 }
 
 .btn-gold {
-  @apply inline-flex items-center justify-center rounded-full bg-[#C9A84C] px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#1a1408] transition hover:bg-[#d4b45a] sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em];
+  @apply inline-flex h-11 items-center justify-center rounded-full bg-[#C9A84C] px-5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#1a1408] transition hover:bg-[#d4b45a] sm:h-12 sm:px-7 sm:text-[11px] sm:tracking-[0.18em];
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center rounded-full border border-[#C9A84C] px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#E8D5A3] transition hover:bg-[#C9A84C]/10 sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em];
+  @apply inline-flex h-11 items-center justify-center rounded-full border border-[#C9A84C] px-5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-[#E8D5A3] transition hover:bg-[#C9A84C]/10 sm:h-12 sm:px-7 sm:text-[11px] sm:tracking-[0.18em];
 }
 
 .btn-navy {
-  @apply inline-flex items-center justify-center rounded-full bg-navy-900 px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-cream-50 transition hover:bg-navy-800 sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em];
+  @apply inline-flex h-11 items-center justify-center rounded-full bg-navy-900 px-5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-cream-50 transition hover:bg-navy-800 sm:h-12 sm:px-7 sm:text-[11px] sm:tracking-[0.18em];
 }
 
 .input {

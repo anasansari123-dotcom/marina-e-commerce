@@ -78,10 +78,16 @@ export default function CustomManufacturingPage() {
         alt="Custom Manufacturing — custom brass telescopes and binoculars manufactured in our own factory"
         title="Custom Manufacturing — Custom Brass Telescopes & Binoculars Manufactured in Our Own Factory"
         hotspots={[
-          { href: "/wholesale/quote", label: "Request a Custom Quote", left: 3.6, top: 72.4, width: 26, height: 10.4 },
+          {
+            href: "/wholesale/quote",
+            label: "Request a Custom Quote",
+            left: 3.4,
+            top: 71,
+            width: 26.5,
+            height: 11,
+            mobile: { left: 5, top: 68, width: 80, height: 13 },
+          },
         ]}
-        actions={[{ href: "/wholesale/quote", label: "Request a Custom Quote" }]}
-        mobileActions={false}
       />
 
       <section className="bg-white px-5 py-10 md:py-14">

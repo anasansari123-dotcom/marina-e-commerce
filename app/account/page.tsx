@@ -7,7 +7,7 @@ export default function AccountPage() {
       <p className="mt-2 text-navy-600">Demo customer / wholesale portal.</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {[
-          ["Orders", "No live orders yet — place a demo checkout.", "/cart"],
+          ["Orders", "View confirmed orders and delivery status.", "/account/orders"],
           ["Quotes", "Open a bulk quote for trade pricing.", "/wholesale/quote"],
           ["Wishlist", "Pieces you saved with the heart icon.", "/wishlist"],
           ["Trade desk", "Wholesale home and account application.", "/wholesale"],

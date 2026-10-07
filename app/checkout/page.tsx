@@ -2,28 +2,26 @@
 
 import { formatPrice } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
-import { CheckCircle2 } from "lucide-react";
+import { company } from "@/lib/company";
 import Link from "next/link";
+import Script from "next/script";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function CheckoutPage() {
-  const { items, subtotal, clear } = useCart();
-  const [done, setDone] = useState(false);
-
-  if (done) {
-    return (
-      <div className="mx-auto max-w-xl px-4 py-24 text-center">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-gold-600" />
-        <h1 className="mt-4 font-serif text-3xl md:text-4xl">Order received</h1>
-        <p className="mt-3 text-navy-600">
-          A confirmation is on its way. Brass takes a moment — shipping takes five to seven days.
-        </p>
-        <Link href="/shop" className="btn-navy mt-8">
-          Continue browsing
-        </Link>
-      </div>
-    );
+declare global {
+  interface Window {
+    Razorpay?: new (options: Record<string, unknown>) => { open: () => void };
   }
+}
+
+const SAVED_ORDERS = "marina-muse-orders";
+
+export default function CheckoutPage() {
+  const { items, subtotal, clear, lines } = useCart();
+  const router = useRouter();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [whatsapp, setWhatsapp] = useState(true);
 
   if (items.length === 0) {
     return (
@@ -36,28 +34,117 @@ export default function CheckoutPage() {
     );
   }
 
+  async function pay(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError("");
+    setBusy(true);
+    const form = new FormData(e.currentTarget);
+    try {
+      const res = await fetch("/api/razorpay/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          lines,
+          name: form.get("name"),
+          email: form.get("email"),
+          phone: form.get("phone"),
+          address: form.get("address"),
+          city: form.get("city"),
+          postal: form.get("postal"),
+          country: form.get("country"),
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Could not start payment.");
+      if (!window.Razorpay) throw new Error("Razorpay checkout failed to load.");
+
+      const rzp = new window.Razorpay({
+        key: data.keyId,
+        amount: data.amount,
+        currency: data.currency,
+        name: company.name,
+        description: "Secure international checkout",
+        order_id: data.razorpayOrderId,
+        prefill: { name: data.name, email: data.email, contact: data.phone },
+        theme: { color: "#C9A84C" },
+        handler: async (response: {
+          razorpay_order_id: string;
+          razorpay_payment_id: string;
+          razorpay_signature: string;
+        }) => {
+          const verify = await fetch("/api/razorpay/verify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              orderId: data.orderId,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+          const result = await verify.json();
+          if (!verify.ok) throw new Error(result.error ?? "Payment could not be verified.");
+
+          try {
+            const prev = JSON.parse(localStorage.getItem(SAVED_ORDERS) ?? "[]") as { id: string; token: string }[];
+            localStorage.setItem(
+              SAVED_ORDERS,
+              JSON.stringify([{ id: result.order.id, token: result.token }, ...prev.filter((o) => o.id !== result.order.id)])
+            );
+          } catch {
+            /* ignore */
+          }
+
+          clear();
+          const qs = new URLSearchParams({ order: result.order.id, token: result.token });
+          if (whatsapp && result.whatsappUrl) qs.set("wa", result.whatsappUrl);
+          router.push(`/checkout/confirmation?${qs.toString()}`);
+        },
+      });
+      rzp.open();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Payment failed.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   return (
     <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 lg:grid-cols-2">
-      <form
-        className="space-y-4"
-        onSubmit={(e) => {
-          e.preventDefault();
-          clear();
-          setDone(true);
-        }}
-      >
-        <h1 className="font-serif text-3xl md:text-4xl">Checkout</h1>
-        <input className="input" required placeholder="Full name" />
-        <input className="input" type="email" required placeholder="Email" />
-        <input className="input" required placeholder="Address" />
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
+      <form className="space-y-4" onSubmit={pay}>
+        <h1 className="font-serif text-3xl md:text-4xl">Secure checkout</h1>
+        <p className="text-sm text-navy-600">
+          Pay through Razorpay. Your order is confirmed only after our server verifies the payment.{" "}
+          <Link href="/payment" className="underline decoration-[#C9A84C]">
+            How secure payment works
+          </Link>
+        </p>
+        <input className="input" name="name" required placeholder="Full name" />
+        <input className="input" name="email" type="email" required placeholder="Email" />
+        <input className="input" name="phone" type="tel" required placeholder="Phone / WhatsApp" />
+        <input className="input" name="address" required placeholder="Street address" />
         <div className="grid gap-4 sm:grid-cols-2">
-          <input className="input" required placeholder="City" />
-          <input className="input" required placeholder="Postal code" />
+          <input className="input" name="city" required placeholder="City" />
+          <input className="input" name="postal" required placeholder="Postal code" />
         </div>
-        <input className="input" required placeholder="Country" />
-        <input className="input" required placeholder="Card number (demo)" defaultValue="4242 4242 4242 4242" />
-        <button className="btn-gold w-full">Pay {formatPrice(subtotal)}</button>
-        <p className="text-center text-xs text-navy-500">Demo checkout — no real charge is made.</p>
+        <input className="input" name="country" required placeholder="Country" />
+        <label className="flex items-start gap-2 text-sm text-navy-700">
+          <input
+            type="checkbox"
+            className="mt-1"
+            checked={whatsapp}
+            onChange={(e) => setWhatsapp(e.target.checked)}
+          />
+          Optional: WhatsApp order confirmation after successful payment
+        </label>
+        {error ? <p className="text-sm text-red-700">{error}</p> : null}
+        <button className="btn-gold w-full" type="submit" disabled={busy}>
+          {busy ? "Connecting to Razorpay…" : `Pay ${formatPrice(subtotal)} with Razorpay`}
+        </button>
+        <p className="text-center text-xs text-navy-500">
+          SSL checkout · Cards, UPI, netbanking and wallets as offered by Razorpay
+        </p>
       </form>
       <aside className="h-fit rounded-2xl bg-white p-6 shadow-soft">
         {items.map(({ product, qty }) => (

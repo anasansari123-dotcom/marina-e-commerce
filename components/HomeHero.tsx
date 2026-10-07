@@ -3,64 +3,69 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, RotateCcw, Truck } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const btnBase =
   "inline-flex items-center justify-center whitespace-nowrap rounded-full text-center font-semibold uppercase transition duration-300";
 
+const btnPad =
+  "box-border h-9 w-[11.5rem] px-3 text-[8px] tracking-[0.06em] sm:h-10 sm:w-[13rem] sm:text-[9px] md:h-11 md:w-[14.5rem] md:px-4 md:text-[10px] md:tracking-[0.1em] lg:h-12 lg:w-[16rem] lg:px-6 lg:text-[12px]";
+
+const arrowCls =
+  "absolute top-1/2 z-30 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-[#081525]/50 text-white shadow-[0_4px_16px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-[#081525]/80 sm:h-10 sm:w-10 lg:h-11 lg:w-11";
+
 const slides = [
   {
-    src: "/hero-1.jpeg",
-    alt: "See More. Explore Further. Handcrafted brass telescopes and binoculars on a mountain overlook at sunset",
-    at: { left: "4.2%", top: "61%" },
+    src: "/Banners/1.png",
+    mobileSrc: "/Banners/New Mobile banner/1.png",
+    alt: "See More. Explore Further. Handcrafted brass telescopes, binoculars and nautical treasures",
+    at: { left: "45%", top: "56%", center: true },
     buttons: true,
-    accent: "#E8D5A3",
+    story: true,
+    pos: "sm:object-center",
+    accent: "#C9A84C",
     primaryCls:
       "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff1d0]",
     secondaryCls:
       "border border-[#C9A84C] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#C9A84C]/20",
   },
   {
-    src: "/hero-2.jpeg",
-    alt: "Forged for Collectors. Armour, helmets, diving pieces and brass instruments on a Mediterranean harbour terrace",
-    at: { left: "50%", top: "55%", center: true },
-    pos: "object-[42%_center] sm:object-[46%_center]",
-    accent: "#E08A2C",
+    src: "/Banners/2.png",
+    mobileSrc: "/Banners/New Mobile banner/3.png",
+    alt: "Brass Decor and Lighting Collection — chandeliers, wall sconces, lamps and jewellery",
+    at: { left: "50%", top: "46%", center: true },
+    pos: "sm:object-center",
+    accent: "#D4AF37",
     primaryCls:
-      "bg-[#E08A2C] text-[#1a1208] hover:bg-[#f09a3c]",
+      "bg-[#E8D5A3] text-[#1a1408] hover:bg-[#fff1d0]",
     secondaryCls:
-      "border border-[#E08A2C] bg-[#081525]/35 text-[#F3D5A0] backdrop-blur-sm hover:bg-[#E08A2C]/20",
+      "border border-[#C9A84C] bg-[#081525]/40 text-[#F3E6C8] backdrop-blur-sm hover:bg-[#C9A84C]/20",
   },
   {
-    src: "/hero-3.jpeg",
-    alt: "Brass & Copper for the Table. Hammered copper cookware and brass serveware overlooking the Bosphorus",
-    at: { left: "4.5%", top: "59%" },
+    src: "/Banners/3.png",
+    mobileSrc: "/Banners/New Mobile banner/2.png",
+    alt: "Premium Brass Kitchenware — handcrafted cookware, drinkware and serveware",
+    at: { left: "42%", top: "44%", center: true },
+    pos: "sm:object-center",
     accent: "#C9A227",
     primaryCls:
-      "bg-[#C9A227] text-[#1a1408] hover:bg-[#d4b03a]",
+      "bg-[#E8C97A] text-[#1a1408] hover:bg-[#f3d78a]",
     secondaryCls:
-      "border border-[#B87333] bg-[#081525]/35 text-[#E8C4A0] backdrop-blur-sm hover:bg-[#B87333]/20",
+      "border border-[#C9A84C] bg-[#081525]/40 text-[#F3E6C8] backdrop-blur-sm hover:bg-[#C9A84C]/20",
   },
   {
     src: "/hero-4.jpeg",
+    mobileSrc: "/Banners/New Mobile banner/4.png",
     alt: "Built for Business. Shipped Worldwide. Brass globe, telescope and lanterns with a cargo ship behind",
-    at: { left: "5.5%", top: "57%" },
+    at: { left: "4.8%", top: "56%" },
     buttons: true,
+    mobileDock: true,
+    pos: "sm:object-center",
     accent: "#E0B455",
     primaryCls:
       "bg-[#E0B455] text-[#1a1208] hover:bg-[#ecc46a]",
     secondaryCls:
       "border border-[#E0B455] bg-[#081525]/35 text-[#F3DDA8] backdrop-blur-sm hover:bg-[#E0B455]/20",
-  },
-  {
-    src: "/hero-5.jpeg",
-    alt: "Nautical Décor for Every Room. Study with brass telescope, globe, hourglass, compass and lanterns",
-    at: { left: "17.5%", top: "54%" },
-    accent: "#D4AF37",
-    primaryCls:
-      "bg-[#D4AF37] text-[#1a1408] hover:bg-[#e0c04a]",
-    secondaryCls:
-      "border border-[#D4AF37] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#D4AF37]/20",
   },
 ];
 
@@ -68,14 +73,6 @@ export function HomeHero() {
   const [i, setI] = useState(0);
   const touchX = useRef<number | null>(null);
   const slide = slides[i];
-
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setI((n) => (n === slides.length - 1 ? 0 : n + 1));
-    }, 6000);
-
-    return () => window.clearInterval(id);
-  }, [i]);
 
   function prev() {
     setI((n) => (n === 0 ? slides.length - 1 : n - 1));
@@ -86,18 +83,14 @@ export function HomeHero() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#081525] text-white">
+    <section className="relative isolate bg-[#081525] text-white">
       <h1 className="sr-only">
         Marina Muse International — handcrafted brass, nautical and armour products
       </h1>
 
       {/* ================= MOBILE + DESKTOP BANNER ================= */}
       <div
-        className="
-          relative mx-auto w-full max-w-[1920px]
-          aspect-[2/1] sm:aspect-[1600/633]
-          overflow-hidden
-        "
+        className="relative mx-auto w-full max-w-[1920px] max-sm:overflow-visible sm:aspect-[1600/633] sm:overflow-hidden"
         onTouchStart={(e) => {
           touchX.current = e.touches[0].clientX;
         }}
@@ -114,16 +107,41 @@ export function HomeHero() {
         }}
       >
         {/* SLIDES */}
+        <Image
+          src={slides[0].mobileSrc}
+          alt=""
+          width={1374}
+          height={1145}
+          aria-hidden
+          quality={95}
+          sizes="100vw"
+          className="pointer-events-none block h-auto w-full max-w-full object-contain sm:hidden"
+        />
+        {slides.map((s, idx) => (
+          <Image
+            key={`${s.src}-m`}
+            src={s.mobileSrc}
+            alt={s.alt}
+            fill
+            priority={idx === 0}
+            quality={95}
+            sizes="100vw"
+            className={`object-contain object-center transition-opacity duration-700 sm:hidden ${
+              idx === i ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+          />
+        ))}
         {slides.map((s, idx) => (
           <Image
             key={s.src}
             src={s.src}
-            alt={s.alt}
+            alt=""
             fill
-            priority={idx === 0}
+            aria-hidden
+            quality={95}
             sizes="100vw"
-            className={`object-cover transition-opacity duration-700 ${
-              s.pos ?? "object-left sm:object-center"
+            className={`hidden object-cover transition-opacity duration-700 sm:block ${
+              s.pos ?? "sm:object-center"
             } ${idx === i ? "opacity-100" : "pointer-events-none opacity-0"}`}
           />
         ))}
@@ -132,91 +150,60 @@ export function HomeHero() {
         {slide.buttons && (
           <div
             key={slide.src}
-            className={`absolute z-20 flex animate-fadeIn flex-col items-stretch gap-1 sm:gap-2 md:gap-3 ${
-              slide.at.center ? "-translate-x-1/2" : ""
+            className={`absolute z-20 flex animate-fadeIn flex-col gap-1.5 sm:gap-2 md:gap-3 ${
+              slide.mobileDock
+                ? "bottom-9 left-1/2 w-[min(92%,26rem)] -translate-x-1/2 items-center pt-0 sm:bottom-auto sm:left-[4.8%] sm:top-[56%] sm:w-auto sm:translate-x-0 sm:items-stretch sm:pt-10 md:pt-12"
+                : `left-1/2 top-[54%] -translate-x-1/2 items-center pt-6 sm:left-[45%] sm:top-[56%] sm:pt-10 md:pt-12`
             }`}
-            style={{
-              left: slide.at.left,
-              top: slide.at.top,
-            }}
           >
-            <Link
-              href="/shop"
-              className={`
-                ${btnBase}
-                px-2.5 py-1
-                text-[7px]
-                tracking-[0.04em]
-                shadow-[0_4px_12px_rgba(0,0,0,0.3)]
-
-                sm:px-3 sm:py-1.5
-                sm:text-[9px]
-
-                md:px-4 md:py-2
-                md:text-[10px]
-                md:tracking-[0.1em]
-
-                lg:px-6 lg:py-3
-                lg:text-[12px]
-
-                2xl:px-7 2xl:py-3.5
-                2xl:text-[13px]
-
-                ${slide.primaryCls}
-              `}
+            <div
+              className={`flex ${
+                slide.at.center || slide.mobileDock
+                  ? "flex-row flex-wrap items-center justify-center gap-2 sm:gap-2 md:gap-3"
+                  : "flex-col gap-1 sm:gap-2 md:gap-3"
+              } ${slide.mobileDock ? "sm:flex-col sm:items-stretch sm:justify-start" : ""}`}
             >
-              B2C Retail Collection
-            </Link>
+              <Link
+                href="/shop"
+                className={`${btnBase} ${btnPad} shadow-[0_4px_12px_rgba(0,0,0,0.3)] ${slide.primaryCls}`}
+              >
+                B2C Retail Collection
+              </Link>
+              <Link
+                href="/wholesale"
+                className={`${btnBase} ${btnPad} ${slide.secondaryCls}`}
+              >
+                B2B Wholesale Collection
+              </Link>
+            </div>
 
-            <Link
-              href="/wholesale"
-              className={`
-                ${btnBase}
-                px-2.5 py-1
-                text-[7px]
-                tracking-[0.04em]
-
-                sm:px-3 sm:py-1.5
-                sm:text-[9px]
-
-                md:px-4 md:py-2
-                md:text-[10px]
-                md:tracking-[0.1em]
-
-                lg:px-6 lg:py-3
-                lg:text-[12px]
-
-                2xl:px-7 2xl:py-3.5
-                2xl:text-[13px]
-
-                ${slide.secondaryCls}
-              `}
-            >
-              B2B Wholesale Collection
-            </Link>
+            {slide.story && (
+              <Link
+                href="/about"
+                className={`${btnBase} h-7 w-[8.5rem] bg-transparent px-2 text-[8px] tracking-[0.16em] text-[#FFF6DC] drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] hover:text-white sm:h-9 sm:w-[11rem] sm:text-[9px] md:h-10 md:w-[12.5rem] md:text-[10px] lg:h-11 lg:w-[14rem] lg:text-[11px]`}
+              >
+                Our Story
+              </Link>
+            )}
           </div>
         )}
 
-        {/* DESKTOP ARROWS */}
-        <div className="absolute bottom-3 right-3 z-30 hidden gap-2 sm:flex lg:bottom-5 lg:right-5">
-          <button
-            type="button"
-            aria-label="Previous slide"
-            onClick={prev}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/30 bg-[#081525]/45 text-white backdrop-blur-sm hover:bg-[#081525]/75 lg:h-10 lg:w-10"
-          >
-            <ChevronLeft className="h-4 w-4 lg:h-5 lg:w-5" />
-          </button>
-
-          <button
-            type="button"
-            aria-label="Next slide"
-            onClick={next}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-white/30 bg-[#081525]/45 text-white backdrop-blur-sm hover:bg-[#081525]/75 lg:h-10 lg:w-10"
-          >
-            <ChevronRight className="h-4 w-4 lg:h-5 lg:w-5" />
-          </button>
-        </div>
+        <button
+          type="button"
+          aria-label="Previous slide"
+          onClick={prev}
+          className={`${arrowCls} left-1.5 sm:left-3 lg:left-4`}
+        >
+          <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+        </button>
+        <button
+          type="button"
+          aria-label="Next slide"
+          onClick={next}
+          className={`${arrowCls} right-1.5 sm:right-3 lg:right-4`}
+        >
+          <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+        </button>
 
         {/* DOTS */}
         <div className="absolute bottom-1.5 left-1/2 z-30 flex -translate-x-1/2 gap-1.5 sm:bottom-4 sm:gap-2">

@@ -8,89 +8,90 @@ export type BannerHotspot = {
   top: number;
   width: number;
   height: number;
-};
-
-export type BannerAction = {
-  href: string;
-  label: string;
-  variant?: "gold" | "outline";
+  mobile?: { left: number; top: number; width: number; height: number };
   external?: boolean;
 };
 
-const actionCls = {
-  gold: "bg-gradient-to-b from-[#E8C97A] to-[#C9A84C] text-[#0B1D36] shadow-[0_6px_18px_rgba(201,168,76,0.35)] hover:brightness-105",
-  outline: "border border-[#C9A84C] bg-[#081525]/40 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#C9A84C]/15",
-};
-
-function ActionLink({ a, className }: { a: BannerAction; className: string }) {
-  const cls = `inline-flex items-center justify-center whitespace-nowrap rounded-full font-semibold uppercase transition ${actionCls[a.variant ?? "gold"]} ${className}`;
-  if (a.external) {
+function HotspotLink({
+  h,
+  coords,
+  className,
+}: {
+  h: BannerHotspot;
+  coords: { left: number; top: number; width: number; height: number };
+  className: string;
+}) {
+  const style = {
+    left: `${coords.left}%`,
+    top: `${coords.top}%`,
+    width: `${coords.width}%`,
+    height: `${coords.height}%`,
+  };
+  const cls = `absolute z-10 rounded-full transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8D5A3] ${className}`;
+  if (h.external) {
     return (
-      <a href={a.href} target="_blank" rel="noreferrer" className={cls}>
-        {a.label}
-      </a>
+      <a href={h.href} target="_blank" rel="noreferrer" aria-label={h.label} className={cls} style={style} />
     );
   }
-  return (
-    <Link href={a.href} className={cls}>
-      {a.label}
-    </Link>
-  );
+  return <Link href={h.href} aria-label={h.label} className={cls} style={style} />;
 }
 
 export function BannerHero({
   src,
+  mobileSrc,
   alt,
   title,
   hotspots = [],
-  actions = [],
-  actionsAt,
-  mobileActions = true,
+  mobileFocus = "object-left",
 }: {
   src: string;
+  mobileSrc?: string;
   alt: string;
   title: string;
   hotspots?: BannerHotspot[];
-  actions?: BannerAction[];
-  actionsAt?: { left: number; top: number };
-  mobileActions?: boolean;
+  mobileFocus?: "object-left" | "object-center" | "object-[38%_center]";
 }) {
+  const phoneSrc = mobileSrc ?? src;
+
   return (
     <section className="bg-[#081525]">
       <h1 className="sr-only">{title}</h1>
-      <div className="relative mx-auto aspect-[2/1] w-full max-w-[1920px] overflow-hidden sm:aspect-[1600/633]">
-        <Image src={src} alt={alt} fill priority sizes="100vw" className="object-cover object-left sm:object-center" />
+      <div className="relative mx-auto aspect-[1374/1145] w-full max-w-[1920px] overflow-hidden sm:aspect-[1600/633]">
+        <Image
+          src={phoneSrc}
+          alt={alt}
+          fill
+          priority
+          quality={95}
+          sizes="100vw"
+          className={`${mobileFocus} object-cover sm:hidden`}
+        />
+        <Image
+          src={src}
+          alt=""
+          fill
+          aria-hidden
+          quality={95}
+          sizes="100vw"
+          className="hidden object-cover object-center sm:block"
+        />
         {hotspots.map((h) => (
-          <Link
-            key={h.label}
-            href={h.href}
-            aria-label={h.label}
-            className="absolute z-10 rounded-full transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8D5A3]"
-            style={{ left: `${h.left}%`, top: `${h.top}%`, width: `${h.width}%`, height: `${h.height}%` }}
+          <HotspotLink
+            key={`d-${h.label}`}
+            h={h}
+            coords={h}
+            className="hidden sm:block"
           />
         ))}
-        {actionsAt && actions.length > 0 && (
-          <div
-            className="absolute z-10 hidden items-center gap-3 md:flex"
-            style={{ left: `${actionsAt.left}%`, top: `${actionsAt.top}%` }}
-          >
-            {actions.map((a) => (
-              <ActionLink
-                key={a.label}
-                a={a}
-                className="px-4 py-2 text-[10px] tracking-[0.1em] lg:px-6 lg:py-3 lg:text-[12px] 2xl:px-7 2xl:py-3.5 2xl:text-[13px]"
-              />
-            ))}
-          </div>
-        )}
+        {hotspots.map((h) => (
+          <HotspotLink
+            key={`m-${h.label}`}
+            h={h}
+            coords={h.mobile ?? h}
+            className="sm:hidden"
+          />
+        ))}
       </div>
-      {mobileActions && actions.length > 0 && (
-        <div className="flex flex-wrap items-center justify-center gap-2 px-4 py-3.5 md:hidden">
-          {actions.map((a) => (
-            <ActionLink key={a.label} a={a} className="flex-auto px-4 py-2.5 text-[11px] tracking-[0.08em]" />
-          ))}
-        </div>
-      )}
     </section>
   );
 }
