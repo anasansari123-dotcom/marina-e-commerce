@@ -42,8 +42,6 @@ const columns = [
       ["Contact Us", "/contact"],
       ["Blog", "/blog"],
       ["Shipping", "/shipping"],
-      ["Returns", "/returns"],
-      ["Secure Payment", "/payment"],
     ],
   },
 ];
@@ -84,7 +82,7 @@ function PayBadge({
   return (
     <span
       aria-label={label}
-      className={`inline-flex h-7 w-full min-w-0 items-center justify-center overflow-hidden rounded-[5px] bg-white px-1 shadow-sm sm:w-auto sm:min-w-[2.35rem] sm:px-1.5 ${className ?? ""}`}
+      className={`inline-flex h-7 w-full min-w-0 items-center justify-center overflow-hidden rounded-[5px] bg-white px-1 shadow-sm sm:w-auto sm:min-w-[2.5rem] sm:px-1.5 ${className ?? ""}`}
     >
       {children}
     </span>
@@ -103,9 +101,8 @@ function PaymentMarks() {
           <span className="absolute left-2.5 top-0.5 h-3.5 w-3.5 rounded-full bg-[#F79E1B]/90" />
         </span>
       </PayBadge>
-      <PayBadge label="American Express" className="bg-[#2E77BB]">
-        <span className="text-[8px] font-extrabold tracking-wide text-white sm:hidden">AMEX</span>
-        <span className="hidden text-[7px] font-extrabold leading-none tracking-wide text-white sm:inline">
+      <PayBadge label="American Express" className="!bg-[#2E77BB]">
+        <span className="text-center text-[6.5px] font-extrabold leading-[1.05] tracking-wide text-white sm:text-[7px]">
           AMERICAN
           <br />
           EXPRESS
@@ -128,16 +125,16 @@ export function Footer() {
   return (
     <footer className="mt-auto overflow-x-hidden bg-[#031D38] text-cream-100">
       <div className="border-y border-white/10 bg-[#0D3159]">
-        <div className="mx-auto grid max-w-[1320px] grid-cols-2 gap-x-2 gap-y-3 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 lg:py-5 xl:flex xl:justify-between xl:gap-6">
+        <div className="mx-auto grid max-w-[1320px] grid-cols-2 gap-x-3 gap-y-3 px-4 py-3 md:grid-cols-4 md:gap-5 md:px-5 md:py-5">
           {promises.map((p) => {
             const inner = (
               <>
-                <p.icon className="h-3.5 w-3.5 shrink-0 text-[#C9A84C] sm:mt-0.5 sm:h-5 sm:w-5" />
+                <p.icon className="h-4 w-4 shrink-0 text-[#C9A84C] md:h-5 md:w-5" />
                 <div className="min-w-0">
-                  <p className="whitespace-nowrap text-[9px] font-medium leading-none tracking-tight sm:text-sm sm:tracking-normal">
+                  <p className="whitespace-nowrap text-[9px] font-medium leading-none tracking-tight md:text-[13px] md:tracking-normal">
                     {p.title}
                   </p>
-                  <p className="mt-0.5 truncate text-[8px] leading-snug text-cream-100/60 sm:mt-1 sm:text-xs sm:whitespace-nowrap">
+                  <p className="mt-0.5 truncate text-[8px] leading-snug text-cream-100/60 md:mt-1 md:text-xs">
                     {p.body}
                   </p>
                 </div>
@@ -145,11 +142,11 @@ export function Footer() {
             );
             const toPayment = p.title === "Multiple Payment Options" || p.title === "Secure & Trusted";
             return toPayment ? (
-              <Link key={p.title} href="/payment" className="flex min-w-0 items-start gap-1.5 transition hover:text-[#E8D5A3] sm:items-center sm:gap-3">
+              <Link key={p.title} href="/payment" className="flex min-w-0 items-center gap-2 transition hover:text-[#E8D5A3] md:gap-3">
                 {inner}
               </Link>
             ) : (
-              <div key={p.title} className="flex min-w-0 items-start gap-1.5 sm:items-center sm:gap-3">
+              <div key={p.title} className="flex min-w-0 items-center gap-2 md:gap-3">
                 {inner}
               </div>
             );
@@ -195,7 +192,7 @@ export function Footer() {
       </Link>
 
       <div className="mx-auto max-w-[1320px] px-4 py-4 sm:px-5 sm:py-6 md:py-8">
-        <div className="grid grid-cols-3 gap-x-2.5 gap-y-3 sm:gap-x-6 sm:gap-y-6 lg:grid-cols-4 lg:gap-8">
+        <div className="grid grid-cols-3 gap-x-2 gap-y-3 sm:gap-x-6 sm:gap-y-6 lg:grid-cols-4 lg:gap-8">
           <div className="col-span-3 lg:col-span-1">
             <BrandLogo size="footer" />
             <p className="mt-1.5 max-w-sm text-[11px] leading-snug text-cream-100/70 sm:mt-3 sm:text-sm sm:leading-relaxed">
@@ -210,7 +207,7 @@ export function Footer() {
               <ul className="mt-1.5 space-y-1 sm:mt-3 sm:space-y-2">
                 {col.links.map(([label, href]) => (
                   <li key={`${col.title}-${label}`}>
-                    <Link href={href} className="text-[11px] text-cream-100/75 transition hover:text-[#C9A84C] sm:text-sm">
+                    <Link href={href} className="whitespace-nowrap text-[9px] tracking-tight text-cream-100/75 transition hover:text-[#C9A84C] sm:text-sm sm:tracking-normal">
                       {label}
                     </Link>
                   </li>

@@ -180,7 +180,7 @@ export function HomeHero() {
             {slide.story && (
               <Link
                 href="/about"
-                className={`${btnBase} h-7 w-[8.5rem] bg-transparent px-2 text-[8px] tracking-[0.16em] text-[#FFF6DC] drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] hover:text-white sm:h-9 sm:w-[11rem] sm:text-[9px] md:h-10 md:w-[12.5rem] md:text-[10px] lg:h-11 lg:w-[14rem] lg:text-[11px]`}
+                className={`${btnBase} hidden h-7 w-[8.5rem] bg-transparent px-2 text-[8px] tracking-[0.16em] text-[#FFF6DC] drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] hover:text-white sm:inline-flex sm:h-9 sm:w-[11rem] sm:text-[9px] md:h-10 md:w-[12.5rem] md:text-[10px] lg:h-11 lg:w-[14rem] lg:text-[11px]`}
               >
                 Our Story
               </Link>
@@ -192,7 +192,7 @@ export function HomeHero() {
           type="button"
           aria-label="Previous slide"
           onClick={prev}
-          className={`${arrowCls} left-1.5 sm:left-3 lg:left-4`}
+          className={`${arrowCls} hidden left-1.5 sm:left-3 sm:flex lg:left-4`}
         >
           <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
@@ -200,7 +200,7 @@ export function HomeHero() {
           type="button"
           aria-label="Next slide"
           onClick={next}
-          className={`${arrowCls} right-1.5 sm:right-3 lg:right-4`}
+          className={`${arrowCls} hidden right-1.5 sm:right-3 sm:flex lg:right-4`}
         >
           <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
