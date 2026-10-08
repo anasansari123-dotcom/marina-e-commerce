@@ -5,27 +5,29 @@ export default function WholesalePage() {
   return (
     <div className="bg-[#FAF7F2]">
       <BannerHero
-        src="/b2b-banner.jpeg"
-        alt="B2B / Wholesale — Built for Businesses, Priced for Volume. Cargo port at sunset."
+        src="/b2bnew.jpeg"
+        mobileSrc="/mobile/wholesale.png"
+        mobileAspect="1145/1374"
+        alt="B2B / Wholesale — Built for Businesses, Priced for Volume."
         title="B2B Wholesale — Built for Businesses. Priced for Volume."
         hotspots={[
           {
             href: "/wholesale/register",
             label: "Create Wholesale Account",
-            left: 4.2,
-            top: 51,
-            width: 26,
-            height: 11,
-            mobile: { left: 6, top: 48, width: 78, height: 13 },
+            left: 13.5,
+            top: 57.6,
+            width: 24.7,
+            height: 10.2,
+            mobile: { left: 8.1, top: 33.7, width: 44.4, height: 5.55 },
           },
           {
             href: "/login",
             label: "Login",
-            left: 3.8,
-            top: 63,
-            width: 20,
-            height: 8,
-            mobile: { left: 6, top: 62, width: 70, height: 11 },
+            left: 26.9,
+            top: 71.8,
+            width: 4.5,
+            height: 3.7,
+            mobile: { left: 31.8, top: 41.7, width: 9.6, height: 3.2 },
           },
         ]}
       />

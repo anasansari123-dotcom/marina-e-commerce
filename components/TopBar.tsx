@@ -18,10 +18,13 @@ export function TopBar() {
             Custom Manufacturing
           </span>
         </div>
-        <p className="flex min-w-0 flex-1 items-center gap-1.5 truncate pr-2 md:hidden">
-          <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
-          Premium Quality
-        </p>
+        <Link
+          href="/custom-manufacturing"
+          className="flex min-w-0 flex-1 items-center gap-1.5 truncate pr-2 text-[#d9c9a3] hover:text-[#C9A84C] md:hidden"
+        >
+          <Sparkles className="h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
+          Custom Manufacturing
+        </Link>
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <LanguageSwitcher />
           <span className="text-white/20">|</span>

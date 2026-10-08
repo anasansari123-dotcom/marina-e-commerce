@@ -74,10 +74,20 @@ const config: Config = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        storyRing: {
+          "0%": { transform: "scale(1)", opacity: "0.65" },
+          "100%": { transform: "scale(1.9)", opacity: "0" },
+        },
+        storyPulse: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.07)" },
+        },
       },
       animation: {
         marquee: "marquee 38s linear infinite",
         fadeIn: "fadeIn 0.6s ease",
+        "story-ring": "storyRing 2s cubic-bezier(0.22, 1, 0.36, 1) infinite",
+        "story-pulse": "storyPulse 2s ease-in-out infinite",
       },
       backgroundImage: {
         "navy-texture":

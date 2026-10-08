@@ -14,9 +14,9 @@ export default function BlogPage() {
     <div className="bg-[#FAF7F2]">
       <BannerHero
         src="/blog-slide.jpeg"
+        mobileSrc="/mobile/blog.png"
         alt="Marina Muse blog — craft, collections and trade from the atelier"
         title="Blog"
-        mobileFocus="object-left"
       />
       <section className="px-5 py-10 md:py-12">
         <div className="mx-auto grid max-w-[1100px] gap-8 md:grid-cols-3">

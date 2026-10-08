@@ -80,7 +80,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .animate-story-ring,
+  .animate-story-pulse {
     animation: none !important;
   }
 }

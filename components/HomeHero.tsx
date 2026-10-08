@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, RotateCcw, Truck } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play, RotateCcw, Truck } from "lucide-react";
 import { useRef, useState } from "react";
 
 const btnBase =
@@ -17,11 +17,10 @@ const arrowCls =
 const slides = [
   {
     src: "/Banners/1.png",
-    mobileSrc: "/Banners/New Mobile banner/1.png",
+    mobileSrc: "/mobile1.jpeg",
     alt: "See More. Explore Further. Handcrafted brass telescopes, binoculars and nautical treasures",
     at: { left: "45%", top: "56%", center: true },
     buttons: true,
-    story: true,
     pos: "sm:object-center",
     accent: "#C9A84C",
     primaryCls:
@@ -31,7 +30,7 @@ const slides = [
   },
   {
     src: "/Banners/2.png",
-    mobileSrc: "/Banners/New Mobile banner/3.png",
+    mobileSrc: "/mobile/decor.png",
     alt: "Brass Decor and Lighting Collection — chandeliers, wall sconces, lamps and jewellery",
     at: { left: "50%", top: "46%", center: true },
     pos: "sm:object-center",
@@ -43,7 +42,7 @@ const slides = [
   },
   {
     src: "/Banners/3.png",
-    mobileSrc: "/Banners/New Mobile banner/2.png",
+    mobileSrc: "/mobile/kitchen.png",
     alt: "Premium Brass Kitchenware — handcrafted cookware, drinkware and serveware",
     at: { left: "42%", top: "44%", center: true },
     pos: "sm:object-center",
@@ -55,7 +54,7 @@ const slides = [
   },
   {
     src: "/hero-4.jpeg",
-    mobileSrc: "/Banners/New Mobile banner/4.png",
+    mobileSrc: "/mobile/business.png",
     alt: "Built for Business. Shipped Worldwide. Brass globe, telescope and lanterns with a cargo ship behind",
     at: { left: "4.8%", top: "56%" },
     buttons: true,
@@ -146,14 +145,32 @@ export function HomeHero() {
           />
         ))}
 
+        {i === 0 && (
+          <Link
+            href="/about"
+            className="group absolute left-1/2 top-[52%] z-20 flex -translate-x-[38%] items-center gap-2 sm:left-[80%] sm:top-[42%] sm:-translate-x-1/2 sm:gap-4 md:top-[43%]"
+          >
+            <span className="relative grid h-8 w-8 place-items-center sm:h-12 sm:w-12 md:h-[3.25rem] md:w-[3.25rem] lg:h-16 lg:w-16">
+              <span className="absolute inset-0 rounded-full bg-[#F3E6C8]/70 animate-story-ring group-hover:[animation-play-state:paused]" />
+              <span className="absolute inset-0 rounded-full bg-[#C9A84C]/50 animate-story-ring [animation-delay:1s] group-hover:[animation-play-state:paused]" />
+              <span className="relative z-10 grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-[#FFF1D0] via-[#E8C97A] to-[#C9A84C] text-[#0B1D36] ring-2 ring-white/90 shadow-[0_0_28px_rgba(232,201,122,0.85)] transition animate-story-pulse group-hover:from-[#fff8e4] group-hover:via-[#f0d48a] group-hover:[animation-play-state:paused]">
+                <Play className="ml-0.5 h-3.5 w-3.5 fill-current sm:h-5 sm:w-5 lg:h-7 lg:w-7" />
+              </span>
+            </span>
+            <span className="font-serif text-[13px] font-medium tracking-[0.04em] text-[#FFF6DC] underline decoration-[#C9A84C] decoration-2 underline-offset-[4px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition group-hover:text-white group-hover:decoration-[#E8C97A] sm:text-[17px] md:text-[19px] lg:text-[22px]">
+              Watch Our Story
+            </span>
+          </Link>
+        )}
+
         {/* BUTTONS */}
         {slide.buttons && (
           <div
             key={slide.src}
-            className={`absolute z-20 flex animate-fadeIn flex-col gap-1.5 sm:gap-2 md:gap-3 ${
+            className={`absolute z-20 hidden animate-fadeIn flex-col gap-1.5 sm:flex sm:gap-2 md:gap-3 ${
               slide.mobileDock
-                ? "bottom-9 left-1/2 w-[min(92%,26rem)] -translate-x-1/2 items-center pt-0 sm:bottom-auto sm:left-[4.8%] sm:top-[56%] sm:w-auto sm:translate-x-0 sm:items-stretch sm:pt-10 md:pt-12"
-                : `left-1/2 top-[54%] -translate-x-1/2 items-center pt-6 sm:left-[45%] sm:top-[56%] sm:pt-10 md:pt-12`
+                ? "sm:bottom-auto sm:left-[4.8%] sm:top-[52%] sm:w-auto sm:translate-x-0 sm:items-stretch sm:pt-8 md:pt-12 lg:pt-14"
+                : `sm:left-[46%] sm:top-[51%] sm:items-center sm:-translate-x-1/2 sm:pt-1 md:pt-2`
             }`}
           >
             <div
@@ -177,14 +194,6 @@ export function HomeHero() {
               </Link>
             </div>
 
-            {slide.story && (
-              <Link
-                href="/about"
-                className={`${btnBase} hidden h-7 w-[8.5rem] bg-transparent px-2 text-[8px] tracking-[0.16em] text-[#FFF6DC] drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)] hover:text-white sm:inline-flex sm:h-9 sm:w-[11rem] sm:text-[9px] md:h-10 md:w-[12.5rem] md:text-[10px] lg:h-11 lg:w-[14rem] lg:text-[11px]`}
-              >
-                Our Story
-              </Link>
-            )}
           </div>
         )}
 
@@ -249,6 +258,23 @@ export function HomeHero() {
             <span className="mt-0.5 block text-[10px] leading-tight text-[#031D38]/75 sm:text-[12px]">14-day return support</span>
           </span>
         </Link>
+      </div>
+
+      <div className="border-t border-[#C9A84C]/30 bg-[#031D38] px-3 py-2.5 sm:hidden">
+        <div className="grid grid-cols-2 gap-2">
+          <Link
+            href="/shop"
+            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#C9A84C] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#1a1408]"
+          >
+            B2C Retail Collection
+          </Link>
+          <Link
+            href="/wholesale"
+            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full border border-[#C9A84C] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#E8D5A3]"
+          >
+            B2B Wholesale Collection
+          </Link>
+        </div>
       </div>
     </section>
   );

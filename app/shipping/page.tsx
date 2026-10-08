@@ -41,6 +41,7 @@ export default function ShippingPage() {
     <div className="bg-white">
       <BannerHero
         src="/shipping-banner.jpeg"
+        mobileSrc="/mobile/shipping.png"
         alt="Shipping — we deliver your orders worldwide by air and sea. Cargo ship, aircraft and truck at port"
         title="Shipping — We deliver your orders worldwide"
       />

@@ -38,9 +38,9 @@ export default function PaymentPage() {
     <div className="bg-[#FAF7F2]">
       <BannerHero
         src="/secure-payment-banner.png"
+        mobileSrc="/mobile/payment.png"
         alt="Secure International Payment — shop with confidence through Razorpay"
         title="Secure International Payment"
-        mobileFocus="object-[38%_center]"
       />
 
       <section className="px-5 py-10 md:py-14">

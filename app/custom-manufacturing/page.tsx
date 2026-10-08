@@ -75,17 +75,18 @@ export default function CustomManufacturingPage() {
     <div className="bg-white">
       <BannerHero
         src="/custom-manufacturing-banner.jpeg"
+        mobileSrc="/mobile/custom.png"
         alt="Custom Manufacturing — custom brass telescopes and binoculars manufactured in our own factory"
         title="Custom Manufacturing — Custom Brass Telescopes & Binoculars Manufactured in Our Own Factory"
         hotspots={[
           {
             href: "/wholesale/quote",
             label: "Request a Custom Quote",
-            left: 3.4,
-            top: 71,
-            width: 26.5,
-            height: 11,
-            mobile: { left: 5, top: 68, width: 80, height: 13 },
+            left: 4.05,
+            top: 73.2,
+            width: 24.9,
+            height: 9.3,
+            mobile: { left: 5.2, top: 50.75, width: 36.4, height: 6.15 },
           },
         ]}
       />

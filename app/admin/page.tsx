@@ -152,7 +152,7 @@ export default function AdminPage() {
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-20 flex items-center gap-3 border-b border-[#e6dfd2] bg-[#FAF7F2]/95 px-4 py-3 backdrop-blur md:px-8">
+        <header className="sticky top-0 z-20 flex flex-wrap items-center gap-3 border-b border-[#e6dfd2] bg-[#FAF7F2]/95 px-4 py-3 backdrop-blur md:px-8">
           <button
             type="button"
             className="grid h-9 w-9 place-items-center rounded-lg border border-[#e6dfd2] bg-white lg:hidden"
@@ -165,24 +165,24 @@ export default function AdminPage() {
             <p className="text-[10px] uppercase tracking-[0.22em] text-[#8C6E28]">Marina Muse</p>
             <h1 className="truncate font-serif text-2xl text-navy-900 md:text-[1.85rem]">{title}</h1>
           </div>
-          <div className="relative hidden min-w-[220px] max-w-sm flex-1 md:block">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-400" />
-            <input
-              className="input pl-9"
-              placeholder="Search SKU, order, customer…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-          <button type="button" className="relative grid h-9 w-9 place-items-center rounded-full border border-[#e6dfd2] bg-white" aria-label="Notifications">
+          <button type="button" className="relative order-3 grid h-9 w-9 place-items-center rounded-full border border-[#e6dfd2] bg-white lg:order-4" aria-label="Notifications">
             <Bell className="h-4 w-4 text-navy-700" />
             <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-[#C9A84C]" />
           </button>
-          <div className="hidden items-center gap-2 rounded-full border border-[#e6dfd2] bg-white py-1 pl-1 pr-3 sm:flex">
+          <div className="order-4 hidden items-center gap-2 rounded-full border border-[#e6dfd2] bg-white py-1 pl-1 pr-3 sm:flex lg:order-5">
             <span className="grid h-7 w-7 place-items-center rounded-full bg-[#0B1D36] text-[10px] font-semibold text-[#C9A84C]">
               MM
             </span>
             <span className="text-xs font-medium text-navy-800">Admin</span>
+          </div>
+          <div className="relative order-5 w-full min-w-0 lg:order-3 lg:max-w-sm lg:flex-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-navy-500" />
+            <input
+              className="w-full rounded-lg border border-[#e6dfd2] bg-white py-2.5 pl-10 pr-4 text-sm text-navy-900 outline-none placeholder:text-navy-500/40 focus:ring-2 focus:ring-[#C9A84C]/30"
+              placeholder="Search SKU, order, customer…"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
           </div>
         </header>
 

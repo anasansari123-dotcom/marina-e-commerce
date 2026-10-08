@@ -85,6 +85,7 @@ export default function AboutPage() {
     <div className="bg-[#FAF7F2]">
       <BannerHero
         src="/about-banner.jpeg"
+        mobileSrc="/mobile/about.png"
         alt="About Marina Muse International — exporter, manufacturer & supplier of handcrafted nautical, brass and armour products from Roorkee, India"
         title="About Marina Muse International"
       />

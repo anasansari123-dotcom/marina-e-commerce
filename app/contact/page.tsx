@@ -15,6 +15,7 @@ export default function ContactPage() {
     <div className="bg-[#FAF7F2]">
       <BannerHero
         src="/contact-banner.jpeg"
+        mobileSrc="/mobile/contact.png"
         alt="Contact us — Atelier & trade desk. Brass globe, binoculars and compass on a desk"
         title="Contact us — Atelier & trade desk"
       />

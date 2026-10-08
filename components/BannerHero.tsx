@@ -27,7 +27,7 @@ function HotspotLink({
     width: `${coords.width}%`,
     height: `${coords.height}%`,
   };
-  const cls = `absolute z-10 rounded-full transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E8D5A3] ${className}`;
+  const cls = `absolute z-10 cursor-pointer rounded-full bg-transparent hover:bg-transparent focus-visible:outline-none ${className}`;
   if (h.external) {
     return (
       <a href={h.href} target="_blank" rel="noreferrer" aria-label={h.label} className={cls} style={style} />
@@ -43,6 +43,7 @@ export function BannerHero({
   title,
   hotspots = [],
   mobileFocus = "object-left",
+  mobileAspect = "1374/1145",
 }: {
   src: string;
   mobileSrc?: string;
@@ -50,13 +51,19 @@ export function BannerHero({
   title: string;
   hotspots?: BannerHotspot[];
   mobileFocus?: "object-left" | "object-center" | "object-[38%_center]";
+  mobileAspect?: "1374/1145" | "1145/1374";
 }) {
   const phoneSrc = mobileSrc ?? src;
+  const hasMobileArt = Boolean(mobileSrc);
 
   return (
     <section className="bg-[#081525]">
       <h1 className="sr-only">{title}</h1>
-      <div className="relative mx-auto aspect-[1374/1145] w-full max-w-[1920px] overflow-hidden sm:aspect-[1600/633]">
+      <div
+        className={`relative mx-auto w-full max-w-[1920px] overflow-hidden sm:aspect-[1600/633] ${
+          mobileAspect === "1145/1374" ? "aspect-[1145/1374]" : "aspect-[1374/1145]"
+        }`}
+      >
         <Image
           src={phoneSrc}
           alt={alt}
@@ -64,7 +71,9 @@ export function BannerHero({
           priority
           quality={95}
           sizes="100vw"
-          className={`${mobileFocus} object-cover sm:hidden`}
+          className={`sm:hidden ${
+            hasMobileArt ? "object-contain object-center" : `${mobileFocus} object-cover`
+          }`}
         />
         <Image
           src={src}
