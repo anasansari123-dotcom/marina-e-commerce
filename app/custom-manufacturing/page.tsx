@@ -141,20 +141,18 @@ export default function CustomManufacturingPage() {
         <div className="absolute inset-0 bg-[#0B1D36]/55" />
         <div className="relative mx-auto max-w-[1200px]">
           <h2 className="text-center font-serif text-[1.65rem] leading-snug md:text-4xl">Our Custom Manufacturing Process</h2>
-          <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 md:flex md:flex-wrap md:items-start md:justify-center md:gap-y-8">
+          <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-8 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-0">
             {process.map((step, i) => (
-              <div key={step.title} className="flex items-start justify-center">
-                <div className="w-full text-center md:w-[160px]">
-                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#C9A84C] text-[#0B1D36] md:h-[72px] md:w-[72px]">
-                    <step.icon className="h-6 w-6 md:h-7 md:w-7" strokeWidth={1.75} />
-                  </div>
-                  <p className="mt-3 text-sm font-semibold md:mt-4">
-                    {step.n}. {step.title}
-                  </p>
-                  <p className="mt-1 text-[12px] leading-relaxed text-white/75">{step.body}</p>
+              <div key={step.title} className="relative text-center lg:px-2">
+                <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#C9A84C] text-[#0B1D36] md:h-[72px] md:w-[72px]">
+                  <step.icon className="h-6 w-6 md:h-7 md:w-7" strokeWidth={1.75} />
                 </div>
+                <p className="mt-3 text-sm font-semibold leading-snug md:mt-4">
+                  {step.n}. {step.title}
+                </p>
+                <p className="mt-1 text-[12px] leading-relaxed text-white/75">{step.body}</p>
                 {i < process.length - 1 ? (
-                  <ArrowRight className="mt-6 hidden h-5 w-5 shrink-0 text-[#C9A84C] md:mx-1 lg:mx-2 lg:block" />
+                  <ArrowRight className="pointer-events-none absolute -right-1 top-6 hidden h-4 w-4 text-[#C9A84C] lg:block" />
                 ) : null}
               </div>
             ))}
@@ -179,11 +177,11 @@ export default function CustomManufacturingPage() {
             <p className="mt-6 leading-relaxed text-navy-600">
               Let’s grow together. We offer competitive pricing for bulk and long-term orders.
             </p>
-            <div className="mx-auto mt-8 grid w-full max-w-sm gap-3 sm:w-fit sm:grid-cols-2">
-              <Link href="/wholesale" className="btn-gold w-full">
+            <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link href="/wholesale" className="btn-gold whitespace-nowrap">
                 Wholesale collection
               </Link>
-              <Link href="/wholesale/quote" className="btn-navy w-full">
+              <Link href="/wholesale/quote" className="btn-navy whitespace-nowrap">
                 Request a Custom Quote
               </Link>
             </div>
@@ -210,18 +208,18 @@ export default function CustomManufacturingPage() {
           <p className="mt-4 text-white/80">
             Tell us what you need. Our team will review your requirements and provide a quotation.
           </p>
-          <div className="mx-auto mt-8 grid w-full max-w-sm gap-3 sm:w-fit sm:grid-cols-2">
-            <Link href="/wholesale/quote" className="btn-gold w-full gap-2">
+          <div className="mx-auto mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link href="/wholesale/quote" className="btn-gold gap-2 whitespace-nowrap px-5 sm:px-6">
               Request a Custom Quote
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
             <a
               href={WHATSAPP}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-2.5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[#20bd5a] sm:px-7 sm:py-3 sm:text-[11px] sm:tracking-[0.18em]"
+              className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#25D366] px-5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[#20bd5a] sm:h-12 sm:px-6 sm:text-[11px] sm:tracking-[0.18em]"
             >
-              <WhatsAppIcon className="h-4 w-4 text-white" />
+              <WhatsAppIcon className="h-4 w-4 shrink-0 text-white" />
               WhatsApp Us
             </a>
           </div>

@@ -24,9 +24,9 @@ const slides = [
     pos: "sm:object-center",
     accent: "#C9A84C",
     primaryCls:
-      "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff1d0]",
+      "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff6e4]",
     secondaryCls:
-      "border border-[#C9A84C] bg-[#081525]/35 text-[#E8D5A3] backdrop-blur-sm hover:bg-[#C9A84C]/20",
+      "bg-[#0B1D36] text-[#F3E6C8] hover:bg-[#152a4a]",
   },
   {
     src: "/Banners/2.png",
@@ -62,9 +62,9 @@ const slides = [
     pos: "sm:object-center",
     accent: "#E0B455",
     primaryCls:
-      "bg-[#E0B455] text-[#1a1208] hover:bg-[#ecc46a]",
+      "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff6e4]",
     secondaryCls:
-      "border border-[#E0B455] bg-[#081525]/35 text-[#F3DDA8] backdrop-blur-sm hover:bg-[#E0B455]/20",
+      "bg-[#0B1D36] text-[#F3E6C8] hover:bg-[#152a4a]",
   },
 ];
 
@@ -151,13 +151,13 @@ export function HomeHero() {
             className="group absolute left-1/2 top-[52%] z-20 flex -translate-x-[38%] items-center gap-2 sm:left-[80%] sm:top-[42%] sm:-translate-x-1/2 sm:gap-4 md:top-[43%]"
           >
             <span className="relative grid h-8 w-8 place-items-center sm:h-12 sm:w-12 md:h-[3.25rem] md:w-[3.25rem] lg:h-16 lg:w-16">
-              <span className="absolute inset-0 rounded-full bg-[#F3E6C8]/70 animate-story-ring group-hover:[animation-play-state:paused]" />
-              <span className="absolute inset-0 rounded-full bg-[#C9A84C]/50 animate-story-ring [animation-delay:1s] group-hover:[animation-play-state:paused]" />
-              <span className="relative z-10 grid h-full w-full place-items-center rounded-full bg-gradient-to-br from-[#FFF1D0] via-[#E8C97A] to-[#C9A84C] text-[#0B1D36] ring-2 ring-white/90 shadow-[0_0_28px_rgba(232,201,122,0.85)] transition animate-story-pulse group-hover:from-[#fff8e4] group-hover:via-[#f0d48a] group-hover:[animation-play-state:paused]">
+              <span className="absolute inset-0 rounded-full bg-[#F6BE52]/50 animate-story-ring group-hover:[animation-play-state:paused]" />
+              <span className="absolute inset-0 rounded-full bg-[#FFD56A]/40 animate-story-ring [animation-delay:1s] group-hover:[animation-play-state:paused]" />
+              <span className="relative z-10 grid h-full w-full place-items-center rounded-full bg-[#F6BE52] text-[#0B1D36] ring-2 ring-[#FFE7A8]/90 shadow-[0_0_28px_rgba(246,190,82,0.85)] transition animate-story-pulse group-hover:bg-[#ffd56a] group-hover:[animation-play-state:paused]">
                 <Play className="ml-0.5 h-3.5 w-3.5 fill-current sm:h-5 sm:w-5 lg:h-7 lg:w-7" />
               </span>
             </span>
-            <span className="font-serif text-[13px] font-medium tracking-[0.04em] text-[#FFF6DC] underline decoration-[#C9A84C] decoration-2 underline-offset-[4px] drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] transition group-hover:text-white group-hover:decoration-[#E8C97A] sm:text-[17px] md:text-[19px] lg:text-[22px]">
+            <span className="font-serif text-[13px] font-medium tracking-[0.04em] text-[#0B1D36] underline decoration-[#0B1D36] decoration-2 underline-offset-[4px] drop-shadow-[0_1px_4px_rgba(255,255,255,0.35)] transition group-hover:text-[#152a4a] group-hover:decoration-[#152a4a] sm:text-[17px] md:text-[19px] lg:text-[22px]">
               Watch Our Story
             </span>
           </Link>
@@ -264,13 +264,13 @@ export function HomeHero() {
         <div className="grid grid-cols-2 gap-2">
           <Link
             href="/shop"
-            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#C9A84C] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#1a1408]"
+            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#F3E6C8] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#0B1D36]"
           >
             B2C Retail Collection
           </Link>
           <Link
             href="/wholesale"
-            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full border border-[#C9A84C] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#E8D5A3]"
+            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#0B1D36] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#F3E6C8] ring-1 ring-[#F3E6C8]/70"
           >
             B2B Wholesale Collection
           </Link>
