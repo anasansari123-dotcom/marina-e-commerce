@@ -15,16 +15,13 @@ export function TopBar() {
           <span className="text-white/20">|</span>
           <span className="inline-flex items-center gap-1.5">
             <Sparkles className="h-3 w-3 text-[#C9A84C]" />
-            Custom Manufacturing
+            Handcrafted & Made in Our Own Factory
           </span>
         </div>
-        <Link
-          href="/custom-manufacturing"
-          className="flex min-w-0 flex-1 items-center gap-1.5 truncate pr-2 text-[#d9c9a3] hover:text-[#C9A84C] md:hidden"
-        >
+        <span className="flex min-w-0 flex-1 items-center gap-1.5 truncate pr-2 text-[#d9c9a3] md:hidden">
           <Sparkles className="h-3.5 w-3.5 shrink-0 text-[#C9A84C]" />
-          Custom Manufacturing
-        </Link>
+          Handcrafted & Made in Our Own Factory
+        </span>
         <div className="flex shrink-0 items-center gap-2 sm:gap-4">
           <LanguageSwitcher />
           <span className="text-white/20">|</span>

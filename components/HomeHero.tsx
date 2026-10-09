@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Play, RotateCcw, Truck } from "lucide-react";
+import { Briefcase, ChevronLeft, ChevronRight, Play, RotateCcw, ShoppingBag, Truck } from "lucide-react";
 import { useRef, useState } from "react";
 
 const btnBase =
   "inline-flex items-center justify-center whitespace-nowrap rounded-full text-center font-semibold uppercase transition duration-300";
 
 const btnPad =
-  "box-border h-9 w-[11.5rem] px-3 text-[8px] tracking-[0.06em] sm:h-10 sm:w-[13rem] sm:text-[9px] md:h-11 md:w-[14.5rem] md:px-4 md:text-[10px] md:tracking-[0.1em] lg:h-12 lg:w-[16rem] lg:px-6 lg:text-[12px]";
+  "box-border h-8 w-[10rem] px-2.5 text-[7.5px] tracking-[0.05em] sm:h-9 sm:w-[11.25rem] sm:text-[8px] md:h-9 md:w-[12.25rem] md:px-3 md:text-[9px] md:tracking-[0.08em] lg:h-10 lg:w-[13.5rem] lg:px-4 lg:text-[10px]";
 
 const arrowCls =
   "absolute top-1/2 z-30 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-white/35 bg-[#081525]/50 text-white shadow-[0_4px_16px_rgba(0,0,0,0.28)] backdrop-blur-sm transition hover:bg-[#081525]/80 sm:h-10 sm:w-10 lg:h-11 lg:w-11";
@@ -26,7 +26,7 @@ const slides = [
     primaryCls:
       "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff6e4]",
     secondaryCls:
-      "bg-[#0B1D36] text-[#F3E6C8] hover:bg-[#152a4a]",
+      "bg-[#C9A84C] text-[#0B1D36] hover:bg-[#d4b45a]",
   },
   {
     src: "/Banners/2.png",
@@ -64,7 +64,7 @@ const slides = [
     primaryCls:
       "bg-[#F3E6C8] text-[#0B1D36] hover:bg-[#fff6e4]",
     secondaryCls:
-      "bg-[#0B1D36] text-[#F3E6C8] hover:bg-[#152a4a]",
+      "bg-[#C9A84C] text-[#0B1D36] hover:bg-[#d4b45a]",
   },
 ];
 
@@ -260,21 +260,27 @@ export function HomeHero() {
         </Link>
       </div>
 
-      <div className="border-t border-[#C9A84C]/30 bg-[#031D38] px-3 py-2.5 sm:hidden">
-        <div className="grid grid-cols-2 gap-2">
-          <Link
-            href="/shop"
-            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#F3E6C8] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#0B1D36]"
-          >
-            B2C Retail Collection
-          </Link>
-          <Link
-            href="/wholesale"
-            className="inline-flex h-8 min-w-0 items-center justify-center overflow-hidden whitespace-nowrap rounded-full bg-[#0B1D36] px-2 text-[6.5px] font-semibold uppercase leading-none tracking-normal text-[#F3E6C8] ring-1 ring-[#F3E6C8]/70"
-          >
-            B2B Wholesale Collection
-          </Link>
-        </div>
+      <div className="grid grid-cols-2 divide-x divide-[#C9A84C]/35 border-t border-[#C9A84C]/40 bg-[#031D38] text-[#F3E6C8] sm:hidden">
+        <Link
+          href="/shop"
+          className="flex items-center justify-center gap-2 px-2 py-2.5 transition hover:bg-[#0B1D36]"
+        >
+          <ShoppingBag className="h-5 w-5 shrink-0 text-[#C9A84C]" strokeWidth={1.7} />
+          <span className="min-w-0 text-left">
+            <span className="block text-[12px] font-semibold leading-tight">B2C Retail Collection</span>
+            <span className="mt-0.5 block text-[10px] leading-tight text-[#F3E6C8]/70">Shop handcrafted pieces</span>
+          </span>
+        </Link>
+        <Link
+          href="/wholesale"
+          className="flex items-center justify-center gap-2 px-2 py-2.5 transition hover:bg-[#0B1D36]"
+        >
+          <Briefcase className="h-5 w-5 shrink-0 text-[#C9A84C]" strokeWidth={1.7} />
+          <span className="min-w-0 text-left">
+            <span className="block text-[12px] font-semibold leading-tight">B2B Wholesale Collection</span>
+            <span className="mt-0.5 block text-[10px] leading-tight text-[#F3E6C8]/70">Volume pricing for business</span>
+          </span>
+        </Link>
       </div>
     </section>
   );
