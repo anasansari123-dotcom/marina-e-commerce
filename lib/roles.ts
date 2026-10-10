@@ -1,0 +1,15 @@
+import type { UserRole } from "@/lib/db/types";
+
+export const adminEmailsList = () =>
+  (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+
+const adminEmails = adminEmailsList;
+
+export function resolveRole(email: string, requested?: UserRole): UserRole {
+  if (adminEmails().includes(email.toLowerCase())) return "admin";
+  if (requested === "wholesale") return "wholesale";
+  return "customer";
+}

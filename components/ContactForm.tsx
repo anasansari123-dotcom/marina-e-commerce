@@ -6,6 +6,8 @@ import { useState } from "react";
 export function ContactForm() {
   const [done, setDone] = useState(false);
   const [kind, setKind] = useState<"retail" | "wholesale">("retail");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (done) {
     return (
@@ -20,8 +22,30 @@ export function ContactForm() {
   return (
     <form
       className="rounded-3xl bg-white p-6 shadow-soft md:p-10"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
+        setError("");
+        setLoading(true);
+        const fd = new FormData(e.currentTarget);
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            kind,
+            name: fd.get("name"),
+            email: fd.get("email"),
+            phone: fd.get("phone"),
+            company: fd.get("company"),
+            subject: fd.get("subject"),
+            message: fd.get("message"),
+          }),
+        });
+        setLoading(false);
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          setError(data.error ?? "Could not send message.");
+          return;
+        }
         setDone(true);
       }}
     >
@@ -43,21 +67,21 @@ export function ContactForm() {
         </button>
       </div>
       <div className="mt-6 space-y-4">
-        <input className="input" required placeholder="Full name" />
-        <input className="input" type="email" required placeholder="Email" />
-        <input className="input" type="tel" placeholder="Phone / WhatsApp" />
-        {kind === "wholesale" ? <input className="input" placeholder="Company" /> : null}
-        <select className="input" defaultValue="">
-          <option value="" disabled>
-            Subject
-          </option>
+        <input className="input" name="name" required placeholder="Full name" />
+        <input className="input" name="email" type="email" required placeholder="Email" />
+        <input className="input" name="phone" type="tel" placeholder="Phone / WhatsApp" />
+        {kind === "wholesale" ? <input className="input" name="company" placeholder="Company" /> : null}
+        <select className="input" name="subject" defaultValue="Product enquiry">
           <option>Product enquiry</option>
           <option>Wholesale pricing</option>
           <option>Custom manufacturing</option>
           <option>Order / shipping</option>
         </select>
-        <textarea className="input min-h-36" required placeholder="How can we help?" />
-        <button className="btn-gold w-full">Send message</button>
+        <textarea className="input min-h-36" name="message" required placeholder="How can we help?" />
+        {error ? <p className="text-sm text-red-700">{error}</p> : null}
+        <button type="submit" className="btn-gold w-full" disabled={loading}>
+          {loading ? "Sending…" : "Send message"}
+        </button>
       </div>
     </form>
   );

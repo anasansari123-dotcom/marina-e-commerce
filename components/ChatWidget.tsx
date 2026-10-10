@@ -7,6 +7,7 @@ import { MessageCircle, Send, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { WholesaleNavLink } from "@/components/WholesaleNavLink";
 
 type Msg = { from: "bot" | "you"; text: string; product?: string; quote?: boolean };
 
@@ -151,14 +152,14 @@ export function ChatWidget() {
                           </Link>
                         </div>
                       </div>
-                      {m.quote && (
-                        <Link
-                          href="/wholesale/quote"
+                      {m.quote ? (
+                        <WholesaleNavLink
+                          callbackUrl="/wholesale/quote"
                           className="block bg-[#0B1D36] py-2 text-center text-[11px] uppercase tracking-[0.14em] text-white"
                         >
                           Proceed to Request Quote
-                        </Link>
-                      )}
+                        </WholesaleNavLink>
+                      ) : null}
                     </div>
                   )}
                 </div>

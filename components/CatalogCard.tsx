@@ -1,6 +1,6 @@
 "use client";
 
-import { B2B_MIN_ORDER_QTY, type Product } from "@/lib/products";
+import { B2B_MIN_ORDER_QTY, showsFreeShipping, type Product } from "@/lib/products";
 import { useWishlist } from "@/lib/wishlist-context";
 import { Heart } from "lucide-react";
 import Image from "next/image";
@@ -55,7 +55,7 @@ export function CatalogCard({
           Min. Order: {B2B_MIN_ORDER_QTY}
         </p>
       )}
-      {!wholesale && <FreeShippingTag />}
+      {!wholesale && showsFreeShipping(product) ? <FreeShippingTag /> : null}
     </article>
   );
 }

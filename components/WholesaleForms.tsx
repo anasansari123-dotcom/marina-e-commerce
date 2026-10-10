@@ -6,6 +6,71 @@ import { useState } from "react";
 
 const catalogProducts = [...products].sort((a, b) => a.name.localeCompare(b.name));
 
+export function wholesaleApplicationPayload(fd: FormData) {
+  const interest = String(fd.get("interest") ?? "");
+  return {
+    company: fd.get("company"),
+    contact: fd.get("contact"),
+    email: fd.get("email"),
+    phone: fd.get("phone"),
+    website: fd.get("website"),
+    type: fd.get("type"),
+    tax: fd.get("tax"),
+    interest,
+    interestOther: fd.get("interestOther"),
+  };
+}
+
+export function WholesaleApplicationFields({ defaultEmail = "" }: { defaultEmail?: string }) {
+  return (
+    <>
+      {(
+        [
+          ["Company Name", "company", "text", false],
+          ["Contact Person", "contact", "text", true],
+          ["Company Email", "email", "email", true],
+          ["Phone", "phone", "tel", true],
+          ["Website", "website", "url", false],
+        ] as const
+      ).map(([label, name, type, required]) => (
+        <label key={name} className="block text-[13px]">
+          <span className="mb-1.5 block text-navy-700">
+            {label}
+            {required ? "" : " (optional)"}
+          </span>
+          <input
+            required={required}
+            name={name}
+            type={type}
+            className="input"
+            defaultValue={name === "email" ? defaultEmail : undefined}
+            readOnly={name === "email" && Boolean(defaultEmail)}
+          />
+        </label>
+      ))}
+      <label className="block text-[13px]">
+        <span className="mb-1.5 block text-navy-700">Business Type</span>
+        <select name="type" className="input" required defaultValue="">
+          <option value="" disabled>
+            Select
+          </option>
+          <option>Retailer</option>
+          <option>Wholesaler / Importer</option>
+          <option>Hotel & Hospitality</option>
+          <option>E-commerce</option>
+        </select>
+      </label>
+      <label className="block text-[13px]">
+        <span className="mb-1.5 block text-navy-700">Tax ID / VAT / GST</span>
+        <input name="tax" className="input" required />
+      </label>
+      <div className="md:col-span-2">
+        <ProductPicker name="interest" label="Products Interested In" />
+      </div>
+    </>
+  );
+}
+
 function ProductPicker({
   name,
   label,
@@ -67,6 +132,8 @@ function ProductPicker({
 
 export function WholesaleRegisterForm() {
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (done) {
     return (
@@ -81,45 +148,29 @@ export function WholesaleRegisterForm() {
   return (
     <form
       className="grid gap-4 md:grid-cols-2"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
+        setError("");
+        setLoading(true);
+        const fd = new FormData(e.currentTarget);
+        const res = await fetch("/api/wholesale/application", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(wholesaleApplicationPayload(fd)),
+        });
+        setLoading(false);
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          setError(data.error ?? "Could not submit application.");
+          return;
+        }
         setDone(true);
       }}
     >
-      {(
-        [
-          ["Company Name", "company", "text", false],
-          ["Contact Person", "contact", "text", true],
-          ["Company Email", "email", "email", true],
-          ["Phone", "phone", "tel", true],
-          ["Website", "website", "url", false],
-        ] as const
-      ).map(([label, name, type, required]) => (
-        <label key={name} className="block text-[13px]">
-          <span className="mb-1.5 block text-navy-700">
-            {label}
-            {required ? "" : " (optional)"}
-          </span>
-          <input required={required} name={name} type={type} className="input" />
-        </label>
-      ))}
-      <label className="block text-[13px]">
-        <span className="mb-1.5 block text-navy-700">Business Type</span>
-        <select name="type" className="input" required>
-          <option value="">Select</option>
-          <option>Retailer</option>
-          <option>Wholesaler / Importer</option>
-          <option>Hotel & Hospitality</option>
-          <option>E-commerce</option>
-        </select>
-      </label>
-      <label className="block text-[13px]">
-        <span className="mb-1.5 block text-navy-700">Tax ID / VAT / GST</span>
-        <input name="tax" className="input" required />
-      </label>
-      <ProductPicker name="interest" label="Products Interested In" />
-      <button type="submit" className="btn-gold mt-2 w-full md:col-span-2">
-        Submit Application
+      <WholesaleApplicationFields />
+      {error ? <p className="text-sm text-red-700 md:col-span-2">{error}</p> : null}
+      <button type="submit" className="btn-gold mt-2 w-full md:col-span-2" disabled={loading}>
+        {loading ? "Submitting…" : "Submit Application"}
       </button>
     </form>
   );
@@ -127,6 +178,8 @@ export function WholesaleRegisterForm() {
 
 export function BulkQuoteForm() {
   const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (done) {
     return (
@@ -141,23 +194,47 @@ export function BulkQuoteForm() {
   return (
     <form
       className="space-y-4"
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
+        setError("");
+        setLoading(true);
+        const fd = new FormData(e.currentTarget);
+        const incoterm = String(fd.get("incoterm") ?? "FOB");
+        const res = await fetch("/api/quotes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            product: fd.get("product"),
+            productOther: fd.get("productOther"),
+            quantity: fd.get("quantity"),
+            logoEngraving: fd.get("logoEngraving"),
+            packaging: fd.get("packaging"),
+            destinationCountry: fd.get("destinationCountry"),
+            requiredDeliveryDate: fd.get("requiredDeliveryDate"),
+            incoterm,
+          }),
+        });
+        setLoading(false);
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          setError(data.error ?? "Could not submit quote.");
+          return;
+        }
         setDone(true);
       }}
     >
       <ProductPicker name="product" label="Product" labelClassName="" />
       <label className="block text-[13px]">
         <span className="mb-1.5 block">Quantity</span>
-        <input className="input" type="number" min={12} defaultValue={50} required />
+        <input name="quantity" className="input" type="number" min={12} defaultValue={50} required />
       </label>
       <label className="block text-[13px]">
         <span className="mb-1.5 block">Logo / Engraving</span>
-        <input className="input" placeholder="Company crest, coordinates, or none" />
+        <input name="logoEngraving" className="input" placeholder="Company crest, coordinates, or none" />
       </label>
       <label className="block text-[13px]">
         <span className="mb-1.5 block">Packaging</span>
-        <select className="input">
+        <select name="packaging" className="input" defaultValue="Standard gift box">
           <option>Standard gift box</option>
           <option>Magnetic branded box</option>
           <option>Your packaging</option>
@@ -166,23 +243,26 @@ export function BulkQuoteForm() {
       </label>
       <label className="block text-[13px]">
         <span className="mb-1.5 block">Destination Country</span>
-        <input className="input" placeholder="United States" required />
+        <input name="destinationCountry" className="input" placeholder="United States" required />
       </label>
       <label className="block text-[13px]">
         <span className="mb-1.5 block">Required Delivery Date</span>
-        <input className="input" type="date" />
+        <input name="requiredDeliveryDate" className="input" type="date" />
       </label>
       <fieldset className="text-[13px]">
         <legend className="mb-2">Choose shipping</legend>
         <div className="flex flex-wrap gap-4">
           {["Ex Works", "FOB", "CIF", "DDP"].map((t) => (
             <label key={t} className="flex items-center gap-2">
-              <input type="radio" name="incoterm" defaultChecked={t === "FOB"} /> {t}
+              <input type="radio" name="incoterm" value={t} defaultChecked={t === "FOB"} /> {t}
             </label>
           ))}
         </div>
       </fieldset>
-      <button className="btn-gold mt-2 w-full">Get Quote Now</button>
+      {error ? <p className="text-sm text-red-700">{error}</p> : null}
+      <button type="submit" className="btn-gold mt-2 w-full" disabled={loading}>
+        {loading ? "Sending…" : "Get Quote Now"}
+      </button>
     </form>
   );
 }

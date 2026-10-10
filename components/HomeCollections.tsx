@@ -4,6 +4,7 @@ import { products } from "@/lib/products";
 import { shopNowTree } from "@/lib/shop-now-data";
 import Image from "next/image";
 import Link from "next/link";
+import { CollectionsWholesaleLink } from "@/components/CollectionsWholesaleLink";
 
 type TileArt = { image: string; pos?: string; origin?: string; zoom?: number };
 
@@ -83,9 +84,10 @@ export function HomeCollections() {
   return (
     <section className="px-5 pb-6 pt-4 md:pb-8 md:pt-5">
       <div className="mx-auto max-w-[1320px]">
-        <h2 className="text-center font-serif text-[1.75rem] text-[#3A6EA5] md:text-[2.85rem]">
+        <h2 className="text-center font-serif text-[1.75rem] text-[#000] md:text-[2.85rem]">
           Explore Our Collections
         </h2>
+        <CollectionsWholesaleLink />
 
         <div className="-mx-5 mt-6 space-y-5 lg:hidden">
           {[firstRow, secondRow].map((row, r) => (

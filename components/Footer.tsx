@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
 import {
@@ -8,6 +10,7 @@ import {
   Instagram,
   Linkedin,
   Lock,
+  Mail,
   MapPin,
   ShieldCheck,
   Sparkles,
@@ -15,36 +18,9 @@ import {
 } from "lucide-react";
 import { BrandLogo } from "./Logo";
 import { company } from "@/lib/company";
-
-const columns = [
-  {
-    title: "Shop",
-    links: [
-      ["B2C Retail Collection", "/shop"],
-      ["Collections", "/collections"],
-      ["My Wishlist", "/wishlist"],
-      ["Add to Cart", "/cart"],
-    ],
-  },
-  {
-    title: "Business with Us",
-    links: [
-      ["B2B Wholesale Collection", "/wholesale"],
-      ["Create Wholesale Account", "/wholesale/register"],
-      ["Bulk Quote", "/wholesale/quote"],
-      ["Custom Manufacturing", "/custom-manufacturing"],
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      ["About Us", "/about"],
-      ["Contact Us", "/contact"],
-      ["Blog", "/blog"],
-      ["Shipping", "/shipping"],
-    ],
-  },
-];
+import { getContactEmails } from "@/lib/contact-emails";
+import { useT } from "@/lib/i18n/LocaleProvider";
+import { WholesaleNavLink } from "@/components/WholesaleNavLink";
 
 const socials = [
   { label: "Facebook", Icon: Facebook },
@@ -122,6 +98,41 @@ function PaymentMarks() {
 }
 
 export function Footer() {
+  const contactEmails = getContactEmails();
+  const t = useT();
+  type FooterLink = { label: string; href?: string; wholesale?: string };
+  const businessLinks: FooterLink[] = [
+    { label: t("footer.link.wholesale"), wholesale: "/wholesale" },
+    { label: t("footer.link.wholesaleAccount"), wholesale: "/wholesale" },
+    { label: t("footer.link.quote"), wholesale: "/wholesale/quote" },
+    { label: t("footer.link.custom"), href: "/custom-manufacturing" },
+  ];
+
+  const columns = [
+    {
+      title: t("footer.shop"),
+      links: [
+        [t("footer.link.retail"), "/shop"],
+        [t("footer.link.collections"), "/collections"],
+        [t("footer.link.wishlist"), "/wishlist"],
+        [t("footer.link.cart"), "/cart"],
+      ],
+    },
+    {
+      title: t("footer.business"),
+      links: businessLinks,
+    },
+    {
+      title: t("footer.company"),
+      links: [
+        [t("footer.link.about"), "/about"],
+        [t("footer.link.contact"), "/contact"],
+        [t("footer.link.blog"), "/blog"],
+        [t("footer.link.shipping"), "/shipping"],
+      ],
+    },
+  ];
+
   return (
     <footer className="mt-auto overflow-x-hidden bg-[#031D38] text-cream-100">
       <div className="border-y border-white/10 bg-[#0D3159]">
@@ -196,8 +207,7 @@ export function Footer() {
           <div className="col-span-3 lg:col-span-1">
             <BrandLogo size="footer" />
             <p className="mt-1.5 max-w-sm text-[11px] leading-snug text-cream-100/70 sm:mt-3 sm:text-sm sm:leading-relaxed">
-              Premium nautical instruments, handcrafted brass décor and custom manufacturing from India — exporter,
-              manufacturer &amp; supplier.
+              {t("footer.tagline")}
             </p>
           </div>
 
@@ -205,13 +215,30 @@ export function Footer() {
             <div key={col.title} className={col.title === "Company" ? "max-sm:pl-11 max-sm:translate-x-1" : undefined}>
               <p className="text-[9px] uppercase tracking-[0.16em] text-[#C9A84C] sm:text-[11px] sm:tracking-[0.24em]">{col.title}</p>
               <ul className="mt-1.5 space-y-1 sm:mt-3 sm:space-y-2">
-                {col.links.map(([label, href]) => (
-                  <li key={`${col.title}-${label}`}>
-                    <Link href={href} className="whitespace-nowrap text-[9px] tracking-tight text-cream-100/75 transition hover:text-[#C9A84C] sm:text-sm sm:tracking-normal">
-                      {label}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const label = Array.isArray(link) ? link[0] : link.label;
+                  const href = Array.isArray(link) ? link[1] : link.href;
+                  const wholesale = Array.isArray(link) ? undefined : link.wholesale;
+                  const key = `${col.title}-${label}`;
+                  const cls =
+                    "whitespace-nowrap text-[9px] tracking-tight text-cream-100/75 transition hover:text-[#C9A84C] sm:text-sm sm:tracking-normal";
+                  if (wholesale) {
+                    return (
+                      <li key={key}>
+                        <WholesaleNavLink callbackUrl={wholesale} className={cls}>
+                          {label}
+                        </WholesaleNavLink>
+                      </li>
+                    );
+                  }
+                  return (
+                    <li key={key}>
+                      <Link href={href ?? "/"} className={cls}>
+                        {label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -219,14 +246,35 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-[1320px] items-start justify-between gap-2 px-4 py-2.5 sm:items-center sm:gap-5 sm:px-5 sm:py-4">
+        <div className="mx-auto flex max-w-[1320px] flex-col gap-4 px-4 py-2.5 sm:px-5 sm:py-4 lg:flex-row lg:items-start lg:justify-between lg:gap-5">
           <div className="flex min-w-0 gap-2 sm:gap-3">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C] sm:h-5 sm:w-5" />
             <div className="min-w-0">
-              <p className="text-[9px] uppercase tracking-[0.16em] text-[#C9A84C] sm:text-[11px] sm:tracking-[0.2em]">Corporate Office &amp; Factory</p>
+              <p className="text-[9px] uppercase tracking-[0.16em] text-[#C9A84C] sm:text-[11px] sm:tracking-[0.2em]">{t("footer.office")}</p>
               <p className="mt-0.5 max-w-xl text-[11px] leading-snug text-cream-100/65 sm:text-sm sm:leading-relaxed">
                 {company.address[0]}, {company.address[1]}, {company.address[2]}
               </p>
+            </div>
+          </div>
+          <div className="flex min-w-0 gap-2 sm:gap-3 lg:max-w-md">
+            <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#C9A84C] sm:h-5 sm:w-5" />
+            <div className="min-w-0">
+              <p className="text-[9px] uppercase tracking-[0.16em] text-[#C9A84C] sm:text-[11px] sm:tracking-[0.2em]">{t("footer.contact")}</p>
+              <ul className="mt-1 space-y-0.5">
+                {contactEmails.map((email) => (
+                  <li key={email}>
+                    <a
+                      href={`mailto:${email}`}
+                      className="break-all text-[11px] text-cream-100/75 transition hover:text-[#C9A84C] sm:text-sm"
+                    >
+                      {email}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <a href={`tel:${company.phoneTel}`} className="mt-1.5 block text-[11px] text-cream-100/65 hover:text-[#C9A84C] sm:text-sm">
+                {company.phone}
+              </a>
             </div>
           </div>
           <div className="flex shrink-0 flex-wrap justify-end gap-1.5 sm:gap-2.5">

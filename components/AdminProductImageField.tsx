@@ -1,0 +1,59 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
+
+export function AdminProductImageField({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (url: string) => void;
+}) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function onPickFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setError("");
+    setUploading(true);
+    try {
+      const body = new FormData();
+      body.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error ?? "Upload failed");
+        return;
+      }
+      if (data.url) onChange(String(data.url));
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      <span className="block text-xs font-semibold uppercase tracking-wide text-navy-600">Product image</span>
+      <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#C9A84C]/50 bg-[#FAF7F2] px-4 py-6 text-center transition hover:border-[#C9A84C]">
+        <input type="file" accept="image/jpeg,image/png,image/webp,image/gif" className="sr-only" onChange={onPickFile} />
+        <span className="text-sm font-medium text-navy-800">{uploading ? "Uploading…" : "Upload image"}</span>
+        <span className="mt-1 text-[11px] text-navy-500">JPG, PNG, WebP · saved to server / KVM2</span>
+      </label>
+      {value ? (
+        <div className="relative h-24 w-24 overflow-hidden rounded-lg border border-[#e6dfd2]">
+          <Image src={value} alt="" fill className="object-cover" sizes="96px" unoptimized={value.startsWith("http")} />
+        </div>
+      ) : null}
+      <input
+        className="input text-sm"
+        placeholder="Or paste image URL"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      {error ? <p className="text-xs text-red-700">{error}</p> : null}
+    </div>
+  );
+}

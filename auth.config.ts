@@ -1,0 +1,26 @@
+import type { NextAuthConfig } from "next-auth";
+import { resolveRole } from "@/lib/roles";
+
+export const authConfig = {
+  trustHost: true,
+  pages: {
+    signIn: "/login",
+  },
+  session: { strategy: "jwt" },
+  callbacks: {
+    /** Route protection redirects are handled in middleware.ts with absolute URLs. */
+    authorized: () => true,
+    jwt({ token }) {
+      return token;
+    },
+    session({ session, token }) {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+        session.user.role = (token.role as "customer" | "wholesale" | "admin") ?? "customer";
+        session.user.wholesaleProfileComplete = Boolean(token.wholesaleProfileComplete);
+      }
+      return session;
+    },
+  },
+  providers: [],
+} satisfies NextAuthConfig;

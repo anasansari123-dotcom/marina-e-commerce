@@ -1,6 +1,6 @@
 "use client";
 
-import { type Product } from "@/lib/products";
+import { showsFreeShipping, type Product } from "@/lib/products";
 import { useWishlist } from "@/lib/wishlist-context";
 import { Heart } from "lucide-react";
 import Image from "next/image";
@@ -44,7 +44,7 @@ export function ProductCard({ product }: { product: Product }) {
         </h3>
       </Link>
       <PriceRow price={product.price} className="mt-1" />
-      <FreeShippingTag />
+      {showsFreeShipping(product) ? <FreeShippingTag /> : null}
     </article>
   );
 }

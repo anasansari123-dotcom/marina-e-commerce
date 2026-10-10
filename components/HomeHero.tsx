@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Briefcase, ChevronLeft, ChevronRight, Play, RotateCcw, ShoppingBag, Truck } from "lucide-react";
 import { useRef, useState } from "react";
+import { WholesaleNavLink } from "@/components/WholesaleNavLink";
 
 const btnBase =
   "inline-flex items-center justify-center whitespace-nowrap rounded-full text-center font-semibold uppercase transition duration-300";
@@ -186,12 +187,12 @@ export function HomeHero() {
               >
                 B2C Retail Collection
               </Link>
-              <Link
-                href="/wholesale"
+              <WholesaleNavLink
+                callbackUrl="/wholesale"
                 className={`${btnBase} ${btnPad} ${slide.secondaryCls}`}
               >
                 B2B Wholesale Collection
-              </Link>
+              </WholesaleNavLink>
             </div>
 
           </div>
@@ -271,8 +272,8 @@ export function HomeHero() {
             <span className="mt-0.5 block text-[10px] leading-tight text-[#F3E6C8]/70">Shop handcrafted pieces</span>
           </span>
         </Link>
-        <Link
-          href="/wholesale"
+        <WholesaleNavLink
+          callbackUrl="/wholesale"
           className="flex items-center justify-center gap-2 px-2 py-2.5 transition hover:bg-[#0B1D36]"
         >
           <Briefcase className="h-5 w-5 shrink-0 text-[#C9A84C]" strokeWidth={1.7} />
@@ -280,7 +281,7 @@ export function HomeHero() {
             <span className="block text-[12px] font-semibold leading-tight">B2B Wholesale Collection</span>
             <span className="mt-0.5 block text-[10px] leading-tight text-[#F3E6C8]/70">Volume pricing for business</span>
           </span>
-        </Link>
+        </WholesaleNavLink>
       </div>
     </section>
   );

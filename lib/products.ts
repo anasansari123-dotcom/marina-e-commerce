@@ -33,6 +33,7 @@ export type Product = {
   description: string;
   story: string;
   wholesaleFrom?: number;
+  freeShipping?: boolean;
   moq?: number;
   featured?: boolean;
 };
@@ -826,6 +827,10 @@ export const reviews: ShopReview[] = [
 
 export function getProduct(slug: string) {
   return products.find((p) => p.slug === slug);
+}
+
+export function showsFreeShipping(p: Pick<Product, "freeShipping">): boolean {
+  return p.freeShipping !== false;
 }
 
 export function getCollection(slug: string) {

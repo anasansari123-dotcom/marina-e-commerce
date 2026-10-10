@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { RotateCcw } from "lucide-react";
 import { company } from "@/lib/company";
+import { ReturnRequestForm } from "@/components/ReturnRequestForm";
 
 const sections: { title: string; body: string[]; list?: string[] }[] = [
   {
@@ -161,12 +160,8 @@ export default function ReturnsPage() {
             </p>
           </div>
 
-          <div className="mt-10 rounded-2xl border border-[#C9A84C]/35 bg-white px-5 py-8 text-center md:px-10">
-            <RotateCcw className="mx-auto h-8 w-8 text-[#C9A84C]" strokeWidth={1.6} />
-            <h2 className="mt-4 font-serif text-2xl text-navy-900">Need a Return?</h2>
-            <Link href="/contact#contact-form" className="btn-gold mt-6 inline-flex">
-              Start a Return
-            </Link>
+          <div className="mt-10">
+            <ReturnRequestForm />
           </div>
         </div>
       </article>

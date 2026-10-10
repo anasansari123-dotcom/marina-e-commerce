@@ -1,14 +1,18 @@
 ﻿"use client";
 
-import { B2B_MIN_ORDER_QTY, getCollection, getProduct, products } from "@/lib/products";
+import { B2B_MIN_ORDER_QTY, getCollection, getProduct, products, showsFreeShipping } from "@/lib/products";
 import { getProductCategory } from "@/lib/catalog";
 import { findShopNowLabel, shopNowTree } from "@/lib/shop-now-data";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useSession } from "next-auth/react";
+import { canAccessWholesale, isRetailCustomer } from "@/lib/wholesale-access";
+import { useWholesaleGate } from "@/components/WholesaleGateProvider";
+import { WholesaleNavLink } from "@/components/WholesaleNavLink";
 import {
   Check,
   Factory,
@@ -29,8 +33,26 @@ import { PriceRow } from "@/components/PriceRow";
 export default function ProductPage() {
   const { slug } = useParams<{ slug: string }>();
   const product = getProduct(slug);
-  const b2b = useSearchParams().get("b2b") === "1";
+  const b2bQuery = useSearchParams().get("b2b") === "1";
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  const wholesaleOk = canAccessWholesale(session?.user);
+  const b2b = b2bQuery && wholesaleOk;
+  const { promptSwitchToWholesale } = useWholesaleGate();
   const { add } = useCart();
+
+  useEffect(() => {
+    if (!b2bQuery || wholesaleOk || status === "loading" || !slug) return;
+    const back = `/product/${slug}?b2b=1`;
+    if (isRetailCustomer(session?.user)) {
+      promptSwitchToWholesale(back);
+      router.replace(`/product/${slug}`);
+      return;
+    }
+    router.replace(
+      `/login?mode=wholesale&view=register&callbackUrl=${encodeURIComponent(back)}`
+    );
+  }, [b2bQuery, wholesaleOk, status, slug, router, session?.user, promptSwitchToWholesale]);
   const { has, toggle } = useWishlist();
   const [active, setActive] = useState(0);
   const [added, setAdded] = useState(false);
@@ -162,7 +184,7 @@ export default function ProductPage() {
             {b2b && (
               <p className="mt-1 text-[13px] font-medium text-[#595959]">Min. Order: {B2B_MIN_ORDER_QTY}</p>
             )}
-            {!b2b && <FreeShippingTag />}
+            {!b2b && showsFreeShipping(product) ? <FreeShippingTag /> : null}
             <div className="mt-3 flex flex-wrap items-center gap-4 text-sm">
               <span className="inline-flex items-center gap-1.5 text-emerald-700">
                 <Check className="h-4 w-4" /> {stockLabel}
@@ -260,12 +282,12 @@ export default function ProductPage() {
                 <Link href="/custom-manufacturing" className="rounded-full border border-[#C9A84C]/50 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-navy-800 hover:bg-[#C9A84C]/15">
                   Custom manufacturing
                 </Link>
-                <Link
-                  href={b2b ? "/wholesale/quote" : "/wholesale"}
+                <WholesaleNavLink
+                  callbackUrl={b2b ? "/wholesale/quote" : "/wholesale"}
                   className="rounded-full border border-[#C9A84C]/50 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-navy-800 hover:bg-[#C9A84C]/15"
                 >
                   {b2b ? "Bulk quote" : "Wholesale"}
-                </Link>
+                </WholesaleNavLink>
               </div>
             </div>
           </div>

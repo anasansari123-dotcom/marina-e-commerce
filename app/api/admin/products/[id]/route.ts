@@ -1,0 +1,81 @@
+import { NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
+import { auth } from "@/auth";
+import { getDb } from "@/lib/mongodb";
+import type { AdminProduct } from "@/lib/db/types";
+
+type Ctx = { params: Promise<{ id: string }> };
+
+function parseBody(body: Record<string, unknown>) {
+  return {
+    name: body.name != null ? String(body.name) : undefined,
+    sku: body.sku != null ? String(body.sku) : undefined,
+    price: body.price != null ? Number(body.price) : undefined,
+    compareAt: body.compareAt != null && body.compareAt !== "" ? Number(body.compareAt) : undefined,
+    wholesaleFrom:
+      body.wholesaleFrom != null && body.wholesaleFrom !== "" ? Number(body.wholesaleFrom) : undefined,
+    quantity: body.quantity != null && body.quantity !== "" ? Number(body.quantity) : undefined,
+    image: body.image != null ? String(body.image) : undefined,
+    description: body.description != null ? String(body.description) : undefined,
+    channel:
+      body.channel === "wholesale" || body.channel === "retail" || body.channel === "both"
+        ? (body.channel as AdminProduct["channel"])
+        : undefined,
+    active: typeof body.active === "boolean" ? body.active : undefined,
+    freeShipping: typeof body.freeShipping === "boolean" ? body.freeShipping : undefined,
+  };
+}
+
+export async function PATCH(req: Request, ctx: Ctx) {
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { id } = await ctx.params;
+  if (!ObjectId.isValid(id)) {
+    return NextResponse.json({ error: "Invalid product id" }, { status: 400 });
+  }
+
+  const body = await req.json();
+  const fields = parseBody(body);
+  const update: Partial<AdminProduct> = { updatedAt: new Date() };
+  if (fields.name !== undefined) update.name = fields.name;
+  if (fields.sku !== undefined) update.sku = fields.sku;
+  if (fields.price !== undefined) update.price = fields.price;
+  if (fields.compareAt !== undefined) update.compareAt = fields.compareAt;
+  if (fields.wholesaleFrom !== undefined) update.wholesaleFrom = fields.wholesaleFrom;
+  if (fields.quantity !== undefined) update.quantity = fields.quantity;
+  if (fields.image !== undefined) update.image = fields.image;
+  if (fields.description !== undefined) update.description = fields.description;
+  if (fields.channel !== undefined) update.channel = fields.channel;
+  if (fields.active !== undefined) update.active = fields.active;
+  if (fields.freeShipping !== undefined) update.freeShipping = fields.freeShipping;
+
+  const db = await getDb();
+  const col = db.collection<AdminProduct>("products");
+  const oid = new ObjectId(id);
+  const existing = await col.findOne({ _id: oid });
+  if (!existing) {
+    return NextResponse.json({ error: "Product not found" }, { status: 404 });
+  }
+  await col.updateOne({ _id: oid }, { $set: update });
+  return NextResponse.json({ ok: true });
+}
+
+export async function DELETE(_req: Request, ctx: Ctx) {
+  const session = await auth();
+  if (session?.user?.role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  const { id } = await ctx.params;
+  if (!ObjectId.isValid(id)) {
+    return NextResponse.json({ error: "Invalid product id" }, { status: 400 });
+  }
+
+  const db = await getDb();
+  const result = await db.collection<AdminProduct>("products").deleteOne({ _id: new ObjectId(id) });
+  if (result.deletedCount === 0) {
+    return NextResponse.json({ error: "Product not found" }, { status: 404 });
+  }
+  return NextResponse.json({ ok: true });
+}

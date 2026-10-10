@@ -2,7 +2,13 @@
 
 import { CatalogCard } from "@/components/CatalogCard";
 import { products } from "@/lib/products";
+import { canAccessWholesale, isRetailCustomer } from "@/lib/wholesale-access";
+import { wholesaleCatalogHref } from "@/lib/wholesale-links";
+import { useWholesaleGate } from "@/components/WholesaleGateProvider";
+import { WholesaleNavLink } from "@/components/WholesaleNavLink";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useRef, useState } from "react";
 
 const PAGE_SIZE = 8;
@@ -13,6 +19,10 @@ export function HomeAllProducts() {
   const [mode, setMode] = useState<"b2c" | "b2b">("b2c");
   const [page, setPage] = useState(1);
   const ref = useRef<HTMLElement>(null);
+  const router = useRouter();
+  const { data: session } = useSession();
+  const wholesaleOk = canAccessWholesale(session?.user);
+  const { promptSwitchToWholesale } = useWholesaleGate();
 
   const totalPages = Math.max(1, Math.ceil(products.length / PAGE_SIZE));
   const items = products.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -28,9 +38,19 @@ export function HomeAllProducts() {
   }
 
   function switchMode(next: "b2c" | "b2b") {
+    if (next === "b2b" && isRetailCustomer(session?.user)) {
+      promptSwitchToWholesale("/wholesale");
+      return;
+    }
+    if (next === "b2b" && !wholesaleOk) {
+      router.push(wholesaleCatalogHref(session?.user));
+      return;
+    }
     setMode(next);
     setPage(1);
   }
+
+  const displayMode = mode === "b2b" && wholesaleOk ? "b2b" : "b2c";
 
   return (
     <section ref={ref} className="scroll-mt-24 bg-white px-4 pb-10 pt-4 md:px-5 md:pb-14 md:pt-5">
@@ -40,7 +60,7 @@ export function HomeAllProducts() {
           <h2 className="font-serif text-[1.75rem] text-navy-900 md:text-5xl">All Products</h2>
         </div>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 flex flex-col items-center gap-2">
           <div className="inline-flex rounded-full border border-[#031D38]/15 bg-[#FAF7F2] p-1">
             {(
               [
@@ -53,18 +73,28 @@ export function HomeAllProducts() {
                 type="button"
                 onClick={() => switchMode(key)}
                 className={`rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] transition sm:px-6 sm:text-xs ${
-                  mode === key ? "bg-[#031D38] text-white" : "text-[#031D38] hover:text-[#3A6EA5]"
+                  (key === "b2b" ? displayMode === "b2b" : displayMode === "b2c")
+                    ? "bg-[#031D38] text-white"
+                    : "text-[#031D38] hover:text-[#3A6EA5]"
                 }`}
               >
                 {label}
               </button>
             ))}
           </div>
+          {!wholesaleOk ? (
+            <p className="max-w-md text-center text-xs text-navy-600">
+              B2B pricing requires a wholesale account.{" "}
+              <WholesaleNavLink callbackUrl="/wholesale" className="font-semibold text-[#8C6E28] underline">
+                Sign up or log in as wholesale
+              </WholesaleNavLink>
+            </p>
+          ) : null}
         </div>
 
         <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-7 sm:gap-x-5 lg:grid-cols-4">
           {items.map((p) => (
-            <CatalogCard key={`${mode}-${p.slug}`} product={p} wholesale={mode === "b2b"} />
+            <CatalogCard key={`${displayMode}-${p.slug}`} product={p} wholesale={displayMode === "b2b"} />
           ))}
         </div>
 
@@ -98,9 +128,18 @@ export function HomeAllProducts() {
         </nav>
 
         <div className="mt-6 text-center">
-          <Link href={mode === "b2b" ? "/wholesale" : "/shop"} className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3A6EA5] hover:underline">
-            View full {mode === "b2b" ? "wholesale" : "retail"} catalogue →
-          </Link>
+          {displayMode === "b2b" ? (
+            <WholesaleNavLink
+              callbackUrl="/wholesale"
+              className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3A6EA5] hover:underline"
+            >
+              View full wholesale catalogue →
+            </WholesaleNavLink>
+          ) : (
+            <Link href="/shop" className="text-xs font-semibold uppercase tracking-[0.2em] text-[#3A6EA5] hover:underline">
+              View full retail catalogue →
+            </Link>
+          )}
         </div>
       </div>
     </section>

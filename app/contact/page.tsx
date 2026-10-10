@@ -3,6 +3,7 @@ import { Clock3, ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide
 import { BannerHero } from "@/components/BannerHero";
 import { ContactForm } from "@/components/ContactForm";
 import { company, companyDirections, companyMapSrc, companyTel, companyWhatsApp } from "@/lib/company";
+import { getContactEmails } from "@/lib/contact-emails";
 
 const desks = [
   { title: "Retail", body: "Orders, tracking and product advice." },
@@ -11,6 +12,8 @@ const desks = [
 ];
 
 export default function ContactPage() {
+  const contactEmails = getContactEmails();
+
   return (
     <div className="bg-[#FAF7F2]">
       <BannerHero
@@ -48,10 +51,12 @@ export default function ContactPage() {
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-[#C9A84C]" />
-                <span>
-                  <a href={`mailto:${company.email}`} className="hover:text-[#8C6E28]">
-                    {company.email}
-                  </a>
+                <span className="space-y-1">
+                  {contactEmails.map((email) => (
+                    <a key={email} href={`mailto:${email}`} className="block hover:text-[#8C6E28]">
+                      {email}
+                    </a>
+                  ))}
                 </span>
               </li>
               <li className="flex gap-3">
